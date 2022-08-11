@@ -3,40 +3,48 @@ package com.codecool.imdb.data.dao;
 import com.codecool.imdb.model.Album;
 import com.codecool.imdb.model.Artist;
 import com.codecool.imdb.model.Song;
+import com.codecool.imdb.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoMem implements UserDao {
 
+    private User user = new User(1, "UserName", "1234");
+    private Artist arcticMonkeys = new Artist("Arctic Monkeys", "Indie");
+    private Song doIWannaKnow = new Song("Do I Wanna Know?", "Indie", arcticMonkeys);
+    private Song iWantItAll = new Song("I Want It All", "Indie", arcticMonkeys);
+    private List<Song> alumSongs = new ArrayList<>() {{
+        add(doIWannaKnow);
+        add(iWantItAll);
+    }};
+    private Album am = new Album("AM", arcticMonkeys, alumSongs);
+
     @Override
     public String getNameByUserId(int userId) {
-        return "Name";
+        return user.getName();
     }
 
     @Override
     public String getPasswordByUserId(int userId) {
-        return "1234";
+        return user.getPassword();
     }
 
     @Override
     public List<Album> getLikedAlbumsByUserId(int userId) {
-        List<Album> albums = new ArrayList<>();
-        albums.add(new Album());
-        return albums;
+        user.addToLikedAlbums(am);
+        return user.getLikedAlbums();
     }
 
     @Override
     public List<Artist> getLikedArtistsByUserId(int userId) {
-        List<Artist> artists = new ArrayList<>();
-        artists.add(new Artist());
-        return artists;
+        user.addToLikedArtists(arcticMonkeys);
+        return user.getLikedArtists();
     }
 
     @Override
     public List<Song> getLikedSongsByUserId(int userId) {
-        List<Song> songs = new ArrayList<>();
-        songs.add(new Song());
-        return songs;
+        user.addToLikedSongs(doIWannaKnow);
+        return user.getLikedSongs();
     }
 }
