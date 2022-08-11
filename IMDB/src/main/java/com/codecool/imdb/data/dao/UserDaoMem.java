@@ -4,10 +4,12 @@ import com.codecool.imdb.model.Album;
 import com.codecool.imdb.model.Artist;
 import com.codecool.imdb.model.Song;
 import com.codecool.imdb.model.User;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UserDaoMem implements UserDao {
 
     private User user = new User(1, "UserName", "1234");
