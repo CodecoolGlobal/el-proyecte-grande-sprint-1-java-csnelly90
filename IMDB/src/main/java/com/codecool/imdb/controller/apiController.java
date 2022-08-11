@@ -40,7 +40,7 @@ public class apiController {
 
     @GetMapping(value = "/genres")
     public JsonNode getAllGenres(){
-        String url = "http://api.napster.com/v2.2/genres?apikey="+ apiKey +"&catalog=DE";
+        String url = "http://api.napster.com/v2.2/genres?apikey="+ apiKey+"&catalog=DE";
         RestTemplate restTemplate = new RestTemplate();
         JsonNode result = restTemplate.getForObject(url, JsonNode.class);
 
