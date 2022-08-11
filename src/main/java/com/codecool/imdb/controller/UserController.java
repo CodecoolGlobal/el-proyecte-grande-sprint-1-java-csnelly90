@@ -1,4 +1,4 @@
-package com.codecool.imdb;
+package com.codecool.imdb.controller;
 
 import com.codecool.imdb.data.dao.UserDaoMem;
 import com.codecool.imdb.model.Album;
