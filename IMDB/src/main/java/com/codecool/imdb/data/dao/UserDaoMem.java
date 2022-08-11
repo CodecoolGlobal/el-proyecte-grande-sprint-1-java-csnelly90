@@ -20,6 +20,12 @@ public class UserDaoMem implements UserDao {
     }};
     private Album am = new Album("AM", arcticMonkeys, alumSongs);
 
+    public UserDaoMem() {
+        user.addToLikedAlbums(am);
+        user.addToLikedArtists(arcticMonkeys);
+        user.addToLikedSongs(doIWannaKnow);
+    }
+
     @Override
     public String getNameByUserId(int userId) {
         return user.getName();
@@ -32,19 +38,16 @@ public class UserDaoMem implements UserDao {
 
     @Override
     public List<Album> getLikedAlbumsByUserId(int userId) {
-        user.addToLikedAlbums(am);
         return user.getLikedAlbums();
     }
 
     @Override
     public List<Artist> getLikedArtistsByUserId(int userId) {
-        user.addToLikedArtists(arcticMonkeys);
         return user.getLikedArtists();
     }
 
     @Override
     public List<Song> getLikedSongsByUserId(int userId) {
-        user.addToLikedSongs(doIWannaKnow);
         return user.getLikedSongs();
     }
 }
