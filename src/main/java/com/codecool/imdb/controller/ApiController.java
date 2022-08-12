@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/api")
-public class apiController {
+public class ApiController {
 
     @Value("${api.key}")
     private String apiKey;
