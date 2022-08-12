@@ -2,9 +2,13 @@ package com.codecool.imdb.model;
 
 public class Artist {
 
-    private final String name;
+    private String name;
 
-    private final String genre;
+    private String genre;
+
+    public Artist() {
+
+    }
 
     public Artist(String name, String genre) {
         this.name = name;
@@ -18,4 +22,13 @@ public class Artist {
     public String getGenre() {
         return genre;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
 }
