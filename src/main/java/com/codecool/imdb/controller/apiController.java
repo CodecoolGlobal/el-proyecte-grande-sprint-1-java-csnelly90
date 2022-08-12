@@ -2,7 +2,6 @@ package com.codecool.imdb.controller;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
