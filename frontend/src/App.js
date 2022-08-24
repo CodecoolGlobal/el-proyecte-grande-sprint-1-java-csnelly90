@@ -1,19 +1,21 @@
-
 import './App.css';
-import {dataHandler} from "./data/DataHandler";
-import Header from "./components/Header";
+import {Route, Routes} from "react-router-dom";
+import UserPage from "./routes/UserPage";
+import React from "react";
+import Layout from "./components/Layout";
+import HomePage from "./routes/HomePage";
+import ArtistPage from "./routes/ArtistPage";
 
 function App() {
-  // let response = await dataHandler.apiGet("/api/artists");
-  // console.log(response);
-
-
 
   return (
-    <div>
-      <Header>
-      </Header>
-    </div>
+    <Routes>
+        <Route path="/" element={<Layout />} >
+            <Route index element={<HomePage />} />
+            <Route path="user" element={<UserPage />} />
+            <Route path="artist" element={<ArtistPage />} />
+        </Route>
+    </Routes>
   );
 }
 
