@@ -1,7 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import {dataHandler} from "./data/DataHandler";
 
-function App() {
+async function App() {
+  let response = await dataHandler.apiGet("/api/artists");
+  console.log(response);
+
   return (
     <div className="App">
       <header className="App-header">
