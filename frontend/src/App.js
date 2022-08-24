@@ -1,18 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import {dataHandler} from "./data/DataHandler";
 
 async function App() {
-
-  async function apiGet(url) {
-    let response = await fetch(url, {
-      method: "GET"
-    })
-    if (response.ok) {
-      return await response.json();
-    }
-  }
-
-  let response = await apiGet("/api/artists");
+  let response = await dataHandler.apiGet("/api/artists");
   console.log(response);
 
   return (
