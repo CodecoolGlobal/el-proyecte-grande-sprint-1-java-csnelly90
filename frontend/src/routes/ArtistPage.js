@@ -8,15 +8,12 @@ import "../ArtistPage.css"
 
     let [artistInfo, setArtistInfo] = useState(null);
      const {artistId} = {artistId: useParams()} ;
-    console.log(artistId.id)
 
      useEffect( () => {
         async function getData() {
             let response = await dataHandler.apiGet("/api/artist/"+artistId.id);
-            console.log(response);
             setArtistInfo(response);
         }
-        console.log("123456789")
          getData();
     }, []);
 
