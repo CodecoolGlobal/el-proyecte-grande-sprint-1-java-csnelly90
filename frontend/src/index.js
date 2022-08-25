@@ -6,7 +6,6 @@ import {
     Route,
 } from "react-router-dom";
 import App from './App';
-import UserPage from "./routes/UserPage";
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

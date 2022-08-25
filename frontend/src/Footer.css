@@ -1,0 +1,63 @@
+.main-footer {
+    color: white;
+    background-color: #121218;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 5em;
+    min-width: 100%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.col li {
+    list-style: none;
+    padding: 0.5em;
+}
+
+.col li:hover {
+    cursor: pointer;
+    background-color: rgb(51, 167, 220);
+    border-radius: 0.2em;
+    transition: background-color 0.8s ease-in-out;
+}
+
+.col ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-company {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.social li {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em;
+}
+
+@media screen and (max-width: 1000px) {
+    .col {
+        width: 90%;
+    }
+}
