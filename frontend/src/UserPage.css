@@ -1,0 +1,122 @@
+#user-main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+    margin: 0;
+    border: solid 1px red;
+}
+
+#user-data-container {
+    border: solid 1px blue;
+    display: flex;
+    flex-direction: row;
+    min-height: 40vh;
+    background-color: rgba(47, 47, 65, 0.77); /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgba(136, 201, 224, 0.58), rgba(25, 116, 143, 0.57));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(136, 201, 224, 0.58), rgba(25, 116, 143, 0.57)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#user-pic-container {
+    border: solid 1px violet;
+    width: 30%;
+    padding: 1em;
+}
+
+#avatar-container img {
+    max-width: 300px;
+}
+
+#user-info-container {
+    width: 70%;
+    border: solid 1px green;
+}
+
+#user-info-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#user-info-form .form-group {
+    background-color: wheat;
+    position: relative;
+}
+
+#user-likes-container {
+    border: solid 1px orange;
+    min-height: 40vh;
+}
+
+#user-likes-tab-container {
+    border: solid 1px green;
+    padding: 1em;
+}
+
+#user-likes-content-container {
+    border: solid 1px purple;
+    padding: 1em;
+}
+
+.login-box .user-box {
+    position: relative;
+}
+
+.login-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+.login-box .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+}
+
+.login-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+}
+
+.login-box a:hover {
+    background: #03e9f4;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 25px #03e9f4,
+    0 0 50px #03e9f4,
+    0 0 100px #03e9f4;
+}
+
+.login-box a span {
+    position: absolute;
+    display: block;
+}

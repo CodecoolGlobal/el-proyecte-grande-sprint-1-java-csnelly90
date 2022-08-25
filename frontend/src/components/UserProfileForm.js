@@ -42,39 +42,41 @@ class UserProfileForm extends Component {
     render() {
         return (
             <form id="user-info-form">
-                <div>
+                <div id="user-info-box">
                     <div className="form-group">
                         <label>
                             First Name:
-                            <input type="text" value={this.state.firstName} onChange={this.handleFirstNameChange} />
+                            <input type="text" defaultValue={this.state.firstName} onChange={this.handleFirstNameChange} />
                         </label>
                     </div>
                     <div className="form-group">
                         <label>
                             Last Name:
-                            <input type="text" value={this.state.lastName} onChange={this.handleLastNameChange} />
+                            <input type="text" defaultValue={this.state.lastName} onChange={this.handleLastNameChange} />
                         </label>
                     </div>
                     <div className="form-group">
                         <label>
                             Email:
-                            <input type="email" value={this.state.email} onChange={this.handleEmailChange} />
+                            <input type="email" defaultValue={this.state.email} onChange={this.handleEmailChange} />
                         </label>
                     </div>
                     <div className="form-group">
                         <label>
                             Phone:
-                            <input type="text" value={this.state.phone} onChange={this.handlePhoneChange} />
+                            <input type="text" defaultValue={this.state.phone} onChange={this.handlePhoneChange} />
                         </label>
                     </div>
                 </div>
-                <a href="#" onClick={this.handleSubmit}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Update
-                </a>
+                <div id="user-submit-box">
+                    <a href="#" onClick={this.handleSubmit}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Update
+                    </a>
+                </div>
             </form>
         );
     }
