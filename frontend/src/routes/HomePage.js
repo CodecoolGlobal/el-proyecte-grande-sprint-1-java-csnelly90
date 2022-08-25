@@ -14,10 +14,11 @@ function HomePage() {
     }, []);
 
     return (
-        <div class="top-artists">
+        <div className="top-artists">
             {artists &&
-                artists.map(({ name, genre }) => (
-                    <div class="artist" key={name}>
+                artists.map(({ name, id, image }) => (
+                    <div className="artist" key={id}>
+                        <img src={image} alt=""/>
                         <h3>{name}</h3>
                     </div>
                 ))}
