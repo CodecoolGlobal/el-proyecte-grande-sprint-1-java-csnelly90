@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import "../HomePage.css"
 import {dataHandler} from "../data/DataHandler";
 
 function HomePage() {
@@ -19,7 +20,7 @@ function HomePage() {
                 artists.map(({ name, id, image }) => (
                     <div className="artist" key={id}>
                         <img src={image} alt=""/>
-                        <h3>{name}</h3>
+                        <h3 className="artist-name">{name}</h3>
                     </div>
                 ))}
         </div>
