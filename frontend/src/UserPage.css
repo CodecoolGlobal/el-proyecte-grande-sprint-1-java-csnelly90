@@ -4,28 +4,27 @@
     align-items: center;
     min-height: 80vh;
     margin: 0;
-    border: solid 1px red;
+    /*border: solid 1px red;*/
     gap: 2em;
 }
 
 #user-data-container {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     display: flex;
     flex-direction: row;
     min-height: 40vh;
     width: 90%;
     background-color: rgba(22, 29, 38, 0.57); /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, rgba(79, 98, 122, 0.11), rgba(22, 29, 38, 0.79));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(79, 98, 122, 0.22), rgba(22, 29, 38, 0.79)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #user-pic-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    border: solid 1px violet;
+    align-items: center;
+    /*border: solid 1px violet;*/
     width: 30%;
-    padding-top: 1em;
 }
 
 #avatar-container {
@@ -44,7 +43,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 70%;
-    border: solid 1px green;
+    /*border: solid 1px green;*/
 }
 
 #user-info-form {
@@ -60,22 +59,34 @@
 }
 
 #user-likes-container {
-    border: solid 1px orange;
+    display: flex;
+    flex-direction: column;
+    /*border: solid 1px orange;*/
     min-height: 40vh;
     width: 90%;
-    background-color: rgba(22, 29, 38, 0.57); /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #user-likes-tab-container {
-    border: solid 1px green;
-    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    /*border: solid 1px green;*/
 }
 
 #user-likes-content-container {
-    border: solid 1px purple;
-    padding: 1em;
+    /*border: solid 1px purple;*/
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: 1em 0 1em 0;
+}
+
+#user-likes-title {
+    padding-left: 1em;
+    width: 20%;
+    clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
+    background-color: rgba(22, 29, 38, 0.57); /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, rgba(79, 98, 122, 0.58), rgba(38, 48, 61, 0.57)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #user-info-box {
@@ -89,11 +100,6 @@
 
 .form-group {
     width: 40%;
-}
-
-#user-submit-box {
-    display: flex;
-    justify-content: flex-end;
 }
 
 #user-info-box .form-group {
@@ -134,7 +140,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin-left: 2em;
+    margin: 0 0 1em 2em;
 }
 
 #user-submit-box a {
@@ -144,7 +150,7 @@
     padding: 15px 20px;
     color: #03e9f4;
     border-radius: 0.2em;
-    font-size: 16px;
+    font-size: 14px;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
@@ -165,5 +171,78 @@
 
 #user-submit-box a span {
     position: absolute;
+    display: block;
+}
+
+.likes-tab {
+    flex: 1;
+    cursor: pointer;
+    padding: 1em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #03e9f4;
+    clip-path: polygon(0 0, 95% 0, 100% 100%, 0% 100%);
+    background-color: #121218; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, rgba(14, 87, 117, 0.58), #121218);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, rgba(14, 87, 117, 0.58), #121218); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-top-right-radius: 1.5em;
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+}
+
+.likes-tab:hover {
+    transition: background-color 0.6s ease-in-out;
+    background: #03e9f4;
+    color: #fff;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 15px #03e9f4,
+    0 0 30px #03e9f4,
+    0 0 70px #03e9f4;
+}
+
+.active-tab  {
+    color: #000;
+    background-color: #03e9f4;
+    background: -webkit-linear-gradient(to right, #03e9f4, #063244);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #03e9f4, #063244); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /*border-bottom: 1px solid #03e9f4;*/
+}
+
+.active-tab::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 2px;
+    background: #03e9f4;
+}
+
+.likes-content {
+    padding: 1em;
+    display: none;
+    color: #03e9f4;
+    background-color: #121218; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, rgba(14, 87, 117, 0.58), rgba(18, 18, 24, 0.7));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, rgba(14, 87, 117, 0.58), rgba(21, 21, 28, 0.71)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.likes-content h2 {
+    margin-left: 1em;
+}
+
+.likes-content p {
+    margin-left: 1em;
+    width: 100%;
+    height: 100%;
+}
+
+.active-content {
     display: block;
 }
