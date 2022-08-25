@@ -21,7 +21,7 @@ public class NapsterApiService implements ApiService {
 
     @Override
     public Collection<Artist> getTopArtists(int limit) {
-        String url = "http://api.napster.com/v2.2/artists/top?apikey=" + apiKey + "&catalog=DE&limit=10";
+        String url = "http://api.napster.com/v2.2/artists/top?apikey=" + apiKey + "&catalog=DE&limit=1";
         RestTemplate restTemplate = new RestTemplate();
         var result = restTemplate.getForObject(url, NapsterArtistResponse.class);
 
