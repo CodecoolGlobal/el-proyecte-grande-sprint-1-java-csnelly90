@@ -51,4 +51,14 @@ public class NapsterApiService implements ApiService {
         image = image.substring(1);
         return image+"?apikey="+apiKey;
     }
+
+
+    @Override
+    public Artist getArtist(String id) {
+        String url = "https://api.napster.com/v2.2/artists/"+id+"?apikey="+apiKey;
+        RestTemplate restTemplate = new RestTemplate();
+        var result = restTemplate.getForObject(url, NapsterArtistResponse.class);
+
+        return result.getArtists().stream().map(this::mapToArtist).toList().get(0);
+    }
 }

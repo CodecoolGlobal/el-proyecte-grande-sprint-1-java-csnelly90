@@ -20,6 +20,9 @@ public class Artist {
         this.name = name;
         this.genre = genre;
         this.blurbs = blurbs;
+        if (this.blurbs == null){
+            setBlurbs(new String[]{"unknown!"});
+        }
     }
 
     public String getName() {

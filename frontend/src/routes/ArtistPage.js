@@ -1,38 +1,41 @@
 import React, {useEffect, useState} from "react";
 import {dataHandler} from "../data/DataHandler";
+import {useParams} from "react-router-dom";
+import "../ArtistPage.css"
 
 
-function ArtistPage() {
+ function ArtistPage() {
 
-    let [artist, setArtist] = useState(null);
+    let [artistInfo, setArtistInfo] = useState(null);
+     const {artistId} = {artistId: useParams()} ;
+    console.log(artistId.id)
 
-
-    useEffect(() => {
+     useEffect( () => {
         async function getData() {
-            let response = await dataHandler.apiGet("/api/artists");
-            setArtist(response);
+            let response = await dataHandler.apiGet("/api/artist/"+artistId.id);
+            console.log(response);
+            setArtistInfo(response);
         }
-        getData();
+        console.log("123456789")
+         getData();
     }, []);
 
     return (
         <div>
-            {artist &&
-                artist.map(({ name, id, image }) => (
-                    <div className="artist" key={id}>
-                        <div className={"artist-basic-info"}>
-                            <div className={"artist-pic"}>
-                                <img src={image} alt=""/>
-                            </div>
-                            <div className={"artist-info"}>
-                                <b><h3 className="artist-name">{name}</h3></b>
-                                <div className={"artist-text"}>
-
-                                </div>
-                            </div>
+            {artistInfo == null ? (<h1>LOADING...</h1>):
+               (<div className={"artist-container"}>
+                   <div className={"artist-info-container"}>
+                       <div className={"artist-pic"}>
+                           <img src={artistInfo.image} alt=""/>
+                       </div>
+                        <div className={"artist-info"}>
+                            <b><h1 className={"artist-name"}>{artistInfo.name}</h1></b>
+                            <p>{artistInfo.blurbs}</p>
                         </div>
-                    </div>
-                ))}
+                   </div>
+               </div>
+               )}
+
         </div>
     );
 }

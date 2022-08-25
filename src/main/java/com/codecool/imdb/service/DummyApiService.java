@@ -22,4 +22,9 @@ public class DummyApiService implements ApiService {
         return artists;
     }
 
+    @Override
+    public Artist getArtist(String id) {
+        return null;
+    }
+
 }
