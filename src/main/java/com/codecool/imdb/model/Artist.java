@@ -6,6 +6,10 @@ public class Artist {
 
     private String genre;
 
+    private String id;
+
+    private String image;
+
     public Artist() {
 
     }
@@ -31,4 +35,19 @@ public class Artist {
         this.genre = genre;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
