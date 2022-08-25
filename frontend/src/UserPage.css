@@ -1,0 +1,169 @@
+#user-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+    margin: 0;
+    border: solid 1px red;
+    gap: 2em;
+}
+
+#user-data-container {
+    border: solid 1px blue;
+    display: flex;
+    flex-direction: row;
+    min-height: 40vh;
+    width: 90%;
+    background-color: rgba(22, 29, 38, 0.57); /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#user-pic-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border: solid 1px violet;
+    width: 30%;
+    padding-top: 1em;
+}
+
+#avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#avatar-container img {
+    max-width: 60%;
+    border-radius: 0.5em;
+}
+
+#user-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+    border: solid 1px green;
+}
+
+#user-info-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+}
+
+#user-info-form .form-group {
+    position: relative;
+}
+
+#user-likes-container {
+    border: solid 1px orange;
+    min-height: 40vh;
+    width: 90%;
+    background-color: rgba(22, 29, 38, 0.57); /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#user-likes-tab-container {
+    border: solid 1px green;
+    padding: 1em;
+}
+
+#user-likes-content-container {
+    border: solid 1px purple;
+    padding: 1em;
+}
+
+#user-info-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2em;
+    height: 70%;
+}
+
+.form-group {
+    width: 40%;
+}
+
+#user-submit-box {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#user-info-box .form-group {
+    position: relative;
+}
+
+#user-info-box .form-group input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #03e9f4;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #03e9f4;
+    outline: none;
+    background: transparent;
+}
+
+#user-info-box .form-group label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    transition: .5s;
+}
+
+#user-info-box .form-group input:focus ~ label,
+#user-info-box .form-group input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+}
+
+#user-submit-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 2em;
+}
+
+#user-submit-box a {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    padding: 15px 20px;
+    color: #03e9f4;
+    border-radius: 0.2em;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .7s;
+    letter-spacing: 4px
+}
+
+#user-submit-box a:hover {
+    border-radius: 0.2em;
+    transition: background-color 0.6s ease-in-out;
+    background: #03e9f4;
+    color: #fff;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 15px #03e9f4,
+    0 0 30px #03e9f4,
+    0 0 70px #03e9f4;
+}
+
+#user-submit-box a span {
+    position: absolute;
+    display: block;
+}

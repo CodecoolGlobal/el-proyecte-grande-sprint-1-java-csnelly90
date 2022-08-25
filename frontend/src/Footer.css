@@ -29,20 +29,38 @@
 }
 
 .col li {
+    cursor: pointer;
+    position: relative;
     list-style: none;
-    padding: 0.5em;
+    padding: 15px 20px;
+    color: #03e9f4;
+    border-radius: 0.2em;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .7s;
+    letter-spacing: 4px;
 }
 
 .col li:hover {
-    cursor: pointer;
-    background-color: rgb(51, 167, 220);
     border-radius: 0.2em;
-    transition: background-color 0.8s ease-in-out;
+    transition: background-color 0.6s ease-in-out;
+    background: #03e9f4;
+    color: #fff;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 15px #03e9f4,
+    0 0 30px #03e9f4,
+    0 0 70px #03e9f4;
 }
 
 .col ul {
     margin: 0;
     padding: 0;
+}
+
+.footer-brand-name {
+    color: #03e9f4;
 }
 
 .footer-company {

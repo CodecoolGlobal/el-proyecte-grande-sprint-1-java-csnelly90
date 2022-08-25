@@ -7,8 +7,8 @@ function Layout() {
     return (
         <div className="page-container">
             <div className="content-wrap">
-                <Outlet />
                 <Header />
+                <Outlet />
             </div>
             <Footer />
         </div>
