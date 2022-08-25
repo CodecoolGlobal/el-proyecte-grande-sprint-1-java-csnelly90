@@ -9,6 +9,9 @@ public class NapsterArtist {
 
     private String image;
 
+    private String[] blurbs;
+
+
     public String getName() {
         return name;
     }
@@ -31,6 +34,14 @@ public class NapsterArtist {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String[] getBlurbs() {
+        return blurbs;
+    }
+
+    public void setBlurbs(String[] blurbs) {
+        this.blurbs = blurbs;
     }
 
     // public String getGenre() {

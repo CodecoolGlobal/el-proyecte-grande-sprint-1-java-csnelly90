@@ -10,13 +10,19 @@ public class Artist {
 
     private String image;
 
+    private String[] blurbs;
+
     public Artist() {
 
     }
 
-    public Artist(String name, String genre) {
+    public Artist(String name, String genre, String[] blurbs) {
         this.name = name;
         this.genre = genre;
+        this.blurbs = blurbs;
+        if (this.blurbs == null){
+            setBlurbs(new String[]{"unknown!"});
+        }
     }
 
     public String getName() {
@@ -49,5 +55,13 @@ public class Artist {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String[] getBlurbs() {
+        return blurbs;
+    }
+
+    public void setBlurbs(String[] blurbs) {
+        this.blurbs = blurbs;
     }
 }
