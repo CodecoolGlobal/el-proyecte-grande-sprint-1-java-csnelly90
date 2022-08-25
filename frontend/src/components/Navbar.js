@@ -9,9 +9,9 @@ function Navbar() {
             <ul>
                 <div id="home-and-search-holder">
                     <li><Link to="/">Home</Link></li>
-                    <li>
-                        <SearchBar />
-                    </li>
+                </div>
+                <div id="search-holder">
+                    <SearchBar />
                 </div>
                 <div id="user-link-holder">
                     <li><Link to="user">User page</Link></li>
