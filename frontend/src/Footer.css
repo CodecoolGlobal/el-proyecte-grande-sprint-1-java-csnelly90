@@ -1,0 +1,81 @@
+.main-footer {
+    color: white;
+    background-color: #121218;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 5em;
+    min-width: 100%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.col li {
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+    padding: 15px 20px;
+    color: #03e9f4;
+    border-radius: 0.2em;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .7s;
+    letter-spacing: 4px;
+}
+
+.col li:hover {
+    border-radius: 0.2em;
+    transition: background-color 0.6s ease-in-out;
+    background: #03e9f4;
+    color: #fff;
+    box-shadow: 0 0 5px #03e9f4,
+    0 0 15px #03e9f4,
+    0 0 30px #03e9f4,
+    0 0 70px #03e9f4;
+}
+
+.col ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-brand-name {
+    color: #03e9f4;
+}
+
+.footer-company {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.social li {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em;
+}
+
+@media screen and (max-width: 1000px) {
+    .col {
+        width: 90%;
+    }
+}
