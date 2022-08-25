@@ -1,10 +1,13 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import "../HomePage.css"
 import {dataHandler} from "../data/DataHandler";
+import {useNavigate} from "react-router-dom";
 
 function HomePage() {
     let [artists, setArtists] = useState(null);
     let [albums, setAlbums] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getData() {
@@ -14,12 +17,13 @@ function HomePage() {
         getData();
     }, []);
 
+
     return (
         <div className="top-artists">
-            {artists &&
+            {artists == null ? (<h1>LOADING...</h1>):
                 artists.map(({ name, id, image }) => (
                     <div className="artist" key={id}>
-                        <img src={image} alt=""/>
+                        <img src={image} alt="" onClick={() => navigate("/artist/"+id)}/>
                         <h3 className="artist-name">{name}</h3>
                     </div>
                 ))}

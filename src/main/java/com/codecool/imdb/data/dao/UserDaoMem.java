@@ -13,7 +13,7 @@ import java.util.List;
 public class UserDaoMem implements UserDao {
 
     private User user = new User(1, "UserName", "1234");
-    private Artist arcticMonkeys = new Artist("Arctic Monkeys", "Indie");
+    private Artist arcticMonkeys = new Artist("Arctic Monkeys", "Indie", null);
     private Song doIWannaKnow = new Song("Do I Wanna Know?", "Indie", arcticMonkeys);
     private Song iWantItAll = new Song("I Want It All", "Indie", arcticMonkeys);
     private List<Song> alumSongs = new ArrayList<>() {{

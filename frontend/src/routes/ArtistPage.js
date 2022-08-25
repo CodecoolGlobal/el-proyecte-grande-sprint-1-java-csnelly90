@@ -1,9 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {dataHandler} from "../data/DataHandler";
+import {useParams} from "react-router-dom";
+import "../ArtistPage.css"
 
-function ArtistPage() {
+
+ function ArtistPage() {
+
+    let [artistInfo, setArtistInfo] = useState(null);
+     const {artistId} = {artistId: useParams()} ;
+
+     useEffect( () => {
+        async function getData() {
+            let response = await dataHandler.apiGet("/api/artist/"+artistId.id);
+            setArtistInfo(response);
+        }
+         getData();
+    }, []);
+
     return (
         <div>
-            <h2>ArtistPage Content</h2>
+            {artistInfo == null ? (<h1>LOADING...</h1>):
+               (<div className={"artist-container"}>
+                   <div className={"artist-info-container"}>
+                       <div className={"artist-pic"}>
+                           <img src={artistInfo.image} alt=""/>
+                       </div>
+                        <div className={"artist-info"}>
+                            <b><h1 className={"artist-name"}>{artistInfo.name}</h1></b>
+                            <p>{artistInfo.blurbs}</p>
+                        </div>
+                   </div>
+               </div>
+               )}
+
         </div>
     );
 }

@@ -9,4 +9,6 @@ public interface ApiService {
 
     Collection<Artist> getTopArtists(int limit);
 
+    Artist getArtist(String id);
+
 }
