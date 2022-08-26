@@ -1,26 +1,15 @@
-import {useState, useEffect} from "react";
+import {useState} from "react";
 import "../UserPage.css"
-import {dataHandler} from "../data/DataHandler";
 import UserLikesTab from "./UserLikesTab";
 import UserLikesContent from "./UserLikesContent";
 
 function UserLikes() {
+    const likedArtists = ['art.146985808', 'art.12313694', 'art.15237004'];
     const [toggleState, setToggleState] = useState(1);
-    // const [artists, setArtists] = useState(null);
-    // const [albums, setAlbums] = useState(null);
-    // const [songs, setSongs] = useState(null);
 
     const toggleTab = (index) => {
         setToggleState(index);
     };
-
-    // useEffect(() => {
-    //     async function getData() {
-    //         let response = await dataHandler.apiGet("/api/artists");
-    //         setArtists(response);
-    //     }
-    //     getData();
-    // }, []);
 
     return (
         <div id="user-likes-container">
@@ -33,6 +22,7 @@ function UserLikes() {
                 toggleState={toggleState}
                 setToggleState={setToggleState}
                 toggleTab={toggleTab}
+                likedArtists={likedArtists}
             />
         </div>
     );
