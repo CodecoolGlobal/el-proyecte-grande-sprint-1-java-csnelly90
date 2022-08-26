@@ -4,7 +4,6 @@ import UserProfileForm from '../components/UserProfileForm';
 import UserProfileImage from '../components/UserProfileImage';
 import userImagePath from '../profileimages/userImage.png';
 import UserLikes from "../components/UserLikes";
-import UserLikesTab from "../components/UserLikesTab";
 
 function UserPage() {
     const data = {
@@ -27,12 +26,6 @@ function UserPage() {
                 </div>
             </div>
             <UserLikes />
-                {/*<div id="user-likes-tab-container">*/}
-                {/*    Favourite artists | Favourite albums | Favourite songs*/}
-                {/*</div>*/}
-                {/*<div id="user-likes-content-container">*/}
-                {/*    */}
-                {/*</div>*/}
         </div>
     );
 }
