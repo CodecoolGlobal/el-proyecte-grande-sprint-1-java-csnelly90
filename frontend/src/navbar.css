@@ -2,11 +2,12 @@ body{
     background-color: #121218;;
     color: #03e9f4;}
 
-a{
+nav a{
     text-decoration: none;
     color: #03e9f4;
 }
-a:hover{
+
+nav a:hover{
     color: white;
 }
 
@@ -20,12 +21,11 @@ nav ul{
 
 }
 nav li{
-    width: 4rem;
+    width: fit-content;
     margin: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
-
     position: relative;
     list-style: none;
     padding: 15px 20px;
@@ -65,7 +65,6 @@ nav li:hover {
 input{
     border-style: none;
     border-radius: 5px;
-
 }
 
 input:focus{
@@ -81,7 +80,6 @@ input:focus{
     border-style: none;
     width: border-box;
 }
-
 
 #search-holder{
     display: flex;
