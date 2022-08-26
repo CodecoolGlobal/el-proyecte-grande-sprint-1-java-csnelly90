@@ -81,12 +81,10 @@
 }
 
 #user-likes-title {
-    padding-left: 1em;
-    width: 20%;
-    clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
+    padding: 0.1em;
     background-color: rgba(22, 29, 38, 0.57); /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, rgba(79, 98, 122, 0.58), rgba(22, 29, 38, 0.57));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, rgba(79, 98, 122, 0.58), rgba(38, 48, 61, 0.57)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to left, rgba(79, 98, 122, 0.58), rgba(23, 232, 224, 0.57)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 #user-info-box {
@@ -111,11 +109,11 @@
     padding: 10px 0;
     font-size: 16px;
     color: #03e9f4;
-    margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #03e9f4;
     outline: none;
     background: transparent;
+    margin-top: 0.5em;
 }
 
 #user-info-box .form-group label {
@@ -234,15 +232,41 @@
 }
 
 .likes-content h2 {
-    margin-left: 1em;
+    margin: 0.2em 1em;
 }
 
 .likes-content p {
-    margin-left: 1em;
-    width: 100%;
-    height: 100%;
+    margin-top: 1em;
 }
 
 .active-content {
     display: block;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+    gap: 6em;
+}
+
+.justified-text {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+@media screen and (max-width: 1000px) {
+    .flex-col div {
+        width: 90%;
+    }
 }
