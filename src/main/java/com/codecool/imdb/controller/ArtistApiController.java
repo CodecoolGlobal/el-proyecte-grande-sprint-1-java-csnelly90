@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/api")
-public class ApiController {
+@RequestMapping("/api/artists")
+public class ArtistApiController {
 
     // TODO: Remove when everything is factored into a service
     @Value("${api.key}")
@@ -22,26 +22,17 @@ public class ApiController {
     private ArtistService artistService;
 
     @Autowired
-    public ApiController(ArtistService artistService) {
+    public ArtistApiController(ArtistService artistService) {
         this.artistService = artistService;
     }
 
-    @GetMapping(value = "/artists")
+    @GetMapping
     public Collection<Artist> getTopTenArtist() {
         var limit = 10;
         return artistService.getTopArtists(limit);
     }
 
-    @GetMapping(value = "/genres")
-    public JsonNode getAllGenres() {
-        String url = "http://api.napster.com/v2.2/genres?apikey=" + apiKey + "&catalog=DE";
-        RestTemplate restTemplate = new RestTemplate();
-        JsonNode result = restTemplate.getForObject(url, JsonNode.class);
-
-        return result;
-    }
-
-    @GetMapping(value = "/artist/{id}")
+    @GetMapping(value = "/{id}")
     public Artist getArtistById(@PathVariable String id){
         return artistService.getArtist(id);
     }
