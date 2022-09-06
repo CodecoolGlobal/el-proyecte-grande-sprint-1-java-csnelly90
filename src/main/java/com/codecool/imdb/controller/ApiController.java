@@ -3,7 +3,7 @@ package com.codecool.imdb.controller;
 import java.util.Collection;
 
 import com.codecool.imdb.domain.model.Artist;
-import com.codecool.imdb.service.ApiService;
+import com.codecool.imdb.service.ArtistService;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +19,17 @@ public class ApiController {
     @Value("${api.key}")
     private String apiKey;
 
-    private ApiService apiService;
+    private ArtistService artistService;
 
     @Autowired
-    public ApiController(ApiService apiService) {
-        this.apiService = apiService;
+    public ApiController(ArtistService artistService) {
+        this.artistService = artistService;
     }
 
     @GetMapping(value = "/artists")
     public Collection<Artist> getTopTenArtist() {
         var limit = 10;
-        return apiService.getTopArtists(limit);
-    }
-
-    @GetMapping(value = "/albums")
-    public JsonNode getTopTenMusic(@RequestParam("genre") String genre) {
-        String url = "http://api.napster.com/v2.2/albums/top?apikey=" + apiKey + "&catalog=ENG&limit=10&genre=" + genre;
-        RestTemplate restTemplate = new RestTemplate();
-        JsonNode result = restTemplate.getForObject(url, JsonNode.class);
-
-        return result;
+        return artistService.getTopArtists(limit);
     }
 
     @GetMapping(value = "/genres")
@@ -52,9 +43,7 @@ public class ApiController {
 
     @GetMapping(value = "/artist/{id}")
     public Artist getArtistById(@PathVariable String id){
-
-
-        return apiService.getArtist(id);
+        return artistService.getArtist(id);
     }
 
 }

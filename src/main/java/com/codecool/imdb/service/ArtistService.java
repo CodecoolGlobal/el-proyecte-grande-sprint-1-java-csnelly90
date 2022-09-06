@@ -10,17 +10,14 @@ import com.codecool.imdb.domain.model.Artist;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@Profile("apis")
-public class NapsterApiService implements ApiService {
+public class ArtistService {
     @Value("${api.key}")
     private String apiKey;
 
-    @Override
     public Collection<Artist> getTopArtists(int limit) {
         String url = "http://api.napster.com/v2.2/artists/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit;
         RestTemplate restTemplate = new RestTemplate();
@@ -62,8 +59,6 @@ public class NapsterApiService implements ApiService {
         return image+"?apikey="+apiKey;
     }
 
-
-    @Override
     public Artist getArtist(String id) {
         String url = "https://api.napster.com/v2.2/artists/"+id+"?apikey="+apiKey;
         RestTemplate restTemplate = new RestTemplate();
