@@ -11,7 +11,7 @@ import "../ArtistPage.css"
 
      useEffect( () => {
         async function getData() {
-            let response = await dataHandler.apiGet("/api/artist/"+artistId.id);
+            let response = await dataHandler.apiGet("/api/artists/"+artistId.id);
             setArtistInfo(response);
         }
          getData();
