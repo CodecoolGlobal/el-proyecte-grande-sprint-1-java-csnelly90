@@ -1,6 +1,8 @@
 package com.codecool.imdb.service;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.codecool.imdb.service.dtos.NapsterArtist;
@@ -8,6 +10,11 @@ import com.codecool.imdb.service.dtos.NapsterArtistResponse;
 import com.codecool.imdb.service.dtos.response.NapsterArtistCardDto;
 import com.codecool.imdb.domain.model.Artist;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,9 +32,8 @@ public class ArtistService {
     }
 
     public Collection<NapsterArtistCardDto> getTopArtists(int limit) {
-        String url = "http://api.napster.com/v2.2/artists/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit;
+        String url = "https://api.napster.com/v2.2/artists/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit;
         var result = restTemplate.getForObject(url, NapsterArtistResponse.class);
-
         return result.getArtists().stream().map(this::mapToNapsterArtistCardDto).collect(Collectors.toSet());
     }
 
@@ -58,4 +64,25 @@ public class ArtistService {
     public String createImageUrl(String artistId, String resolution) {
         return "https://api.napster.com/imageserver/v2/artists/" + artistId + resolution;
     }
+
+    protected List<?> getUserCustomArtistSearch(String userInput) throws JsonProcessingException {
+        String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=artist";
+
+        var resultData = restTemplate.getForObject(url, JsonNode.class);
+        JsonNode node = resultData.get("search").get("data").get("artists");
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        List<NapsterArtist> napsterArtistList = mapper.readValue(node.toString(), new TypeReference<List<NapsterArtist>>() {
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
+        });
+        return napsterArtistList;
+    }
+
+
+
 }

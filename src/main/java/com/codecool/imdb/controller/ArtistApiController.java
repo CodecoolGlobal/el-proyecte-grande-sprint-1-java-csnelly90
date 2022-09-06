@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/artists")
 public class ArtistApiController {
 
-    // TODO: Remove when everything is factored into a service
     @Value("${api.key}")
     private String apiKey;
 
