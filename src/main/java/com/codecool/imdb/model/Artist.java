@@ -12,6 +12,8 @@ public class Artist {
 
     private String[] blurbs;
 
+    private String type;
+
     public Artist() {
 
     }
@@ -63,5 +65,13 @@ public class Artist {
 
     public void setBlurbs(String[] blurbs) {
         this.blurbs = blurbs;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
