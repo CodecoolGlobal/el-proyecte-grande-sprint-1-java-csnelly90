@@ -23,7 +23,7 @@ function HomePage() {
             {artists == null ? (<h1>LOADING...</h1>):
                 artists.map(({ name, id, image }) => (
                     <div className="artist" key={id}>
-                        <img src={image} alt="" onClick={() => navigate("/artist/"+id)}/>
+                        <img src={image} alt="" onClick={() => navigate("/artists/"+id)}/>
                         <h3 className="artist-name">{name}</h3>
                     </div>
                 ))}

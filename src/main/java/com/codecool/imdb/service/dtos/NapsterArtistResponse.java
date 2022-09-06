@@ -1,4 +1,4 @@
-package com.codecool.imdb.dto;
+package com.codecool.imdb.service.dtos;
 
 import java.util.Collection;
 
