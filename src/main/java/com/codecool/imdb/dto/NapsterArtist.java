@@ -1,6 +1,7 @@
 package com.codecool.imdb.dto;
 
 public class NapsterArtist {
+    private String type;
     private String name;
     // TODO:  Get this indirectly
     // private String genre;
@@ -10,9 +11,6 @@ public class NapsterArtist {
     private String image;
 
     private String[] blurbs;
-
-    private String type;
-
 
     public String getName() {
         return name;
