@@ -17,7 +17,7 @@ public class DummyApiService implements ApiService {
     public Collection<Artist> getTopArtists(int limit) {
         var artists = new HashSet<Artist>();
         for (int i = 0; i < 10; i++) {
-            artists.add(new Artist("Artist " + i, "Pop", null));
+            artists.add(Artist.builder().name("Artist " + i).genre("Pop").build());
         }
         return artists;
     }
