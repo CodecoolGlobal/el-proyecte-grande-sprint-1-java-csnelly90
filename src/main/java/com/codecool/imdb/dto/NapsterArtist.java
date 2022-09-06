@@ -11,6 +11,8 @@ public class NapsterArtist {
 
     private String[] blurbs;
 
+    private String type;
+
 
     public String getName() {
         return name;
@@ -42,6 +44,14 @@ public class NapsterArtist {
 
     public void setBlurbs(String[] blurbs) {
         this.blurbs = blurbs;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     // public String getGenre() {
