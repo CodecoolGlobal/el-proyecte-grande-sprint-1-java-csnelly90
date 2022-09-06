@@ -1,10 +1,19 @@
 package com.codecool.imdb.dto;
 
-public class NapsterTrack {
+public class NapsterSong {
     private String type;
     private String id;
-    private boolean isExplicit;
     private String name;
+    private String artistId;
+    private String artistName;
+    private String albumId;
+    private String albumName;
+    private String[] blurbs;
+    private boolean isExplicit;
+    private String label;
+    private String copyright;
+
+
 
     public String getType() {
         return type;
@@ -22,11 +31,11 @@ public class NapsterTrack {
         this.id = id;
     }
 
-    public boolean isExplicit() {
+    public boolean getIsExplicit() {
         return isExplicit;
     }
 
-    public void setExplicit(boolean explicit) {
+    public void setIsExplicit(boolean explicit) {
         isExplicit = explicit;
     }
 
@@ -78,14 +87,19 @@ public class NapsterTrack {
         this.albumName = albumName;
     }
 
-    private String[] blurbs;
-    private String artistId;
-    private String artistName;
-    private String albumId;
-    private String albumName;
+    public String getLabel() {
+        return label;
+    }
 
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
+    public String getCopyright() {
+        return copyright;
+    }
 
-
-
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
+    }
 }
