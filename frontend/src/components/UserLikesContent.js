@@ -7,7 +7,7 @@ function LikedContent(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await dataHandler.apiGet(`/api/artist/${props.artistId}/`);
+            const response = await dataHandler.apiGet(`/api/artists/${props.artistId}/`);
             setData(response);
         };
 
