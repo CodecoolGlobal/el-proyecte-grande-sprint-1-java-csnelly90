@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.codecool.imdb.model.Artist;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public interface ApiService {
@@ -12,5 +13,5 @@ public interface ApiService {
 
     Artist getArtist(String id);
 
-    List<?> getUsersCustomSearch(String searchedType, String userInput);
+    List<?> getUsersCustomSearch(String searchedType, String userInput) throws JsonProcessingException;
 }

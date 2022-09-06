@@ -1,16 +1,22 @@
 package com.codecool.imdb.service;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.codecool.imdb.dto.NapsterArtist;
 import com.codecool.imdb.dto.NapsterArtistResponse;
+import com.codecool.imdb.dto.NapsterTrack;
 import com.codecool.imdb.dto.response.NapsterArtistCardDto;
 import com.codecool.imdb.model.Artist;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -74,7 +80,7 @@ public class NapsterApiService implements ApiService {
         return result.getArtists().stream().map(this::mapToArtist).toList().get(0);
     }
 
-    public List<?> getUsersCustomSearch(String searchedType, String userInput) {
+    public List<?> getUsersCustomSearch(String searchedType, String userInput) throws JsonProcessingException {
         return switch (searchedType) {
             case ("album") -> getUserCustomAlbumSearch(userInput);
             case ("artist") -> getUserCustomArtistSearch(userInput);
@@ -91,7 +97,22 @@ public class NapsterApiService implements ApiService {
     private List<?> getUserCustomAlbumSearch(String userInput) {
         return null;
     }
-    private List<?> getUserCustomTrackSearch(String userInput) {
-        return null;
+    private List<?> getUserCustomTrackSearch(String userInput) throws JsonProcessingException {
+        String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=track";
+        RestTemplate restTemplate = new RestTemplate();
+        var resultData = restTemplate.getForObject(url, JsonNode.class);
+        JsonNode node = resultData.get("search").get("data").get("tracks");
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        List<NapsterTrack> napsterTrackList = mapper.readValue(node.toString(), new TypeReference<List<NapsterTrack>>() {
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
+        });
+        napsterTrackList.stream().forEach(System.out::println);
+        return napsterTrackList;
     }
 }
