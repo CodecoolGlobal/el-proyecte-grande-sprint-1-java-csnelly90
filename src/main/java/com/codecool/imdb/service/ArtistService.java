@@ -17,10 +17,10 @@ import org.springframework.web.client.RestTemplate;
 public class ArtistService {
     @Value("${api.key}")
     private String apiKey;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public Collection<Artist> getTopArtists(int limit) {
         String url = "http://api.napster.com/v2.2/artists/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit;
-        RestTemplate restTemplate = new RestTemplate();
         var result = restTemplate.getForObject(url, NapsterArtistResponse.class);
 
         return result.getArtists().stream().map(this::mapToArtist).collect(Collectors.toSet());
@@ -51,7 +51,6 @@ public class ArtistService {
     public String getImage(String id) {
         String image;
         String url = "https://api.napster.com/v2.2/artists/" + id + "/images?apikey=" + apiKey + "&limit=1";
-        RestTemplate restTemplate = new RestTemplate();
         var result = restTemplate.getForEntity(url, JsonNode.class);
         image = String.valueOf(result.getBody().findValue("url"));
         image = image.substring(0, image.length() - 1);
@@ -61,9 +60,7 @@ public class ArtistService {
 
     public Artist getArtist(String id) {
         String url = "https://api.napster.com/v2.2/artists/"+id+"?apikey="+apiKey;
-        RestTemplate restTemplate = new RestTemplate();
         var result = restTemplate.getForObject(url, NapsterArtistResponse.class);
-
         return result.getArtists().stream().map(this::mapToArtist).toList().get(0);
     }
 }
