@@ -4,11 +4,11 @@ public class NapsterAlbum {
     private String type;
     private String id;
     private String name;
+    private String artistName;
     private String released;
     private String label;
     private String copyright;
     private boolean isExplicit;
-    private String artistName;
 
     public String getId() {
         return id;
@@ -50,11 +50,11 @@ public class NapsterAlbum {
         this.copyright = copyright;
     }
 
-    public boolean isExplicit() {
+    public boolean getIsExplicit() {
         return isExplicit;
     }
 
-    public void setExplicit(boolean explicit) {
+    public void setIsExplicit(boolean explicit) {
         isExplicit = explicit;
     }
 
