@@ -25,7 +25,7 @@ public class AlbumApiController {
     }
 
     @GetMapping
-    public JsonNode getTopTenMusic(@RequestParam("genre") String genre) {
+    public JsonNode getTopTenAlbums(@RequestParam("genre") String genre) {
         String url = "http://api.napster.com/v2.2/albums/top?apikey=" + apiKey + "&catalog=ENG&limit=10&genre=" + genre;
         RestTemplate restTemplate = new RestTemplate();
         JsonNode result = restTemplate.getForObject(url, JsonNode.class);
