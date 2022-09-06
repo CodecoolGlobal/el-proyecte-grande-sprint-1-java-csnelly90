@@ -2,6 +2,7 @@ package com.codecool.imdb.service;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 import com.codecool.imdb.model.Artist;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,6 +25,11 @@ public class DummyApiService implements ApiService {
 
     @Override
     public Artist getArtist(String id) {
+        return null;
+    }
+
+    @Override
+    public List<?> getUsersCustomSearch(String searchedType, String userInput) {
         return null;
     }
 
