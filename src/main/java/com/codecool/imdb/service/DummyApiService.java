@@ -3,8 +3,7 @@ package com.codecool.imdb.service;
 import java.util.Collection;
 import java.util.HashSet;
 
-import com.codecool.imdb.model.Artist;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.codecool.imdb.domain.model.Artist;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;

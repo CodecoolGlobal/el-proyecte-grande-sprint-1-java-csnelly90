@@ -1,4 +1,4 @@
-package com.codecool.imdb.dto;
+package com.codecool.imdb.service.dtos;
 
 public class NapsterArtist {
     private String name;

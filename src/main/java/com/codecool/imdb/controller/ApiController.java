@@ -2,7 +2,7 @@ package com.codecool.imdb.controller;
 
 import java.util.Collection;
 
-import com.codecool.imdb.model.Artist;
+import com.codecool.imdb.domain.model.Artist;
 import com.codecool.imdb.service.ApiService;
 import com.fasterxml.jackson.databind.JsonNode;
 

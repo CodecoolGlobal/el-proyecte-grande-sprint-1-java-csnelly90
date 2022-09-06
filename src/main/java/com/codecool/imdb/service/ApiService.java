@@ -2,8 +2,7 @@ package com.codecool.imdb.service;
 
 import java.util.Collection;
 
-import com.codecool.imdb.model.Artist;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.codecool.imdb.domain.model.Artist;
 
 public interface ApiService {
 

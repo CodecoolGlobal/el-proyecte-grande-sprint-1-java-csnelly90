@@ -1,4 +1,4 @@
-package com.codecool.imdb.model;
+package com.codecool.imdb.domain.model;
 
 import lombok.*;
 

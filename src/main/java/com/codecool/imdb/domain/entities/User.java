@@ -1,5 +1,8 @@
-package com.codecool.imdb.model;
+package com.codecool.imdb.domain.entities;
 
+import com.codecool.imdb.domain.model.Album;
+import com.codecool.imdb.domain.model.Artist;
+import com.codecool.imdb.domain.model.Song;
 import lombok.*;
 
 import java.util.ArrayList;

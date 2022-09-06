@@ -3,10 +3,10 @@ package com.codecool.imdb.service;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import com.codecool.imdb.dto.NapsterArtist;
-import com.codecool.imdb.dto.NapsterArtistResponse;
-import com.codecool.imdb.dto.response.NapsterArtistCardDto;
-import com.codecool.imdb.model.Artist;
+import com.codecool.imdb.service.dtos.NapsterArtist;
+import com.codecool.imdb.service.dtos.NapsterArtistResponse;
+import com.codecool.imdb.service.dtos.response.NapsterArtistCardDto;
+import com.codecool.imdb.domain.model.Artist;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Value;

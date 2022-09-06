@@ -1,4 +1,4 @@
-package com.codecool.imdb.dto.response;
+package com.codecool.imdb.service.dtos.response;
 
 import lombok.*;
 
