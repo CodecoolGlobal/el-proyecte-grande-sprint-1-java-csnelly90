@@ -1,6 +1,9 @@
-package com.codecool.imdb.model;
+package com.codecool.imdb.domain.entities;
 
-import java.util.ArrayList;
+import com.codecool.imdb.domain.model.Album;
+import com.codecool.imdb.domain.model.Artist;
+import com.codecool.imdb.domain.model.Song;
+
 import java.util.List;
 
 public class UserSafeData {
