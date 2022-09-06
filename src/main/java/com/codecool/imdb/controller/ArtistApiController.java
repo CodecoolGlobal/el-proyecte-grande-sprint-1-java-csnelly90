@@ -5,6 +5,7 @@ import java.util.Collection;
 import com.codecool.imdb.domain.model.Artist;
 import com.codecool.imdb.service.ArtistService;
 
+import com.codecool.imdb.service.dtos.response.NapsterArtistCardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class ArtistApiController {
     }
 
     @GetMapping
-    public Collection<Artist> getTopTenArtist() {
+    public Collection<NapsterArtistCardDto> getTopTenArtist() {
         var limit = 10;
         return artistService.getTopArtists(limit);
     }
