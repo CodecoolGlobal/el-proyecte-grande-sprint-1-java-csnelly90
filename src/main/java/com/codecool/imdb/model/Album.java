@@ -1,34 +1,22 @@
 package com.codecool.imdb.model;
 
+import lombok.*;
+
 import java.util.List;
 
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Album {
 
-    private final String name;
-
-    private final Artist artist;
-
+    private String id;
+    private String name;
+    private Artist artistName;
+    private Integer released;
+    private String type;
+    private String label;
+    private Integer trackCount;
     private List<Song> songs;
-
-    public Album(String name, Artist artist, List<Song> songs) {
-        this.name = name;
-        this.artist = artist;
-        this.songs = songs;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public List<Song> getSongs() {
-        return List.copyOf(songs);
-    }
-
-    public void addToSongs(Song song) {
-        this.songs.add(song);
-    }
 }
