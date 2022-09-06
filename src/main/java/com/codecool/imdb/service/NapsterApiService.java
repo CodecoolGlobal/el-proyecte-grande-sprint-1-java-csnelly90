@@ -1,14 +1,14 @@
 package com.codecool.imdb.service;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.codecool.imdb.dto.NapsterAlbum;
 import com.codecool.imdb.dto.NapsterArtist;
 import com.codecool.imdb.dto.NapsterArtistResponse;
-import com.codecool.imdb.dto.NapsterTrack;
+import com.codecool.imdb.dto.NapsterSong;
 import com.codecool.imdb.dto.response.NapsterArtistCardDto;
 import com.codecool.imdb.model.Artist;
 
@@ -84,18 +84,48 @@ public class NapsterApiService implements ApiService {
         return switch (searchedType) {
             case ("album") -> getUserCustomAlbumSearch(userInput);
             case ("artist") -> getUserCustomArtistSearch(userInput);
-            case ("songs") -> getUserCustomTrackSearch(userInput);
+            case ("song") -> getUserCustomTrackSearch(userInput);
             default -> null;
         };
     }
 
 
-    private List<?> getUserCustomArtistSearch(String userInput) {
-        return null;
+    private List<?> getUserCustomArtistSearch(String userInput) throws JsonProcessingException {
+        String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=artist";
+        System.out.println(url);
+        RestTemplate restTemplate = new RestTemplate();
+        var resultData = restTemplate.getForObject(url, JsonNode.class);
+        JsonNode node = resultData.get("search").get("data").get("artists");
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        List<NapsterArtist> napsterArtistList = mapper.readValue(node.toString(), new TypeReference<List<NapsterArtist>>() {
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
+        });
+        return napsterArtistList;
     }
 
-    private List<?> getUserCustomAlbumSearch(String userInput) {
-        return null;
+    private List<?> getUserCustomAlbumSearch(String userInput) throws JsonProcessingException {
+        String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=album";
+
+        RestTemplate restTemplate = new RestTemplate();
+        var resultData = restTemplate.getForObject(url, JsonNode.class);
+        JsonNode node = resultData.get("search").get("data").get("albums");
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        List<NapsterAlbum> napsterAlbumList = mapper.readValue(node.toString(), new TypeReference<List<NapsterAlbum>>() {
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
+        });
+        return napsterAlbumList;
     }
     private List<?> getUserCustomTrackSearch(String userInput) throws JsonProcessingException {
         String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=track";
@@ -106,13 +136,12 @@ public class NapsterApiService implements ApiService {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        List<NapsterTrack> napsterTrackList = mapper.readValue(node.toString(), new TypeReference<List<NapsterTrack>>() {
+        List<NapsterSong> napsterTrackList = mapper.readValue(node.toString(), new TypeReference<List<NapsterSong>>() {
             @Override
             public Type getType() {
                 return super.getType();
             }
         });
-        napsterTrackList.stream().forEach(System.out::println);
         return napsterTrackList;
     }
 }
