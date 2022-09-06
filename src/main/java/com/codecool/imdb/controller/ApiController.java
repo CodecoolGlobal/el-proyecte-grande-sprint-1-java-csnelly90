@@ -1,6 +1,8 @@
 package com.codecool.imdb.controller;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 import com.codecool.imdb.model.Artist;
 import com.codecool.imdb.service.ApiService;
@@ -55,6 +57,11 @@ public class ApiController {
 
 
         return apiService.getArtist(id);
+    }
+
+    @GetMapping(value = "/search/{type}/{userInput}")
+    public List<?> getUsersCustomSearch(@PathVariable String type, @PathVariable String userInput) throws IOException {
+        return apiService.getUsersCustomSearch(type,userInput);
     }
 
 }
