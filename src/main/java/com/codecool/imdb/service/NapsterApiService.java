@@ -1,6 +1,8 @@
 package com.codecool.imdb.service;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.codecool.imdb.dto.NapsterArtist;
@@ -70,5 +72,26 @@ public class NapsterApiService implements ApiService {
         var result = restTemplate.getForObject(url, NapsterArtistResponse.class);
 
         return result.getArtists().stream().map(this::mapToArtist).toList().get(0);
+    }
+
+    public List<?> getUsersCustomSearch(String searchedType, String userInput) {
+        return switch (searchedType) {
+            case ("album") -> getUserCustomAlbumSearch(userInput);
+            case ("artist") -> getUserCustomArtistSearch(userInput);
+            case ("songs") -> getUserCustomTrackSearch(userInput);
+            default -> null;
+        };
+    }
+
+
+    private List<?> getUserCustomArtistSearch(String userInput) {
+        return null;
+    }
+
+    private List<?> getUserCustomAlbumSearch(String userInput) {
+        return null;
+    }
+    private List<?> getUserCustomTrackSearch(String userInput) {
+        return null;
     }
 }
