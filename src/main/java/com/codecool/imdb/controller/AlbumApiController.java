@@ -21,7 +21,7 @@ public class AlbumApiController {
         this.albumService = albumService;
     }
 
-    @GetMapping
+    @GetMapping("/trending")
     public Collection<NapsterAlbumCardDto> getTopTenAlbums() {
         int limit = 10;
         return albumService.getTopAlbums(limit);
