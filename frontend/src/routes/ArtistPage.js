@@ -27,6 +27,8 @@ import "../ArtistPage.css"
                        </div>
                         <div className={"artist-info"}>
                             <b><h1 className={"artist-name"}>{artistInfo.name}</h1></b>
+                            <h3>Genres:</h3>
+                            <small>{artistInfo.genre}</small>
                             <p>{artistInfo.blurbs}</p>
                         </div>
                    </div>
