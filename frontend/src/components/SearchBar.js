@@ -6,8 +6,6 @@ import {faMusic} from "@fortawesome/free-solid-svg-icons";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useEffect} from "react";
-import {dataHandler} from "../data/DataHandler";
 import {useNavigate} from "react-router-dom";
 
 const options = [
@@ -20,18 +18,17 @@ function SearchBar() {
         const [isActive, setIsActive]=useState(false);
         const [selected, setSelected]=useState("Choose one");
         const [text, setText] = useState("");
+        const navigate = useNavigate();
+        const updateText = () => {
+            setText(document.getElementById("userInput").value);
 
-        useEffect(() => {
-            async function getData() {
-                let userSearch = await dataHandler.apiGet(`/api/search/${selected}/${text}`);
-            }
+        }
 
-            getData().then(useNavigate(() =>{`/`}))
-        }, [text]);
     return (
         <div id="search-container">
             <div id="icons-container">
-                <div className="dropdown" id="dropdown-button" onClick={(e) => {setIsActive(!isActive)}}>
+                <div className="dropdown" id="dropdown-button" onClick={() => {
+                    setIsActive(!isActive)}}>
                     <span>{selected} </span> <span><FontAwesomeIcon icon={faCaretDown} /></span>
                 </div>
                 {isActive && (
@@ -50,8 +47,8 @@ function SearchBar() {
 
             </div>
             <div>
-                <input type="text" id="userInput"/>
-                <button onClick={() =>setText(document.getElementById("userInput").value)}>
+                <input type="text" id="userInput" onChange={updateText}/>
+                <button onClick={()=> navigate(`/search/type=${selected}/userSearch=${text}`)}>
                     <span><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></span>
                 </button>
             </div>
