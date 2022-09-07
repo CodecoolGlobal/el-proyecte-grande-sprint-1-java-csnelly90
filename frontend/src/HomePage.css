@@ -1,34 +1,110 @@
-.top-artists{
+.trending-content-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 85%;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
     align-items: center;
     align-content: center;
-    margin: 100px;
 }
-.artist-name{
-    text-align: match-parent;
+
+.trending-content-wrapper section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 3rem;
 }
-.artist{
+
+.top-trending-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 70%;
+}
+
+.top-trending-title h3, .top-trending-title p {
+    margin: 0;
+    padding: 0.5rem 2rem;
+}
+
+.top-trending-title p {
+    color: #e3e5e5;
+}
+
+.top-trending-title h3 {
+    font-size: 1.5rem;
+}
+
+.top-trending-title h3:hover {
     cursor: pointer;
-    position: relative;
-    list-style: none;
-    padding: 15px 20px;
-    color: #03e9f4;
-    border-radius: 0.2em;
-    font-size: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .7s;
-    letter-spacing: 4px;
+    transition: color 0.6s ease-in-out;
+    color: #fff;
+}
+
+.top-trending-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    align-items: stretch;
+    align-content: center;
+    color: #1c1c25;
+    margin: 2rem 0;
+}
+
+.main-card {
+    width: 40%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    align-content: center;
+}
+
+.other-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 60%;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.card-redirect p {
+    cursor: pointer;
+    border-radius: 0.3rem;
+    background-color: #0094b2;
+    padding: 0.7rem 1rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.card-redirect p:hover {
+    transition: background-color 0.6s ease-in-out;
+    background-color: rgba(28, 28, 37, 0.89);
+}
+
+.card {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    cursor: pointer;
+    padding: 15px 20px;
+    color: #03e9f4;
+    border-radius: 1rem;
+    text-decoration: none;
+    overflow: hidden;
+    transition: .7s;
+    letter-spacing: 4px;
+    background: #1a1a23;
 }
-.artist:hover{
-    border-radius: 0.2em;
+
+.card:hover {
     transition: background-color 0.6s ease-in-out;
     background: #03e9f4;
     color: #fff;
@@ -36,4 +112,62 @@
     0 0 15px #03e9f4,
     0 0 30px #03e9f4,
     0 0 70px #03e9f4;
+}
+
+.main-card .card-name {
+    margin-top: 1rem;
+}
+
+.other-cards .card {
+    width: 25%;
+    font-size: 0.8rem;
+}
+
+.card-image {
+    width: 100%;
+}
+
+.card-image img {
+    width: 100%;
+    object-fit: contain;
+    border-radius: 0.5rem;
+}
+
+.card-info, .card-redirect {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+}
+
+.card-info {
+    height: 100%;
+    margin-left: 0.5rem;
+}
+
+.card-name {
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.card-type {
+    margin: 0;
+}
+
+#trending-icon {
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .top-trending-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-card, .other-cards {
+        width: 90%;
+    }
 }
