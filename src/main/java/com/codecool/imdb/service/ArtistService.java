@@ -41,7 +41,7 @@ public class ArtistService {
         String resolution = "/images/633x422.jpg";
         var result = new Artist();
         result.setName(napsterArtist.getName());
-        result.setGenre("UNKOWN");
+        result.setGenre(napsterArtist.getGenre());
         result.setId(napsterArtist.getId());
         String image = createImageUrl(napsterArtist.getId(), resolution);
         result.setImage(image);
