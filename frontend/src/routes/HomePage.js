@@ -19,19 +19,22 @@ function HomePage() {
 
     const changeCardOrder = function (arrayType, id) {
         if (arrayType === "artists") {
-            const index = artists.map(object => object.id).indexOf(id);
-            const artistsCopy = artists.slice();
-            artistsCopy.unshift(artistsCopy.splice(index, 1)[0]);
+            const mainCardIndex = 0;
+            const otherCardIndex = artists.map(object => object.id).indexOf(id);
+            let artistsCopy = [...artists];
+            artistsCopy[mainCardIndex] = artistsCopy.splice(otherCardIndex, 1, artistsCopy[mainCardIndex])[0]
             setArtists(artistsCopy);
         } else if (arrayType === "albums") {
-            const index = albums.map(object => object.id).indexOf(id);
-            const albumsCopy = albums.slice();
-            albumsCopy.unshift(albumsCopy.splice(index, 1)[0]);
+            const mainCardIndex = 0;
+            const otherCardIndex = albums.map(object => object.id).indexOf(id);
+            let albumsCopy = [...artists];
+            albumsCopy[mainCardIndex] = albumsCopy.splice(otherCardIndex, 1, albumsCopy[mainCardIndex])[0]
             setArtists(albumsCopy);
         } else if (arrayType === "songs") {
-            const index = songs.map(object => object.id).indexOf(id);
-            const songsCopy = songs.slice();
-            songsCopy.unshift(songsCopy.splice(index, 1)[0]);
+            const mainCardIndex = 0;
+            const otherCardIndex = songs.map(object => object.id).indexOf(id);
+            let songsCopy = [...artists];
+            songsCopy[mainCardIndex] = songsCopy.splice(otherCardIndex, 1, songsCopy[mainCardIndex])[0]
             setArtists(songsCopy);
         }
     }
