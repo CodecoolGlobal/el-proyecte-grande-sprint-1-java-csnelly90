@@ -157,6 +157,14 @@
     margin: 0;
 }
 
+.card-bio {
+    letter-spacing: normal;
+    font-size: 1rem;
+    text-align: justify;
+    margin-top: 1rem;
+    padding: 0 1rem;
+}
+
 #trending-icon {
     font-size: 2rem;
 }
