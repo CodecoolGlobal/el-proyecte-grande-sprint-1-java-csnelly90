@@ -10,7 +10,7 @@ function HomePage() {
 
     useEffect(() => {
         async function getData() {
-            let artistResponse = await dataHandler.apiGet("/api/artists");
+            let artistResponse = await dataHandler.apiGet("/api/artists/trending");
             setArtists(artistResponse);
         }
 
