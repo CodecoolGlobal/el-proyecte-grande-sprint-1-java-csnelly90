@@ -1,6 +1,8 @@
 package com.codecool.imdb.service;
 
 import com.codecool.imdb.service.dtos.NapsterAlbum;
+import com.codecool.imdb.service.dtos.NapsterAlbumResponse;
+import com.codecool.imdb.service.dtos.response.NapsterAlbumCardDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AlbumService {
@@ -35,6 +39,27 @@ public class AlbumService {
             }
         });
         return napsterAlbumList;
+    }
+
+    public Collection<NapsterAlbumCardDto> getTopAlbums(int limit) {
+        String url = "http://api.napster.com/v2.2/albums/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "range=week";
+        var resultData = restTemplate.getForObject(url, NapsterAlbumResponse.class);
+        return resultData.getAlbums().stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toSet());
+    }
+
+    private NapsterAlbumCardDto mapToNapsterAlbumCardDto(NapsterAlbum napsterAlbum) {
+        String resolution = "/images/356x237.jpg";
+        var card = new NapsterAlbumCardDto();
+        card.setName(napsterAlbum.getName());
+        card.setId(napsterAlbum.getId());
+        String image = createImageUrl(card.getId(), resolution);
+        card.setImage(image);
+        card.setType(napsterAlbum.getType());
+        return card;
+    }
+
+    public String createImageUrl(String albumId, String resolution) {
+        return "https://api.napster.com/imageserver/v2/albums/" + albumId + resolution;
     }
 
 }
