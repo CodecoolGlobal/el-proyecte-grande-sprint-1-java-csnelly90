@@ -8,11 +8,12 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useEffect} from "react";
 import {dataHandler} from "../data/DataHandler";
+import {useNavigate} from "react-router-dom";
 
 const options = [
     {"name": "Album", "icon": faCompactDisc},
-    {"name": "Artists", "icon": faPerson},
-    {"name": "Songs", "icon": faMusic}
+    {"name": "Artist", "icon": faPerson},
+    {"name": "Song", "icon": faMusic}
 ]
 
 function SearchBar() {
@@ -25,7 +26,7 @@ function SearchBar() {
                 let userSearch = await dataHandler.apiGet(`/api/search/${selected}/${text}`);
             }
 
-            getData();
+            getData().then(useNavigate(() =>{`/`}))
         }, [text]);
     return (
         <div id="search-container">
