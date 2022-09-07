@@ -17,22 +17,24 @@ function HomePage() {
         getData();
     }, []);
 
-    const changeCardOrder = function (arrayType, id) {
+    const swapArrayItems = function (array, selectedItemId) {
+        const mainCardIndex = 0;
+        const otherCardIndex = array.map(object => object.id).indexOf(selectedItemId);
+        let arrayCopy = [...array];
+        arrayCopy[mainCardIndex] = arrayCopy.splice(otherCardIndex, 1, arrayCopy[mainCardIndex])[0]
+        return arrayCopy;
+    }
+
+    const changeCardOrder = function (arrayType, selectedItemId) {
         if (arrayType === "artists") {
-            const index = artists.map(object => object.id).indexOf(id);
-            const artistsCopy = artists.slice();
-            artistsCopy.unshift(artistsCopy.splice(index, 1)[0]);
-            setArtists(artistsCopy);
+            const rearrangedArray = swapArrayItems(artists, selectedItemId);
+            setArtists(rearrangedArray);
         } else if (arrayType === "albums") {
-            const index = albums.map(object => object.id).indexOf(id);
-            const albumsCopy = albums.slice();
-            albumsCopy.unshift(albumsCopy.splice(index, 1)[0]);
-            setArtists(albumsCopy);
+            const rearrangedArray = swapArrayItems(albums, selectedItemId);
+            setAlbums(rearrangedArray);
         } else if (arrayType === "songs") {
-            const index = songs.map(object => object.id).indexOf(id);
-            const songsCopy = songs.slice();
-            songsCopy.unshift(songsCopy.splice(index, 1)[0]);
-            setArtists(songsCopy);
+            const rearrangedArray = swapArrayItems(songs, selectedItemId);
+            setSongs(rearrangedArray);
         }
     }
 
