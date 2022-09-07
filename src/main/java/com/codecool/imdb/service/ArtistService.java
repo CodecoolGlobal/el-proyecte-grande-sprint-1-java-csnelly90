@@ -57,6 +57,7 @@ public class ArtistService {
         card.setId(napsterArtist.getId());
         String image = createImageUrl(napsterArtist.getId(), resolution);
         card.setImage(image);
+        card.setBlurbs(String.join(" ", napsterArtist.getBlurbs()));
         card.setType(napsterArtist.getType());
         return card;
     }
