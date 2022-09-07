@@ -24,7 +24,7 @@ public class ArtistApiController {
         this.artistService = artistService;
     }
 
-    @GetMapping
+    @GetMapping("/trending")
     public Collection<NapsterArtistCardDto> getTopTenArtist() {
         var limit = 10;
         return artistService.getTopArtists(limit);
