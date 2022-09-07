@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import "../HomePage.css"
 import {dataHandler} from "../data/DataHandler";
 import TopTrending from "../components/TopTrending";
@@ -10,10 +10,15 @@ function HomePage() {
 
     useEffect(() => {
         async function getData() {
-            let artistResponse = await dataHandler.apiGet("/api/artists/trending");
-            setArtists(artistResponse);
+            try {
+                let artistResponse = await dataHandler.apiGet("/api/artists/trending");
+                let albumResponse = await dataHandler.apiGet("/api/albums/trending");
+                setArtists(artistResponse);
+                setAlbums(albumResponse);
+            } catch (error) {
+                console.log(error);
+            }
         }
-
         getData();
     }, []);
 
@@ -39,7 +44,7 @@ function HomePage() {
     }
 
     // TODO: also check albums and songs for null value when they are implemented
-    if (artists == null) {
+    if (artists == null && albums == null) {
         return (
             <div className="trending-content-wrapper">
                 <div className="loading">
@@ -51,6 +56,7 @@ function HomePage() {
         return (
             <div className="trending-content-wrapper">
                 <TopTrending trendingItems={artists} changeCardOrder={changeCardOrder} apiRouteOption="artists"/>
+                <TopTrending trendingItems={albums} changeCardOrder={changeCardOrder} apiRouteOption="albums"/>
             </div>
         );
     }
