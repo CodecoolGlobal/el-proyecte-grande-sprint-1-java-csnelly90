@@ -47,6 +47,12 @@ public class AlbumService {
         return resultData.getAlbums().stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toSet());
     }
 
+    public Collection<NapsterAlbumCardDto> getAlbumsByArtistId(String id){
+        String url = "https://api.napster.com/v2.2/artists/art.978/albums/top?apikey="+apiKey+"&limit=200";
+        var resultData = restTemplate.getForObject(url, NapsterAlbumResponse.class);
+        return resultData.getAlbums().stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toSet());
+    }
+
     private NapsterAlbumCardDto mapToNapsterAlbumCardDto(NapsterAlbum napsterAlbum) {
         String resolution = "/images/356x237.jpg";
         var card = new NapsterAlbumCardDto();
