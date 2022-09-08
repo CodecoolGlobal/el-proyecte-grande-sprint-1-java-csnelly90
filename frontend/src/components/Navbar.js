@@ -7,15 +7,15 @@ function Navbar() {
     return (
         <nav>
             <ul>
-                <div id="home-and-search-holder">
-                    <li><Link to="/">Home</Link></li>
-                </div>
+                <Link to="/"><div id="home-and-search-holder">
+                    <li>Home</li>
+                </div></Link>
                 <div id="search-holder">
                     <SearchBar />
                 </div>
-                <div id="user-link-holder">
-                    <li><Link to="user">User page</Link></li>
-                </div>
+                <Link to="user"><div id="user-link-holder">
+                    <li>User page</li>
+                </div></Link>
             </ul>
         </nav>
     );
