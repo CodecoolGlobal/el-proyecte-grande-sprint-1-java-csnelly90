@@ -19,5 +19,5 @@ public class NapsterSong {
     private boolean isExplicit;
     private String label;
     private String copyright;
-
+    private String image;
 }
