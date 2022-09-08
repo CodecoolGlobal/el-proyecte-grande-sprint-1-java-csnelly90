@@ -1,36 +1,27 @@
 package com.codecool.imdb.domain.entities;
 
-import com.codecool.imdb.domain.model.Album;
-import com.codecool.imdb.domain.model.Artist;
-import com.codecool.imdb.domain.model.Song;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
 
-    private int id;
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false)
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
+    @Column(unique = true, nullable = false)
+    private String email;
+    @Column(nullable = false)
     private String password;
-    private List<Album> likedAlbums = new ArrayList<>();
-    private List<Artist> likedArtists = new ArrayList<>();
-    private List<Song> likedSongs = new ArrayList<>();
-
-    public void addToLikedArtists(Artist likedArtist) {
-        this.likedArtists.add(likedArtist);
-    }
-
-    public void addToLikedAlbums(Album likedAlbum) {
-        this.likedAlbums.add(likedAlbum);
-    }
-
-    public void addToLikedSongs(Song likedSong) {
-        this.likedSongs.add(likedSong);
-    }
 }

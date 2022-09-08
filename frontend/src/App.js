@@ -5,6 +5,7 @@ import React from "react";
 import Layout from "./components/Layout";
 import HomePage from "./routes/HomePage";
 import ArtistPage from "./routes/ArtistPage";
+import PageNotFound from "./routes/PageNotFound";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
             <Route path="user" element={<UserPage />} />
             <Route path="artists/:id" element={<ArtistPage />} />
         </Route>
+        <Route path="*" element={<PageNotFound/>} />
     </Routes>
   );
 }
