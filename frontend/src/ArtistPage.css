@@ -1,52 +1,41 @@
 .artist-container {
     display: flex;
     flex-direction: column;
-
+    align-items: center;
+    align-content: center;
 }
 
 .artist-info-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
     width: 85%;
     align-items: center;
     align-content: center;
     margin: auto;
+    gap: 2rem;
 }
 
 .artist-name {
     text-align: match-parent;
 }
 
-.artist-pic {
-    position: relative;
-    list-style: none;
-    color: #03e9f4;
-    border-radius: 0.2em;
-    font-size: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .7s;
-    letter-spacing: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.artist-pic-container {
+    width: 30%;
+    border-radius: 0.5rem;
 }
 
-.artist-pic img {
+.artist-pic-container img {
     width: 100%;
     object-fit: contain;
+    border-radius: 0.5rem;
 }
 
-.artist:hover {
-    border-radius: 0.2em;
-    transition: background-color 0.6s ease-in-out;
-    background: #03e9f4;
-    color: #fff;
-    box-shadow: 0 0 5px #03e9f4,
-    0 0 15px #03e9f4,
-    0 0 30px #03e9f4,
-    0 0 70px #03e9f4;
+.artist-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 70%;
 }
 
 .card-wrapper {
@@ -65,9 +54,63 @@
     width: 13%;
 }
 
+#album-tab-container {
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    margin: 5rem 0 2rem 0;
+}
+
+.album-tab {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #03e9f4;
+    clip-path: polygon(0 0, 95% 0, 100% 100%, 0% 100%);
+    background-color: #121218; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, rgba(14, 87, 117, 0.58), #121218); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, rgba(14, 87, 117, 0.58), #121218); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-top-right-radius: 1.5em;
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+}
+
+.active-tab {
+    color: #000;
+    background-color: #03e9f4;
+    background: -webkit-linear-gradient(to right, #03e9f4, #063244); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #03e9f4, #063244); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.active-tab::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 2px;
+    background: #03e9f4;
+}
+
 @media screen and (max-width: 1000px) {
     .card-wrapper .card {
         width: 45%;
+    }
+
+    .artist-info-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .artist-pic-container, .artist-info {
+        width: 80%;
     }
 }
 
