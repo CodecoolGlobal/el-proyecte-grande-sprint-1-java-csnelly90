@@ -31,7 +31,7 @@ function SearchPage() {
     }, [searchedType, searchInput]);
 
     const navigateToPage = function (apiOption, itemId) {
-        navigate(`/${apiOption + "s"}/` + itemId)
+        navigate(`/${apiOption}/` + itemId)
     }
 
     if (searchedData !== null) {
@@ -49,7 +49,7 @@ function SearchPage() {
                             <CardView item={item}
                                       key={item.id}
                                       cardType={cardType}
-                                      apiOption={item.type}
+                                      apiOption={item.type + "s"}
                                       handleClick={navigateToPage}
                             />
                         )
