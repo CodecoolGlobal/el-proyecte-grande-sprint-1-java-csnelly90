@@ -18,4 +18,5 @@ public class Song {
     private Integer released;
     private String type;
     private String label;
+    private String previewURL;
 }
