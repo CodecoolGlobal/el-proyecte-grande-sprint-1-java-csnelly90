@@ -69,4 +69,19 @@ public class SongService {
     public String createImageUrl(String albumId, String resolution) {
         return "https://api.napster.com/imageserver/v2/albums/" + albumId + resolution;
     }
+
+    public Collection<NapsterSong> getSongsByAlbumId(String id) throws JsonProcessingException {
+        String url = "https://api.napster.com/v2.2/albums/"+id+"/tracks?apikey="+apiKey;
+        var resultData = restTemplate.getForObject(url, JsonNode.class);
+        JsonNode node = resultData.get("tracks");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        Collection<NapsterSong> napsterSongs = mapper.readValue(node.toString(), new TypeReference<List<NapsterSong>>() {
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
+        });
+        return napsterSongs.stream().map(this::addImage).collect(Collectors.toSet());
+    }
 }
