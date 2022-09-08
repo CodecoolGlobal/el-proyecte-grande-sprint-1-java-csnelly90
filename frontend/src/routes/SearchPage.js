@@ -30,7 +30,7 @@ function SearchPage() {
 
     }, [searchedType, searchInput]);
 
-    const changeCardOrder = function (apiOption, itemId) {
+    const navigateToPage = function (apiOption, itemId) {
         navigate(`/${apiOption + "s"}/` + itemId)
     }
 
@@ -49,7 +49,7 @@ function SearchPage() {
                                       key={item.id}
                                       cardType={cardType}
                                       apiOption={item.type}
-                                      handleClick={changeCardOrder}
+                                      handleClick={navigateToPage}
                             />
                         )
                     )
