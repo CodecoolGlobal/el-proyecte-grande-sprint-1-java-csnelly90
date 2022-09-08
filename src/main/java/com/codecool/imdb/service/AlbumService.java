@@ -68,7 +68,7 @@ public class AlbumService {
             card.setBlurbs("There is no available information.");
         }
         card.setArtistName(napsterAlbum.getArtistName());
-        card.setReleased(napsterAlbum.getReleased());
+        card.setReleased(napsterAlbum.getReleased().substring(0, 4));
         card.setLabel(napsterAlbum.getLabel());
 
         return card;
