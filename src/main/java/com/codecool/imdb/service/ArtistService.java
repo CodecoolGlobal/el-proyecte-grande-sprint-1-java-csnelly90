@@ -45,6 +45,11 @@ public class ArtistService {
         result.setId(napsterArtist.getId());
         String image = createImageUrl(napsterArtist.getId(), resolution);
         result.setImage(image);
+        if (napsterArtist.getBlurbs() != null) {
+            result.setBlurbs(napsterArtist.getBlurbs());
+        } else {
+            result.setBlurbs(new String[]{"There is no available information."});
+        }
         result.setBlurbs(napsterArtist.getBlurbs());
         result.setType(napsterArtist.getType());
         return result;
@@ -57,7 +62,11 @@ public class ArtistService {
         card.setId(napsterArtist.getId());
         String image = createImageUrl(napsterArtist.getId(), resolution);
         card.setImage(image);
-        card.setBlurbs(String.join(" ", napsterArtist.getBlurbs()));
+        if (napsterArtist.getBlurbs() != null && napsterArtist.getBlurbs().length != 0) {
+            card.setBlurbs(String.join(" ", napsterArtist.getBlurbs()));
+        } else {
+            card.setBlurbs("There is no available information.");
+        }
         card.setType(napsterArtist.getType());
         return card;
     }
@@ -66,7 +75,7 @@ public class ArtistService {
         return "https://api.napster.com/imageserver/v2/artists/" + artistId + resolution;
     }
 
-    protected List<?> getUserCustomArtistSearch(String userInput) throws JsonProcessingException {
+    private List<NapsterArtist> getUserCustomArtistSearch(String userInput) throws JsonProcessingException {
         String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=artist";
 
         var resultData = restTemplate.getForObject(url, JsonNode.class);
@@ -82,6 +91,11 @@ public class ArtistService {
             }
         });
         return napsterArtistList;
+    }
+
+    public List<NapsterArtistCardDto> getUserCustomArtistSearchWithImage(String userInput) throws JsonProcessingException{
+        List<NapsterArtist> response = getUserCustomArtistSearch(userInput);
+        return response.stream().map(this::mapToNapsterArtistCardDto).collect(Collectors.toList());
     }
 
 

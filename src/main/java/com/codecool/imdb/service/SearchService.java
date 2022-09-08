@@ -22,9 +22,9 @@ public class SearchService {
 
     public List<?> getUsersCustomSearch(String searchedType, String userInput) throws JsonProcessingException {
         return switch (searchedType) {
-            case ("album") -> albumService.getUserCustomAlbumSearch(userInput);
-            case ("artist") -> artistService.getUserCustomArtistSearch(userInput);
-            case ("song") -> songService.getUserCustomSongSearch(userInput);
+            case ("album") -> albumService.getUserCustomAlbumSearchWithImage(userInput);
+            case ("artist") -> artistService.getUserCustomArtistSearchWithImage(userInput);
+            case ("song") -> songService.getUserCustomSearchWithImage(userInput);
             default -> null;
         };
     }

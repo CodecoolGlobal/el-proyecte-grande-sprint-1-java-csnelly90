@@ -24,7 +24,7 @@ public class AlbumService {
     private String apiKey;
     private final RestTemplate restTemplate = new RestTemplate();
 
-    protected List<?> getUserCustomAlbumSearch(String userInput) throws JsonProcessingException {
+    private List<NapsterAlbum> getUserCustomAlbumSearch(String userInput) throws JsonProcessingException {
         String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=album";
         var resultData = restTemplate.getForObject(url, JsonNode.class);
         JsonNode node = resultData.get("search").get("data").get("albums");
@@ -56,19 +56,30 @@ public class AlbumService {
     private NapsterAlbumCardDto mapToNapsterAlbumCardDto(NapsterAlbum napsterAlbum) {
         String resolution = "/images/356x237.jpg";
         var card = new NapsterAlbumCardDto();
-        card.setName(napsterAlbum.getName());
         card.setId(napsterAlbum.getId());
+        card.setName(napsterAlbum.getName());
         String image = createImageUrl(card.getId(), resolution);
         card.setImage(image);
         card.setType(napsterAlbum.getType());
-        if (napsterAlbum.getBlurbs() != null) {
+        if (napsterAlbum.getBlurbs() != null  && napsterAlbum.getBlurbs().length != 0) {
             card.setBlurbs(String.join(" ", napsterAlbum.getBlurbs()));
+        } else {
+            card.setBlurbs("There is no available information.");
         }
+        card.setArtistName(napsterAlbum.getArtistName());
+        card.setReleased(napsterAlbum.getReleased().substring(0, 4));
+        card.setLabel(napsterAlbum.getLabel());
+
         return card;
     }
 
     public String createImageUrl(String albumId, String resolution) {
         return "https://api.napster.com/imageserver/v2/albums/" + albumId + resolution;
+    }
+    
+    public List<NapsterAlbumCardDto> getUserCustomAlbumSearchWithImage(String userInput) throws JsonProcessingException{
+        List<NapsterAlbum> response = getUserCustomAlbumSearch(userInput);
+        return response.stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toList());
     }
 
 }

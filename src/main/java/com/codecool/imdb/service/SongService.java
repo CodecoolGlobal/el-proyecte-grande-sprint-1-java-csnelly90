@@ -41,7 +41,7 @@ public class SongService {
         });
     }
 
-    protected List<?> getUserCustomSongSearch(String userInput) throws JsonProcessingException {
+    private List<NapsterSong> getUserCustomSongSearch(String userInput) throws JsonProcessingException {
         String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=track";
 
         var resultData = restTemplate.getForObject(url, JsonNode.class);
@@ -68,6 +68,11 @@ public class SongService {
 
     public String createImageUrl(String albumId, String resolution) {
         return "https://api.napster.com/imageserver/v2/albums/" + albumId + resolution;
+    }
+
+    public List<NapsterSong> getUserCustomSearchWithImage(String userInput) throws JsonProcessingException{
+        List<NapsterSong> response = getUserCustomSongSearch(userInput);
+        return response.stream().map(this::addImage).collect(Collectors.toList());
     }
 
     public Collection<NapsterSong> getSongsByAlbumId(String id) throws JsonProcessingException {
