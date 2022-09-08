@@ -6,6 +6,7 @@ import {dataHandler} from "../data/DataHandler";
 import {useState} from "react";
 import CardView from "../components/CardView";
 import '../HomePage.css'
+import React from "react";
 
 
 function SearchPage() {
@@ -19,7 +20,6 @@ function SearchPage() {
             try {
                 let searchResponse = await dataHandler.apiGet(`/api/search/${type.type}/${type.searchInput}`);
                 setSearchedData(searchResponse);
-                console.log(searchedData);
             } catch (error) {
                 console.log(error);
             }

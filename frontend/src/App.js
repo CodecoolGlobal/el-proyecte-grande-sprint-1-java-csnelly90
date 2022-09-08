@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import HomePage from "./routes/HomePage";
 import ArtistPage from "./routes/ArtistPage";
 import PageNotFound from "./routes/PageNotFound";
+import AlbumPage from "./routes/AlbumPage";
 import SearchPage from "./routes/SearchPage";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="user" element={<UserPage />} />
             <Route path="artists/:id" element={<ArtistPage />} />
+            <Route path="albums/:id" element={<AlbumPage/>} />
             <Route path="search/type=:type/userSearch=:searchInput" element={<SearchPage/>}></Route>
         </Route>
         <Route path="*" element={<PageNotFound/>} />

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import "../HomePage.css"
 import {dataHandler} from "../data/DataHandler";
 import TopTrending from "../components/TopTrending";
@@ -13,8 +13,10 @@ function HomePage() {
             try {
                 let artistResponse = await dataHandler.apiGet("/api/artists/trending");
                 let albumResponse = await dataHandler.apiGet("/api/albums/trending");
+                let songResponse = await dataHandler.apiGet("/api/songs/trending");
                 setArtists(artistResponse);
                 setAlbums(albumResponse);
+                setSongs(songResponse);
             } catch (error) {
                 console.log(error);
             }
@@ -57,6 +59,7 @@ function HomePage() {
             <div className="trending-content-wrapper">
                 <TopTrending trendingItems={artists} changeCardOrder={changeCardOrder} apiRouteOption="artists"/>
                 <TopTrending trendingItems={albums} changeCardOrder={changeCardOrder} apiRouteOption="albums"/>
+                <TopTrending trendingItems={songs} changeCardOrder={changeCardOrder} apiRouteOption="songs"/>
             </div>
         );
     }

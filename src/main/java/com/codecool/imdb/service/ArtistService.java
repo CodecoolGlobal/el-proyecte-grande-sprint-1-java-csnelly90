@@ -41,7 +41,7 @@ public class ArtistService {
         String resolution = "/images/633x422.jpg";
         var result = new Artist();
         result.setName(napsterArtist.getName());
-        result.setGenre("UNKOWN");
+        result.setGenre(napsterArtist.getGenre());
         result.setId(napsterArtist.getId());
         String image = createImageUrl(napsterArtist.getId(), resolution);
         result.setImage(image);
@@ -66,7 +66,7 @@ public class ArtistService {
         return "https://api.napster.com/imageserver/v2/artists/" + artistId + resolution;
     }
 
-    protected List<?> getUserCustomArtistSearch(String userInput) throws JsonProcessingException {
+    private List<NapsterArtist> getUserCustomArtistSearch(String userInput) throws JsonProcessingException {
         String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=artist";
 
         var resultData = restTemplate.getForObject(url, JsonNode.class);
@@ -82,6 +82,11 @@ public class ArtistService {
             }
         });
         return napsterArtistList;
+    }
+
+    public List<NapsterArtistCardDto> getUserCustomArtistSearchWithImage(String userInput) throws JsonProcessingException{
+        List<NapsterArtist> response = getUserCustomArtistSearch(userInput);
+        return response.stream().map(this::mapToNapsterArtistCardDto).collect(Collectors.toList());
     }
 
 
