@@ -48,7 +48,7 @@ public class AlbumService {
     }
 
     public Collection<NapsterAlbumCardDto> getAlbumsByArtistId(String id){
-        String url = "https://api.napster.com/v2.2/artists/art.978/albums/top?apikey="+apiKey+"&limit=200";
+        String url = "https://api.napster.com/v2.2/artists/"+id+"/albums/top?apikey="+apiKey+"&limit=200";
         var resultData = restTemplate.getForObject(url, NapsterAlbumResponse.class);
         return resultData.getAlbums().stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toSet());
     }
