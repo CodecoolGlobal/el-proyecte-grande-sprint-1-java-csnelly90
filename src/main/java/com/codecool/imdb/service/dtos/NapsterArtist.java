@@ -10,7 +10,7 @@ import lombok.*;
 public class NapsterArtist {
     private String name;
     // TODO:  Get this indirectly
-    // private String genre;
+    private String genre;
     private String id;
     private String image;
     private String[] blurbs;
