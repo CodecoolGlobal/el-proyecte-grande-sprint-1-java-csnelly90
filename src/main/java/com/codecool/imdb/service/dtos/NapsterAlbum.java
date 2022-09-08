@@ -11,6 +11,7 @@ public class NapsterAlbum {
     private String type;
     private String id;
     private String name;
+    private String[] blurbs;
     private String artistName;
     private String released;
     private String label;
