@@ -1,33 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import ReactImageFallback from "react-image-fallback";
-
-function createImage(props) {
-    return (
-        <ReactImageFallback
-            src={props.item.image}
-            fallbackImage={`/default_${props.apiOption}_cover.jpg`}
-            initialImage={props.item.image}
-            alt=""
-        />
-    );
-}
-
-function createArtistNameDiv(props) {
-    if (props.apiOption !== "artists") {
-        return (
-            <p>Artist: {props.item.artistName}</p>
-        );
-    }
-}
-
-function createYearDiv(props) {
-    if (props.apiOption !== "artists") {
-        return (
-            <p className="card-year">{props.item.released}</p>
-        );
-    }
-}
+import CardImage from "./CardImage";
 
 function TrendingMainCard(props) {
     const navigate = useNavigate();
@@ -35,16 +8,19 @@ function TrendingMainCard(props) {
     return (
         <div className="card" style={{cursor: "default"}}>
             <div className="card-image">
-                {createImage(props)}
+                <CardImage image={props.item.image} apiOption={props.apiOption} />
             </div>
             <div className="card-info">
                 <p className="card-name" style={{fontSize: "2rem"}}>{props.item.name}</p>
-                {createArtistNameDiv(props)}
-                <p className="card-bio">{props.item.blurbs}</p>
-                <div className="card-type-container">
-                    <p className="card-type">{props.item.type}</p>
-                    {createYearDiv(props)}
-                </div>
+                <h3 className="card-artist-name" style={{display: props.apiOption === "artists" ? "none" : "box"}}>
+                    Artist: {props.item.artistName}
+                </h3>
+                <h3 className="card-year">{props.item.released}</h3>
+                <h3 style={{display: props.apiOption !== "artists" ? "none" : "flex"}}>Bio:</h3>
+                <p className="card-bio" style={{display: props.apiOption !== "artists" ? "none" : "flex"}}>{props.item.blurbs}</p>
+            </div>
+            <div className="card-type-container">
+                <p className="card-type">{props.item.type}</p>
             </div>
             <div className="card-redirect" style={{display: props.apiOption === "songs" ? "none" : "flex"}}>
                 <p onClick={() => navigate(`/${props.apiOption}/` + props.item.id)}>GO TO PAGE</p>
