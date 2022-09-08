@@ -2,7 +2,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import CardImage from "./CardImage";
 
-function TrendingMainCard(props) {
+function CardViewMain(props) {
     const navigate = useNavigate();
 
     return (
@@ -20,13 +20,14 @@ function TrendingMainCard(props) {
                 <p className="card-bio" style={{display: props.apiOption !== "artists" ? "none" : "flex"}}>{props.item.blurbs}</p>
             </div>
             <div className="card-type-container">
+                <div className="card-redirect" style={{display: props.apiOption === "songs" ? "none" : "flex"}}>
+                    <p onClick={() => navigate(`/${props.apiOption}/` + props.item.id)}>GO TO PAGE</p>
+                </div>
                 <p className="card-type">{props.item.type}</p>
             </div>
-            <div className="card-redirect" style={{display: props.apiOption === "songs" ? "none" : "flex"}}>
-                <p onClick={() => navigate(`/${props.apiOption}/` + props.item.id)}>GO TO PAGE</p>
-            </div>
+
         </div>
     );
 }
 
-export default TrendingMainCard;
+export default CardViewMain;
