@@ -18,7 +18,7 @@ function App() {
             <Route path="user" element={<UserPage />} />
             <Route path="artists/:id" element={<ArtistPage />} />
             <Route path="albums/:id" element={<AlbumPage/>} />
-            <Route path="search/type=:type/userSearch=:searchInput" element={<SearchPage/>}></Route>
+            <Route path="search/type=:searchedType/userSearch=:searchInput" element={<SearchPage/>}></Route>
         </Route>
         <Route path="*" element={<PageNotFound/>} />
     </Routes>
