@@ -24,7 +24,7 @@ public class AlbumService {
     private String apiKey;
     private final RestTemplate restTemplate = new RestTemplate();
 
-    protected List<?> getUserCustomAlbumSearch(String userInput) throws JsonProcessingException {
+    private List<NapsterAlbum> getUserCustomAlbumSearch(String userInput) throws JsonProcessingException {
         String url = "https://api.napster.com/v2.2/search/verbose?apikey=" + apiKey + "&query=" + userInput + "&type=album";
         var resultData = restTemplate.getForObject(url, JsonNode.class);
         JsonNode node = resultData.get("search").get("data").get("albums");
@@ -69,6 +69,11 @@ public class AlbumService {
 
     public String createImageUrl(String albumId, String resolution) {
         return "https://api.napster.com/imageserver/v2/albums/" + albumId + resolution;
+    }
+    
+    public List<NapsterAlbumCardDto> getUserCustomAlbumSearchWithImage(String userInput) throws JsonProcessingException{
+        List<NapsterAlbum> response = getUserCustomAlbumSearch(userInput);
+        return response.stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toList());
     }
 
 }

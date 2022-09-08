@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import "../HomePage.css"
 import {dataHandler} from "../data/DataHandler";
 import TopTrending from "../components/TopTrending";
