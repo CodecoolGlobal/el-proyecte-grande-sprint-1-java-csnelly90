@@ -44,6 +44,7 @@ public class AlbumService {
     public Collection<NapsterAlbumCardDto> getTopAlbums(int limit) {
         String url = "http://api.napster.com/v2.2/albums/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "range=week";
         var resultData = restTemplate.getForObject(url, NapsterAlbumResponse.class);
+        System.out.println(resultData.getAlbums());
         return resultData.getAlbums().stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toSet());
     }
 
@@ -61,7 +62,7 @@ public class AlbumService {
         String image = createImageUrl(card.getId(), resolution);
         card.setImage(image);
         card.setType(napsterAlbum.getType());
-        if (napsterAlbum.getBlurbs().length == 0) {
+        if (napsterAlbum.getBlurbs() != null) {
             card.setBlurbs(String.join(" ", napsterAlbum.getBlurbs()));
         } else {
             card.setBlurbs("There is no available information.");
