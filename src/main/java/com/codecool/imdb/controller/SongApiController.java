@@ -26,7 +26,7 @@ public class SongApiController {
     @GetMapping("/trending")
     public Collection<NapsterSong> getTopSongs() throws JsonProcessingException {
         int limit = 10;
-        return songService.getTopSongs(limit);
+        return songService.getTopSongsWithImage(limit);
     }
 
 }
