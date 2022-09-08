@@ -11,28 +11,27 @@ import React from "react";
 
 function SearchPage() {
     let searchIcon = <FontAwesomeIcon icon={faSearch}/>;
-    const {type} = {type: useParams()}
+    const {searchedType, searchInput} = useParams()
     const [searchedData, setSearchedData] = useState(null);
-    document.title = `${type.type.toUpperCase()}` + " | " + `${type.searchInput.toUpperCase()}`
+    document.title = `${searchedType.toUpperCase()}` + " | " + `${searchInput.toUpperCase()}`
 
     useEffect(() => {
         async function getData() {
             try {
-                let searchResponse = await dataHandler.apiGet(`/api/search/${type.type}/${type.searchInput}`);
+                let searchResponse = await dataHandler.apiGet(`/api/search/${searchedType}/${searchInput}`);
                 setSearchedData(searchResponse);
             } catch (error) {
                 console.log(error);
             }
         }
-
         getData();
 
-    }, [type]);
+    }, [searchedType,searchInput]);
     if (searchedData !== null) {
         return (
             <div className="search-result-container">
                 <div className="result-header">
-                    {searchIcon}Your <strong>{type.type.toUpperCase()}</strong> search results on <strong>{type.searchInput.toUpperCase()}</strong>
+                    {searchIcon}Your <strong>{searchedType.toUpperCase()}</strong> search results on <strong>{searchInput.toUpperCase()}</strong>
                 </div>
                 <div className="other-cards">
                     {searchedData.map((item) => (
