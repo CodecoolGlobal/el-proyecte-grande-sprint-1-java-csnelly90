@@ -31,7 +31,7 @@ function createImage(props) {
     return (
         <ReactImageFallback
             src={props.item.image}
-            fallbackImage={`/default_${props.apiOption.slice(0, props.apiOption.length - 1)}_cover.jpg`}
+            fallbackImage={`/default_${props.apiOption}_cover.jpg`}
             initialImage={props.item.image}
             alt=""
         />
