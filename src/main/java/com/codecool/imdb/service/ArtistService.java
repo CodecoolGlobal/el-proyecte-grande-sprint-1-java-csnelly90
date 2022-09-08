@@ -45,6 +45,11 @@ public class ArtistService {
         result.setId(napsterArtist.getId());
         String image = createImageUrl(napsterArtist.getId(), resolution);
         result.setImage(image);
+        if (napsterArtist.getBlurbs() != null) {
+            result.setBlurbs(napsterArtist.getBlurbs());
+        } else {
+            result.setBlurbs(new String[]{"There is no available information."});
+        }
         result.setBlurbs(napsterArtist.getBlurbs());
         result.setType(napsterArtist.getType());
         return result;
@@ -57,7 +62,11 @@ public class ArtistService {
         card.setId(napsterArtist.getId());
         String image = createImageUrl(napsterArtist.getId(), resolution);
         card.setImage(image);
-        card.setBlurbs(String.join(" ", napsterArtist.getBlurbs()));
+        if (napsterArtist.getBlurbs() != null && napsterArtist.getBlurbs().length != 0) {
+            card.setBlurbs(String.join(" ", napsterArtist.getBlurbs()));
+        } else {
+            card.setBlurbs("There is no available information.");
+        }
         card.setType(napsterArtist.getType());
         return card;
     }
