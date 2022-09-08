@@ -3,7 +3,6 @@ import CardImage from "./CardImage";
 import MusicPlayer from "./MusicPlayer";
 
 function CardView(props) {
-    console.log(props.cardType)
     return (
         <div className="card"
              onClick={props.cardType !== "songs" ? () => props.handleClick(props.apiOption, props.item.id) : null}
