@@ -14,4 +14,7 @@ public class NapsterAlbumCardDto {
     private String image;
     private String type;
     private String blurbs;
+    private String artistName;
+    private String released;
+    private String label;
 }

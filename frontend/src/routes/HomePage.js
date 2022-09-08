@@ -12,15 +12,16 @@ function HomePage() {
         async function getData() {
             try {
                 let artistResponse = await dataHandler.apiGet("/api/artists/trending");
-                let albumResponse = await dataHandler.apiGet("/api/albums/trending");
-                let songResponse = await dataHandler.apiGet("/api/songs/trending");
                 setArtists(artistResponse);
+                let albumResponse = await dataHandler.apiGet("/api/albums/trending");
                 setAlbums(albumResponse);
+                let songResponse = await dataHandler.apiGet("/api/songs/trending");
                 setSongs(songResponse);
             } catch (error) {
                 console.log(error);
             }
         }
+
         getData();
     }, []);
 
@@ -45,25 +46,13 @@ function HomePage() {
         }
     }
 
-    // TODO: also check albums and songs for null value when they are implemented
-    if (artists == null && albums == null) {
-        return (
-            <div className="trending-content-wrapper">
-                <div className="loading">
-                    <h1>LOADING...</h1>
-                </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className="trending-content-wrapper">
-                <TopTrending trendingItems={artists} changeCardOrder={changeCardOrder} apiRouteOption="artists"/>
-                <TopTrending trendingItems={albums} changeCardOrder={changeCardOrder} apiRouteOption="albums"/>
-                <TopTrending trendingItems={songs} changeCardOrder={changeCardOrder} apiRouteOption="songs"/>
-            </div>
-        );
-    }
-
+    return (
+        <div className="trending-content-wrapper">
+            <TopTrending trendingItems={artists} changeCardOrder={changeCardOrder} apiRouteOption="artists"/>
+            <TopTrending trendingItems={albums} changeCardOrder={changeCardOrder} apiRouteOption="albums"/>
+            <TopTrending trendingItems={songs} changeCardOrder={changeCardOrder} apiRouteOption="songs"/>
+        </div>
+    );
 }
 
 export default HomePage;

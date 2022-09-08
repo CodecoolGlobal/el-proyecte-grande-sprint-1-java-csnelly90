@@ -1,63 +1,24 @@
 import React from "react";
-import {useNavigate} from "react-router-dom";
-import ReactImageFallback from "react-image-fallback";
-
-function createRedirect(props, navigate) {
-    let shouldShow = false;
-    if (props.apiOption !== "songs" && props.cardType === "main") shouldShow = true;
-
-    return (
-        <div className="card-redirect" style={{display: shouldShow === false ? "none" : "flex"}}>
-            <p onClick={() => navigate(`/${props.apiOption}/` + props.item.id)}>GO TO PAGE</p>
-        </div>
-    );
-}
-
-function createMusicPlayer(props) {
-    let shouldShow = false;
-    if (props.apiOption === "songs") {
-        if ((props.isMainPage === true && props.cardType === "main")
-            || (props.isMainPage === false && props.cardType === "other")) shouldShow = true;
-    }
-
-    return (
-        <div className="card-player" style={{display: shouldShow === false ? "none" : "flex"}}>
-            <p>This is a music player</p>
-        </div>
-    );
-}
-
-function createImage(props) {
-    return (
-        <ReactImageFallback
-            src={props.item.image}
-            fallbackImage={`/default_${props.apiOption.slice(0, props.apiOption.length - 1)}_cover.jpg`}
-            initialImage={props.item.image}
-            alt=""
-        />
-    );
-}
+import CardImage from "./CardImage";
 
 function CardView(props) {
-    const navigate = useNavigate();
-
     return (
         <div className="card"
              onClick={props.cardType !== "main" ? () => props.handleClick(props.apiOption, props.item.id) : null}
-             style={{cursor: props.cardType !== "main" ? "pointer" : "default"}}
         >
             <div className="card-image">
-                {createImage(props)}
+                <CardImage image={props.item.image} apiOption={props.apiOption}/>
             </div>
-            <div className="card-info">
-                <p className="card-name"
-                   style={{fontSize: props.cardType !== "main" ? "1rem" : "2rem"}}>{props.item.name}</p>
+            <div className="card-info" style={{justifyContent: "space-between"}}>
+                <h3 className="card-name">{props.item.name}</h3>
+                <p className="card-artist-name" style={{display: props.apiOption === "artists" ? "none" : "box"}}>
+                    {props.item.artistName}
+                </p>
+            </div>
+            <div className="card-type-container">
                 <p className="card-type">{props.item.type}</p>
-                <p className="card-bio"
-                   style={{display: props.cardType !== "main" ? "none" : "flex"}}>{props.item.blurbs}</p>
+                <p className="card-year">{props.item.released}</p>
             </div>
-            {createMusicPlayer(props)}
-            {createRedirect(props, navigate)}
         </div>
     );
 }
