@@ -14,7 +14,7 @@ function AlbumSongs(props) {
                 (props.albumItems.map((item) =>(
                         <CardView item={item}
                                   key={item.id}
-                                  cardType="other"
+                                  cardType="songs"
                                   apiOption={props.apiRouteOption}
                                   handleClick={() => navigate(`/${props.apiRouteOption}/` + item.id)}/>
                     ))
