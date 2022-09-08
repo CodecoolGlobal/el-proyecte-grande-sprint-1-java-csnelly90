@@ -2,7 +2,7 @@ import React from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faArrowTrendUp} from '@fortawesome/free-solid-svg-icons'
 import CardView from "./CardView";
-import TrendingMainCard from "./TrendingMainCard";
+import CardViewMain from "./CardViewMain";
 
 function TopTrending(props) {
     const trendingIcon = <FontAwesomeIcon icon={faArrowTrendUp}/>;
@@ -24,20 +24,18 @@ function TopTrending(props) {
                 <div className="top-trending-section">
                     <div className="main-card">
                         {props.trendingItems.slice(0, 1).map((item) => (
-                            <TrendingMainCard key={item.id}
-                                      item={item}
-                                      apiOption={props.apiRouteOption}
+                            <CardViewMain key={item.id}
+                                          item={item}
+                                          apiOption={props.apiRouteOption}
                             />
                         ))}
                     </div>
                     <div className="other-cards">
                         {props.trendingItems.slice(1, props.trendingItems.length).map((item) => (
-                            <CardView item={item}
-                                      key={item.id}
-                                      cardType="other"
+                            <CardView key={item.id}
+                                      item={item}
                                       apiOption={props.apiRouteOption}
                                       handleClick={props.changeCardOrder}
-                                      isMainPage={true}
                             />
                         ))}
                     </div>
