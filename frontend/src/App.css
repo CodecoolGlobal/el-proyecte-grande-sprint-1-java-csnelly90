@@ -58,3 +58,32 @@ body {
 .content-wrap {
   flex: 1;
 }
+
+.card-player {
+  width: 100%;
+}
+
+audio {
+  width: 100%;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: #7bd4ec;
+}
+
+.card:hover audio::-webkit-media-controls-panel {
+  background-color: #0094b2;
+}
+
+audio::-webkit-media-controls-mute-button {
+  background-color: #0094b2;
+  border-radius: 50%;
+}
+
+.card:hover audio::-webkit-media-controls-mute-button {
+  background-color: #7bd4ec;
+}
+
+.card:hover audio::-webkit-media-controls-volume-slider-container {
+  background-color: #849093;
+}

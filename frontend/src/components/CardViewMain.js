@@ -1,6 +1,7 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import CardImage from "./CardImage";
+import MusicPlayer from "./MusicPlayer";
 
 function CardViewMain(props) {
     const navigate = useNavigate();
@@ -18,6 +19,9 @@ function CardViewMain(props) {
                 <h3 className="card-year">{props.item.released}</h3>
                 <h3 style={{display: props.apiOption !== "artists" ? "none" : "flex"}}>Bio:</h3>
                 <p className="card-bio" style={{display: props.apiOption !== "artists" ? "none" : "flex"}}>{props.item.blurbs}</p>
+            </div>
+            <div className="card-player" style={{display: props.cardType !== "songs" ? "none" : "box"}}>
+                <MusicPlayer song={props.item.previewURL}/>
             </div>
             <div className="card-type-container">
                 <div className="card-redirect" style={{display: props.apiOption === "songs" ? "none" : "flex"}}>

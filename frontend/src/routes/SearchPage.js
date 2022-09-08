@@ -28,6 +28,8 @@ function SearchPage() {
 
     }, [searchedType,searchInput]);
     if (searchedData !== null) {
+        let cardType = searchedType.toLowerCase() + "s";
+
         return (
             <div className="search-result-container">
                 <div className="result-header">
@@ -35,7 +37,7 @@ function SearchPage() {
                 </div>
                 <div className="other-cards">
                     {searchedData.map((item) => (
-                        <CardView item={item} key={item.id} cardType="other" apiOption={item.type}
+                        <CardView item={item} key={item.id} cardType={cardType} apiOption={item.type}
                                   handleClick={null}/>
                     ))
                     }
