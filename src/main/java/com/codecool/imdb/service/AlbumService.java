@@ -61,6 +61,9 @@ public class AlbumService {
         String image = createImageUrl(card.getId(), resolution);
         card.setImage(image);
         card.setType(napsterAlbum.getType());
+        if (napsterAlbum.getBlurbs() != null) {
+            card.setBlurbs(String.join(" ", napsterAlbum.getBlurbs()));
+        }
         return card;
     }
 
