@@ -12,6 +12,7 @@ function SearchPage() {
     let searchIcon = <FontAwesomeIcon icon={faSearch}/>;
     const {type} = {type: useParams()}
     const [searchedData, setSearchedData] = useState(null);
+    document.title = `${type.type.toUpperCase()}` + " | " + `${type.searchInput.toUpperCase()}`
 
     useEffect(() => {
         async function getData() {
@@ -23,21 +24,24 @@ function SearchPage() {
                 console.log(error);
             }
         }
+
         getData();
 
-    },[type]);
-    if (searchedData !== null){
-        return(
-            <section >
-                   <p> {searchIcon}Your search result's on <h3>{type.type} {type.searchInput}</h3></p>
+    }, [type]);
+    if (searchedData !== null) {
+        return (
+            <div className="search-result-container">
+                <div className="result-header">
+                    {searchIcon}Your <strong>{type.type.toUpperCase()}</strong> search results on <strong>{type.searchInput.toUpperCase()}</strong>
+                </div>
                 <div className="other-cards">
-                    {searchedData.map((item) =>(
-                            <CardView item={item} key={item.id} cardType="other"  apiOption={item.type}
-                                      handleClick={null}/>
+                    {searchedData.map((item) => (
+                        <CardView item={item} key={item.id} cardType="other" apiOption={item.type}
+                                  handleClick={null}/>
                     ))
                     }
                 </div>
-            </section>
+            </div>
         )
     }
 }
