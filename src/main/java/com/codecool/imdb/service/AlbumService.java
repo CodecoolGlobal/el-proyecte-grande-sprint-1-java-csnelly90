@@ -56,14 +56,20 @@ public class AlbumService {
     private NapsterAlbumCardDto mapToNapsterAlbumCardDto(NapsterAlbum napsterAlbum) {
         String resolution = "/images/356x237.jpg";
         var card = new NapsterAlbumCardDto();
-        card.setName(napsterAlbum.getName());
         card.setId(napsterAlbum.getId());
+        card.setName(napsterAlbum.getName());
         String image = createImageUrl(card.getId(), resolution);
         card.setImage(image);
         card.setType(napsterAlbum.getType());
-        if (napsterAlbum.getBlurbs() != null) {
+        if (napsterAlbum.getBlurbs().length == 0) {
             card.setBlurbs(String.join(" ", napsterAlbum.getBlurbs()));
+        } else {
+            card.setBlurbs("There is no available information.");
         }
+        card.setArtistName(napsterAlbum.getArtistName());
+        card.setReleased(napsterAlbum.getReleased());
+        card.setLabel(napsterAlbum.getLabel());
+
         return card;
     }
 
