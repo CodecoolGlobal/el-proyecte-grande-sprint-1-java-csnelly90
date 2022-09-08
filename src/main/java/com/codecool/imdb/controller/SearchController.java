@@ -11,18 +11,18 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/search")
+@RequestMapping("/api")
 public class SearchController {
 
-    private SearchService searchService;
+    private final SearchService searchService;
 
     @Autowired
     public SearchController(SearchService searchService) {
         this.searchService = searchService;
     }
 
-    @GetMapping(value = "/{type}/{userInput}")
+    @GetMapping(value = "/search/{type}/{userInput}")
     public List<?> getUsersCustomSearch(@PathVariable String type, @PathVariable String userInput) throws IOException {
-        return searchService.getUsersCustomSearch(type,userInput);
+        return searchService.getUsersCustomSearch(type.toLowerCase(),userInput.toLowerCase());
     }
 }

@@ -180,6 +180,13 @@
     font-size: 2rem;
 }
 
+.search-result-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
 @media screen and (max-width: 1000px) {
     .top-trending-section {
         display: flex;
