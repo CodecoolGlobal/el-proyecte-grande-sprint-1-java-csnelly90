@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SongService {
@@ -20,6 +21,11 @@ public class SongService {
     @Value("${api.key}")
     private String apiKey;
     private final RestTemplate restTemplate = new RestTemplate();
+
+    public Collection<NapsterSong> getTopSongsWithImage(int limit) throws JsonProcessingException {
+        Collection<NapsterSong> songs = getTopSongs(limit);
+        return songs.stream().map(this::addImage).collect(Collectors.toSet());
+    }
 
     public Collection<NapsterSong> getTopSongs(int limit) throws JsonProcessingException {
         String url = "https://api.napster.com/v2.2/tracks/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "&range=week";
@@ -51,5 +57,16 @@ public class SongService {
             }
         });
         return napsterTrackList;
+    }
+
+    private NapsterSong addImage(NapsterSong napsterSong) {
+        String resolution = "/images/356x237.jpg";
+        String image = createImageUrl(napsterSong.getAlbumId(), resolution);
+        napsterSong.setImage(image);
+        return napsterSong;
+    }
+
+    public String createImageUrl(String albumId, String resolution) {
+        return "https://api.napster.com/imageserver/v2/albums/" + albumId + resolution;
     }
 }
