@@ -27,6 +27,7 @@ function TopTrending(props) {
                             <CardViewMain key={item.id}
                                           item={item}
                                           apiOption={props.apiRouteOption}
+                                          cardType={props.cardType}
                             />
                         ))}
                     </div>
