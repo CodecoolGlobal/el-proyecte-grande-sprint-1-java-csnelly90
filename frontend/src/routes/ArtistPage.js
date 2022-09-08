@@ -24,19 +24,24 @@ function ArtistPage() {
 
     return (
         <div className={"artist-container"}>
-            {artistInfo == null ? (<div className={"artist-info-container"}><h1>LOADING ARTIST INFO...</h1></div>) :
-                (<div className={"artist-info-container"}>
-                        <div className={"artist-pic"}>
-                            <img src={artistInfo.image} alt=""/>
-                        </div>
-                        <div className={"artist-info"}>
-                            <b><h1 className={"artist-name"}>{artistInfo.name}</h1></b>
-                            <h3>Genres:</h3>
-                            <small>{artistInfo.genre}</small>
-                            <p>{artistInfo.blurbs}</p>
-                        </div>
+            {artistInfo == null ? (<div className={"artist-info-container"}><h1>LOADING ARTIST INFO...</h1></div>) : (
+                <div className={"artist-info-container"}>
+                    <div className={"artist-pic-container"}>
+                        <img src={artistInfo.image} alt=""/>
                     </div>
-                )}
+                    <div className={"artist-info"}>
+                        <b><h1 className={"artist-name"}>{artistInfo.name}</h1></b>
+                        <h3>Genres:</h3>
+                        <small>{artistInfo.genre}</small>
+                        <p>{artistInfo.blurbs}</p>
+                    </div>
+                </div>
+            )}
+
+            <div id="album-tab-container">
+                <div className="album-tab active-tab">Albums</div>
+            </div>
+
             <ArtistAlbums albumItems={albumsInfo} apiRouteOption="albums" changeCardOrder={null}/>
         </div>
     );
