@@ -1,17 +1,25 @@
-body{
+body {
     background-color: #121218;;
-    color: #03e9f4;}
+    color: #03e9f4;
+}
 
-nav a{
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+nav a {
     text-decoration: none;
     color: #03e9f4;
 }
 
-nav a:hover{
+nav a:hover {
     color: white;
 }
 
-nav ul{
+nav ul {
     list-style-type: none;
     position: relative;
     display: flex;
@@ -20,7 +28,8 @@ nav ul{
     align-content: center;
 
 }
-nav li{
+
+nav li {
     width: fit-content;
     margin: 1rem;
     display: flex;
@@ -50,7 +59,7 @@ nav li:hover {
     0 0 70px #03e9f4;
 }
 
-#home-and-search-holder{
+#home-and-search-holder {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -58,16 +67,16 @@ nav li:hover {
 
 }
 
-#user-link-holder{
+#user-link-holder {
     float: right;
 }
 
-input{
+input {
     border-style: none;
     border-radius: 5px;
 }
 
-input:focus{
+input:focus {
     box-shadow: 0 0 5px #03e9f4,
     0 0 15px #03e9f4,
     0 0 30px #03e9f4,
@@ -76,12 +85,12 @@ input:focus{
     border-radius: 5px;
 }
 
-input:focus{
+input:focus {
     border-style: none;
     width: border-box;
 }
 
-#search-holder{
+#search-holder {
     display: flex;
     flex-direction: row;
     justify-content: center;

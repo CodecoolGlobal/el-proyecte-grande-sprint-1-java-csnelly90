@@ -30,8 +30,8 @@ function SearchPage() {
 
     }, [searchedType, searchInput]);
 
-    const changeCardOrder = function (apiOption, itemId) {
-        navigate(`/${apiOption + "s"}/` + itemId)
+    const navigateToPage = function (apiOption, itemId) {
+        navigate(`/${apiOption}/` + itemId)
     }
 
     if (searchedData !== null) {
@@ -40,16 +40,17 @@ function SearchPage() {
         return (
             <div className="search-result-container">
                 <div className="result-header">
-                    {searchIcon}Your <strong>{searchedType.toUpperCase()}</strong> search results
-                    on <strong>{searchInput.toUpperCase()}</strong>
+                    <div>{searchIcon}</div>
+                    <div>Your <strong>{searchedType.toUpperCase()}</strong> search results on
+                        <strong> {searchInput.toUpperCase()}</strong></div>
                 </div>
-                <div className="other-cards">
+                <div className="other-cards search-result-cards">
                     {searchedData.map((item) => (
                             <CardView item={item}
                                       key={item.id}
                                       cardType={cardType}
-                                      apiOption={item.type}
-                                      handleClick={changeCardOrder}
+                                      apiOption={item.type + "s"}
+                                      handleClick={navigateToPage}
                             />
                         )
                     )
