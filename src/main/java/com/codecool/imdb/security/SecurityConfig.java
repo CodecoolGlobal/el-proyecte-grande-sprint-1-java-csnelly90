@@ -69,6 +69,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .logout()
                     .permitAll();
+
+        // add JWT token filter
+        httpSecurity
+                .addFilter(new JwtUsernamePasswordAuthenticationFilter())
+                .addFilterAfter(new JwtTokenVerifier(), JwtUsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
