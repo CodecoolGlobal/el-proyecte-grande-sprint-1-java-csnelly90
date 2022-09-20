@@ -1,6 +1,6 @@
 package com.codecool.imdb.controller;
 
-import com.codecool.imdb.domain.entities.User;
+import com.codecool.imdb.domain.entities.AppUser;
 import com.codecool.imdb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,8 @@ public class UserApiController {
     }
 
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable("userId") Long id) {
-        Optional<User> user = userService.getUserById(id);
+    public AppUser getUserById(@PathVariable("userId") Long id) {
+        Optional<AppUser> user = userService.getUserById(id);
         return user.orElse(null);
     }
 }
