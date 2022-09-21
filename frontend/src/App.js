@@ -10,6 +10,7 @@ import AlbumPage from "./routes/AlbumPage";
 import SearchPage from "./routes/SearchPage";
 import TopTrendingArtistPage from "./routes/TopTrendingArtistPage";
 import TopTrendingAlbumPage from "./routes/TopTrendingAlbumPage";
+import TopTrendingSongPage from "./routes/TopTrendingSongPage";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Route path="search/type=:searchedType/userSearch=:searchInput" element={<SearchPage/>}></Route>
             <Route path="artists/top-trending" element={<TopTrendingArtistPage/>}></Route>
             <Route path="albums/top-trending" element={<TopTrendingAlbumPage/>}></Route>
+            <Route path="songs/top-trending" element={<TopTrendingSongPage/>}></Route>
         </Route>
         <Route path="*" element={<PageNotFound/>} />
     </Routes>
