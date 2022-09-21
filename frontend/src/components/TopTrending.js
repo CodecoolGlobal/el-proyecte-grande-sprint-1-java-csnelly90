@@ -7,7 +7,7 @@ import CardViewMain from "./CardViewMain";
 function TopTrending(props) {
     const trendingIcon = <FontAwesomeIcon icon={faArrowTrendUp}/>;
 
-    if (props.trendingItems == null) {
+    if (props.trendingItems === null || props.trendingItems.length === 0) {
         return (
             <div className="loading">
                 <h1>LOADING TOP TRENDING {props.apiRouteOption.toUpperCase()}...</h1>
