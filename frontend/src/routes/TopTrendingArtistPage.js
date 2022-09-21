@@ -20,13 +20,15 @@ function TopTrendingArtistPage() {
     }, [offset]);
 
     function decreaseOffset() {
-        if (offset !== 0) {
+        if (offset !== 0 && artists !== null) {
             setOffset(offset - 10);
         }
     }
 
     function increaseOffset() {
-        setOffset(offset + 10);
+        if (artists !== null) {
+            setOffset(offset + 10);
+        }
     }
 
     const swapArrayItems = function (array, selectedItemId) {
