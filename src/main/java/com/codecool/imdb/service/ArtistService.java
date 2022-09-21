@@ -31,8 +31,8 @@ public class ArtistService {
         return result.getArtists().stream().map(this::mapToArtist).toList().get(0);
     }
 
-    public Collection<NapsterArtistCardDto> getTopArtists(int limit) {
-        String url = "https://api.napster.com/v2.2/artists/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "&range=week";
+    public Collection<NapsterArtistCardDto> getTopArtists(int limit, int offset) {
+        String url = "https://api.napster.com/v2.2/artists/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "&offset=" + offset + "&range=week";
         var result = restTemplate.getForObject(url, NapsterArtistResponse.class);
         return result.getArtists().stream().map(this::mapToNapsterArtistCardDto).collect(Collectors.toSet());
     }
