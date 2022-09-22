@@ -3,25 +3,22 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faArrowTrendUp} from '@fortawesome/free-solid-svg-icons'
 import CardView from "./CardView";
 import CardViewMain from "./CardViewMain";
-import {useNavigate} from "react-router-dom";
 
-function TopTrending(props) {
-    const navigate = useNavigate();
+function TopTrendingPage(props) {
     const trendingIcon = <FontAwesomeIcon icon={faArrowTrendUp}/>;
 
     if (props.trendingItems === null || props.trendingItems.length === 0) {
         return (
             <div className="loading">
-                <h1>LOADING TOP TRENDING {props.apiRouteOption.toUpperCase()}...</h1>
+                <h1>LOADING TRENDING {props.apiRouteOption.toUpperCase()}...</h1>
             </div>
         );
     } else {
         return (
             <section>
                 <div className="top-trending-title">
-                    <h3 onClick={() => navigate(`/${props.apiRouteOption}/top-trending`)}>TRENDING {props.apiRouteOption.toUpperCase()} <span id="trending-icon">{trendingIcon}</span>
+                    <h3>TRENDING {props.apiRouteOption.toUpperCase()} <span id="trending-icon">{trendingIcon}</span>
                     </h3>
-                    <p>Top 10 trending {props.apiRouteOption} this week</p>
                 </div>
                 <div className="top-trending-section">
                     <div className="main-card">
@@ -48,4 +45,4 @@ function TopTrending(props) {
     }
 }
 
-export default TopTrending;
+export default TopTrendingPage;
