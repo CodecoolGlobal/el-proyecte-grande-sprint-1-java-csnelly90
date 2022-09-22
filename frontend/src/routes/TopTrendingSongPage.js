@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "../HomePage.css"
 import {dataHandler} from "../data/DataHandler";
-import TopTrending from "../components/TopTrending";
+import TopTrendingPage from "../components/TopTrendingPage";
 
 function TopTrendingSongPage() {
     let [songs, setSongs] = useState(null);
@@ -49,11 +49,11 @@ function TopTrendingSongPage() {
 
     return (
         <div className="trending-content-wrapper">
-            <div className="card-redirect">
+            <div className="card-redirect" id="buttons">
                 <p onClick={decreaseOffset}>Previous page</p>
                 <p onClick={increaseOffset}>Next Page</p>
             </div>
-            <TopTrending trendingItems={songs} changeCardOrder={changeCardOrder} apiRouteOption="songs" cardType="songs"/>
+            <TopTrendingPage trendingItems={songs} changeCardOrder={changeCardOrder} apiRouteOption="songs" cardType="songs"/>
         </div>
     );
 }
