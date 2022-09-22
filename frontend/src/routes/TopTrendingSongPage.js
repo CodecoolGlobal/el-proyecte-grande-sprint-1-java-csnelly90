@@ -3,30 +3,31 @@ import "../HomePage.css"
 import {dataHandler} from "../data/DataHandler";
 import TopTrendingPage from "../components/TopTrendingPage";
 
-function TopTrendingArtistPage() {
-    let [artists, setArtists] = useState(null);
+function TopTrendingSongPage() {
+    let [songs, setSongs] = useState(null);
     let [offset, setOffset] = useState(0);
     useEffect(() => {
         async function getData() {
             try {
-                setArtists(null);
-                let artistResponse = await dataHandler.apiGet(`/api/artists/top-trending?offset=${offset}`);
-                setArtists(artistResponse);
+                setSongs(null);
+                let songResponse = await dataHandler.apiGet(`/api/songs/top-trending?offset=${offset}`);
+                setSongs(songResponse);
             } catch (error) {
                 console.log(error);
             }
         }
+
         getData();
     }, [offset]);
 
     function decreaseOffset() {
-        if (offset !== 0 && artists !== null) {
+        if (offset !== 0 && songs !== null) {
             setOffset(offset - 10);
         }
     }
 
     function increaseOffset() {
-        if (artists !== null) {
+        if (songs !== null) {
             setOffset(offset + 10);
         }
     }
@@ -40,9 +41,9 @@ function TopTrendingArtistPage() {
     }
 
     const changeCardOrder = function (arrayType, selectedItemId) {
-        if (arrayType === "artists") {
-            const rearrangedArray = swapArrayItems(artists, selectedItemId);
-            setArtists(rearrangedArray);
+        if (arrayType === "songs") {
+            const rearrangedArray = swapArrayItems(songs, selectedItemId);
+            setSongs(rearrangedArray);
         }
     }
 
@@ -50,11 +51,11 @@ function TopTrendingArtistPage() {
         <div className="trending-content-wrapper">
             <div className="card-redirect" id="buttons">
                 <p onClick={decreaseOffset}>Previous page</p>
-                <p onClick={() => {increaseOffset()}}>Next Page</p>
+                <p onClick={increaseOffset}>Next Page</p>
             </div>
-            <TopTrendingPage trendingItems={artists} changeCardOrder={changeCardOrder} apiRouteOption="artists" cardType="artists"/>
+            <TopTrendingPage trendingItems={songs} changeCardOrder={changeCardOrder} apiRouteOption="songs" cardType="songs"/>
         </div>
     );
 }
 
-export default TopTrendingArtistPage;
+export default TopTrendingSongPage;

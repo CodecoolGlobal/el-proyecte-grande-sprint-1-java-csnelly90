@@ -43,6 +43,13 @@
     color: #fff;
 }
 
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
 .top-trending-section {
     display: flex;
     flex-direction: row;
