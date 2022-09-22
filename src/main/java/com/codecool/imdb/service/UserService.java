@@ -2,6 +2,7 @@ package com.codecool.imdb.service;
 
 import com.codecool.imdb.data.repositories.UserRepository;
 import com.codecool.imdb.domain.entities.AppUser;
+import com.codecool.imdb.security.service.UserDetailsImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,6 +33,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<AppUser> user = userRepository.findByUsername(username);
 
@@ -41,11 +44,6 @@ public class UserService implements UserDetailsService {
             log.info("Loading user from database. Name: {}", username);
         }
 
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
-        user.get().getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName()))
-        );
-
-        return new User(user.get().getUsername(), user.get().getPassword(), authorities);
+        return UserDetailsImpl.build(user.get());
     }
 }
