@@ -41,8 +41,8 @@ public class AlbumService {
         return napsterAlbumList;
     }
 
-    public Collection<NapsterAlbumCardDto> getTopAlbums(int limit) {
-        String url = "http://api.napster.com/v2.2/albums/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "range=week";
+    public Collection<NapsterAlbumCardDto> getTopAlbums(int limit, int offset) {
+        String url = "http://api.napster.com/v2.2/albums/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "&offset=" + offset + "range=week";
         var resultData = restTemplate.getForObject(url, NapsterAlbumResponse.class);
         return resultData.getAlbums().stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toSet());
     }

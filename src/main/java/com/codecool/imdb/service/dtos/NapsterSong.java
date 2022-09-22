@@ -20,4 +20,5 @@ public class NapsterSong {
     private String label;
     private String copyright;
     private String image;
+    private String previewURL;
 }

@@ -22,13 +22,13 @@ public class SongService {
     private String apiKey;
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public Collection<NapsterSong> getTopSongsWithImage(int limit) throws JsonProcessingException {
-        Collection<NapsterSong> songs = getTopSongs(limit);
+    public Collection<NapsterSong> getTopSongsWithImage(int limit, int offset) throws JsonProcessingException {
+        Collection<NapsterSong> songs = getTopSongs(limit, offset);
         return songs.stream().map(this::addImage).collect(Collectors.toSet());
     }
 
-    public Collection<NapsterSong> getTopSongs(int limit) throws JsonProcessingException {
-        String url = "https://api.napster.com/v2.2/tracks/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "&range=week";
+    public Collection<NapsterSong> getTopSongs(int limit, int offset) throws JsonProcessingException {
+        String url = "https://api.napster.com/v2.2/tracks/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "&offset=" + offset + "&range=week";
         var resultData = restTemplate.getForObject(url, JsonNode.class);
         JsonNode node = resultData.get("tracks");
         ObjectMapper mapper = new ObjectMapper();
@@ -73,5 +73,20 @@ public class SongService {
     public List<NapsterSong> getUserCustomSearchWithImage(String userInput) throws JsonProcessingException{
         List<NapsterSong> response = getUserCustomSongSearch(userInput);
         return response.stream().map(this::addImage).collect(Collectors.toList());
+    }
+
+    public Collection<NapsterSong> getSongsByAlbumId(String id) throws JsonProcessingException {
+        String url = "https://api.napster.com/v2.2/albums/"+id+"/tracks?apikey="+apiKey;
+        var resultData = restTemplate.getForObject(url, JsonNode.class);
+        JsonNode node = resultData.get("tracks");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        Collection<NapsterSong> napsterSongs = mapper.readValue(node.toString(), new TypeReference<List<NapsterSong>>() {
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
+        });
+        return napsterSongs.stream().map(this::addImage).collect(Collectors.toSet());
     }
 }

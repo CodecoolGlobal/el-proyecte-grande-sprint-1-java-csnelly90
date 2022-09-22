@@ -43,6 +43,13 @@
     color: #fff;
 }
 
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
 .top-trending-section {
     display: flex;
     flex-direction: row;
@@ -100,14 +107,15 @@
     text-decoration: none;
     overflow: hidden;
     transition: .7s;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
+    line-height: 1.3rem;
     background: #1a1a23;
 }
 
 .card:hover {
     transition: background-color 0.6s ease-in-out;
     background: #03e9f4;
-    color: #fff;
+    color: #353546;
     box-shadow: 0 0 5px #03e9f4,
     0 0 15px #03e9f4,
     0 0 30px #03e9f4,
@@ -159,6 +167,14 @@
     font-weight: bold;
 }
 
+.card-year, .card-artist-name {
+    font-weight: bold;
+}
+
+.card-year {
+    font-size: 1.1rem;
+}
+
 .card-type-container {
     display: flex;
     flex-direction: row;
@@ -192,6 +208,23 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+}
+
+.search-result-cards {
+    width: 80%;
+}
+
+.search-result-cards .card {
+    width: 15%;
+}
+
+.result-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    width: 80%;
+    margin-top: 5rem;
 }
 
 @media screen and (max-width: 1000px) {

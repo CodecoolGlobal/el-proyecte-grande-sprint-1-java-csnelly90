@@ -3,6 +3,8 @@ package com.codecool.imdb.domain.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Getter
 @Setter
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,16 @@ public class User {
     @Column(nullable = false)
     private String lastName;
     @Column(unique = true, nullable = false)
+    private String username;
+    @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new HashSet<>();
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
 }

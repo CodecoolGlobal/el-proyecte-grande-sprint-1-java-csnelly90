@@ -27,7 +27,14 @@ public class ArtistApiController {
     @GetMapping("/trending")
     public Collection<NapsterArtistCardDto> getTopTenArtist() {
         var limit = 10;
-        return artistService.getTopArtists(limit);
+        var offset = 0;
+        return artistService.getTopArtists(limit, offset);
+    }
+
+    @GetMapping(value = "/top-trending")
+    public Collection<NapsterArtistCardDto> getTopArtists(@RequestParam("offset") int offset) {
+        var limit = 10;
+        return artistService.getTopArtists(limit, offset);
     }
 
     @GetMapping(value = "/{id}")

@@ -48,9 +48,9 @@ function HomePage() {
 
     return (
         <div className="trending-content-wrapper">
-            <TopTrending trendingItems={artists} changeCardOrder={changeCardOrder} apiRouteOption="artists"/>
-            <TopTrending trendingItems={albums} changeCardOrder={changeCardOrder} apiRouteOption="albums"/>
-            <TopTrending trendingItems={songs} changeCardOrder={changeCardOrder} apiRouteOption="songs"/>
+            <TopTrending trendingItems={artists} changeCardOrder={changeCardOrder} apiRouteOption="artists" cardType="artists"/>
+            <TopTrending trendingItems={albums} changeCardOrder={changeCardOrder} apiRouteOption="albums" cardType="albums"/>
+            <TopTrending trendingItems={songs} changeCardOrder={changeCardOrder} apiRouteOption="songs" cardType="songs"/>
         </div>
     );
 }

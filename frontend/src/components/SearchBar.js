@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import '../searchbar.css';
 import {faCompactDisc} from '@fortawesome/free-solid-svg-icons';
 import {faPerson} from "@fortawesome/free-solid-svg-icons";
@@ -7,7 +7,6 @@ import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 import {dataHandler} from "../data/DataHandler";
 import SearchBoxCard from "./SearchBoxCard";
 
@@ -58,22 +57,25 @@ function SearchBar() {
         <div id="search-container">
             <div id="icons-container">
                 <div className="dropdown" id="dropdown-button" onClick={() => {
-                    setIsActive(!isActive)}}>
-                    <span>{selected} </span> <span><FontAwesomeIcon icon={faCaretDown} /></span>
+                    setIsActive(!isActive)
+                }}>
+                    <span>{selected} </span> <span><FontAwesomeIcon icon={faCaretDown}/></span>
                 </div>
                 {isActive && (
                     <div className="dropdown-content">
-                        {options.map((option, index)=>(
-                            <div key={index} onClick={(e)=> {
-                                setSelected(option.name);
-                                setIsActive(false);}}
-                                className="dropdown-item">
-                                <FontAwesomeIcon icon={option.icon}></FontAwesomeIcon>
+                        {options.map((option, index) => (
+                            <div key={index}
+                                 onClick={(e) => {
+                                     setSelected(option.name);
+                                     setIsActive(false);
+                                 }}
+                                 className="dropdown-item">
+                                <FontAwesomeIcon icon={option.icon}/>
                                 {option.name}
                             </div>
                         ))}
                     </div>
-                    )}
+                )}
 
             </div>
             <div>

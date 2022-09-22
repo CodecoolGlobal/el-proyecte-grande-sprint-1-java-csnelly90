@@ -1,15 +1,14 @@
-#icons-container{
-
+#icons-container {
     display: flex;
     flex-direction: column;
-
     background-color: #121218;;
     color: #03e9f4;
-    margin-right: 1.5rem;
-    width: auto;
+    width: 6rem;
     position: relative;
 }
-#icons-container:hover{
+
+#icons-container:hover {
+    cursor: pointer;
     border-radius: 0.2em;
     transition: background-color 0.6s ease-in-out;
     background: #03e9f4;
@@ -21,22 +20,77 @@
 
 }
 
-#search-container{
+#search-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 1rem;
+    gap: 1rem;
     position: absolute;
 }
 
-#dropdown-button{
+#search-field-container {
     display: flex;
-    justify-content: center;
-    align-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
 }
-.dropdown-item:hover {
-    border-radius: 0.2em;
+
+#search-field-container input[type=text] {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    color: #015667;
+    font-size: 0.8rem;
+    letter-spacing: 0.2rem;
+}
+
+#search-field-container input[type=text]:hover {
+    background-color: #c0e5ef;
+    transition: background-color 0.6s ease-in-out;
+}
+
+#search-field-container input[type=text]:focus {
+    padding: 0.5rem 1rem;
+    outline: none;
+}
+
+#search-field-container button {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+#search-field-container svg {
+    font-size: 1rem;
+}
+
+#dropdown-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: center;
+    width: 100%;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+}
+
+.dropdown-content {
+    width: 100%;
+    position: absolute;
+    margin-top: 1.5rem;
+}
+
+.dropdown-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.2rem 1rem;
+    border-radius: 0.2rem;
+}
+
+.dropdown-item:hover, #search-field-container button:hover {
+    cursor: pointer;
     transition: background-color 0.6s ease-in-out;
     background-color: #121218;
     color: #fff;
