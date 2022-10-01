@@ -20,7 +20,7 @@ function ArtistPage() {
         }
 
         getData();
-    }, []);
+    }, [artistId]);
 
     return (
         <div className={"artist-container"}>

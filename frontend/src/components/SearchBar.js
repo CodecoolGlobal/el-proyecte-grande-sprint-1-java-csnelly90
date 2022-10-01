@@ -30,7 +30,7 @@ function SearchBar() {
             setText(document.getElementById("userInput").value);
         }
         const navigateToPage = function (apiOption, itemId) {
-            navigate(`/${apiOption}/` + itemId)
+            navigate(`/${apiOption}/` + itemId);
         }
 
         useEffect(() => {
@@ -87,7 +87,11 @@ function SearchBar() {
                         {searchResponse.map((item) => (
                             <div key={item.id} className="search-result-card" onClick={
                                 ()=>setSearchResultContainer(false)}>
-                               <SearchBoxCard data={item} apiOption={item.type + "s"} handleClick={navigateToPage}/>
+                               <SearchBoxCard data={item}
+                                              key={item.id}
+                                              apiOption={item.type + "s"}
+                                              handleClick={navigateToPage}
+                               />
                             </div>
                             )
                         )}
