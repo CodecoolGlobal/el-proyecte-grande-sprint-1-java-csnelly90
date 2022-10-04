@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useAuth} from "../security/auth";
+import {useAuth} from "../../security/auth";
 import {useNavigate} from "react-router-dom";
 
 function LoginForm() {
@@ -12,27 +12,22 @@ function LoginForm() {
         event.preventDefault();
 
         const payload = {
-            username: username,
-            password: password
+            "username": username,
+            "password": password
         }
 
         auth.login(payload);
-
         navigate("/");
     }
 
     return (
         <form onSubmit={(event) => handleSubmit(event, username, password)} className="login-form">
-            <label>
-                Username:{" "}
-                <input type="text" value={username} autoComplete="on" placeholder="Enter a username"
-                       onChange={(e) => setUsername(e.target.value)}/>
-            </label>
-            <label>
-                Password:{" "}
-                <input type="password" value={password} autoComplete="off" placeholder="Enter a password"
-                       onChange={(e) => setPassword(e.target.value)}/>
-            </label>
+            <div><label htmlFor="username-field">USERNAME{" "}</label></div>
+            <input type="text" value={username} id="username-field" autoComplete="on" placeholder="Enter a username"
+                   required onChange={(e) => setUsername(e.target.value)}/>
+            <div><label htmlFor="pwd-field">PASSWORD{" "}</label></div>
+            <input type="password" value={password} id="pwd-field" placeholder="Enter a password"
+                   required onChange={(e) => setPassword(e.target.value)}/>
             <button>Login</button>
         </form>
     );
