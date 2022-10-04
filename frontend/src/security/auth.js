@@ -2,7 +2,7 @@ import {useState, createContext, useContext} from "react";
 import {dataHandler} from "../data/DataHandler";
 import { ACCESS_TOKEN } from '../constants/constants';
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({user: {}});
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -11,20 +11,22 @@ export const AuthProvider = ({ children }) => {
         console.log("loading current user")
         dataHandler.getCurrentUser()
             .then(response => {
-                setUser(response);
+                setUser({
+                    "username": response.username,
+                    "email": response.email,
+                });
                 console.log("You are successfully logged in.")
-                console.log(user); //TODO: delete this
             }).catch(error => {
-            console.log(`Could not load current user: ${error}`);
+                console.log(`Could not load current user: ${error}`);
         });
     }
 
     const login = (payload) => {
         dataHandler.login(payload)
             .then(response => {
-                localStorage.setItem(ACCESS_TOKEN, response.token);
-            });
-        loadCurrentUser();
+                localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response.token));
+            })
+            .then(() => loadCurrentUser());
     }
 
     const logout = () => {
