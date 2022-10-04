@@ -41,7 +41,7 @@ public class UserService implements UserDetailsService {
             log.error("No user found in database by the following username: {}", username);
             throw new UsernameNotFoundException("User not found in database.");
         } else {
-            log.info("Loading user from database. Name: {}", username);
+            log.info("Loading user from database. Username: {}", username);
         }
 
         return UserDetailsImpl.build(user.get());
