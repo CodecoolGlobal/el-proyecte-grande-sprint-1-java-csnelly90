@@ -19,7 +19,7 @@ function AlbumPage(){
         }
 
         getData();
-    }, []);
+    }, [albumId]);
 
     return (
         <div className={"album-container"}>
