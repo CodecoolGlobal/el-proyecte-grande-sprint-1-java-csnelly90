@@ -1,5 +1,6 @@
 package com.codecool.imdb.service.dtos;
 
+import com.codecool.imdb.domain.model.Item;
 import lombok.*;
 
 @Getter
@@ -7,7 +8,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NapsterSong {
+public class NapsterSong extends Item {
     private String type;
     private String id;
     private String name;
