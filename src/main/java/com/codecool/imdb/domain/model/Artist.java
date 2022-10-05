@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Artist {
+public class Artist extends Item {
 
     private String name;
     private String genre;
