@@ -27,12 +27,10 @@ export const AuthProvider = ({children}) => {
 
         dataHandler.getCurrentUser()
             .then((user) => {
-                console.log(user);
-                console.log(user.authorities[0].authority);
                 setUser({
                     "username": user.username,
                     "email": user.email,
-                    "roles": user.authorities[0].authority,
+                    "roles": user.authorities[0].authority
                 });
             })
             .catch((error) => {
@@ -45,31 +43,33 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     const loadCurrentUser = () => {
-        console.log("loading current user")
         dataHandler.getCurrentUser()
             .then((user) => {
                 setUser({
                     "username": user.username,
                     "email": user.email,
+                    "roles": user.authorities[0].authority
                 });
-                console.log("You are successfully logged in.")
             }).catch(error => {
             console.log(`Could not load current user: ${error}`);
         });
     }
 
+    const signup = async (payload) => {
+        return await dataHandler.signup(payload);
+    }
+
     const login = (payload) => {
         dataHandler.login(payload)
             .then(response => {
-                localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response.token));
+                if (response.token) localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response.token));
             })
-            .then(() => loadCurrentUser());
+            .then(() => loadCurrentUser())
     }
 
     const logout = () => {
         localStorage.removeItem(ACCESS_TOKEN);
         setUser(null);
-        console.log("You are successfully logged out.")
     }
 
     const isJwtExpired = (tokenFromLocalStorage) => {
@@ -79,7 +79,7 @@ export const AuthProvider = ({children}) => {
     };
 
     return (
-        <AuthContext.Provider value={{user, login, logout}}>
+        <AuthContext.Provider value={{user, signup, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

@@ -11,20 +11,19 @@ function createRequestHeaders() {
 
 export const dataHandler = {
 
-    login: function (loginRequest) {
-        return this.apiPost("/api/auth/login", loginRequest);
+    login: async function (loginRequest) {
+        return await this.apiPost("/api/auth/login", loginRequest);
     },
 
-    signup: function (signupRequest) {
-        return this.apiPost("/api/auth/signup", signupRequest);
+    signup: async function (signupRequest) {
+        return await this.apiPost("/api/auth/signup", signupRequest);
     },
 
     getCurrentUser: async function () {
         if (!localStorage.getItem(ACCESS_TOKEN)) {
             return Promise.reject("No access token set.");
         }
-
-        return this.apiGet("/api/users/me")
+        return await this.apiGet("/api/users/me")
     },
 
     apiGet: async function (url) {
@@ -32,9 +31,7 @@ export const dataHandler = {
             method: 'GET',
             headers: createRequestHeaders()
         });
-        if (response.ok) {
-            return await response.json();
-        }
+        return await response.json();
     },
 
     apiPost: async function (url, payload) {
@@ -43,9 +40,7 @@ export const dataHandler = {
             headers: createRequestHeaders(),
             body: JSON.stringify(payload)
         });
-        if (response.ok) {
-            return await response.json();
-        }
+        return await response.json();
     },
 
     apiDelete: async function (url) {
