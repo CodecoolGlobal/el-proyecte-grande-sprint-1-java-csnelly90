@@ -7,9 +7,9 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Song {
+public class Song extends Item {
 
-    private Integer id;
+    private String id;
     private String name;
     private Integer albumId;
     private Artist albumName;
