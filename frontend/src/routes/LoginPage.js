@@ -14,7 +14,7 @@ export const LoginPage = () => {
                 </div>
                 <div className="register-link-container">
                     <span>OR</span>
-                    <Link to="signup">Register now!</Link>
+                    <Link to="/signup">Register now!</Link>
                 </div>
             </div>
         </div>
