@@ -16,9 +16,12 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String commentTargetId;
+
     @ManyToOne
     @Column(nullable = false)
-    private AppUser userName;
+    private AppUser user;
 
     @Column(nullable = false)
     private String text;
