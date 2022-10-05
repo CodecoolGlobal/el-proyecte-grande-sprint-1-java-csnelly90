@@ -20,7 +20,7 @@ public class Comment {
     private String commentTargetId;
 
     @ManyToOne
-    @Column(nullable = false)
+    @JoinColumn
     private AppUser user;
 
     @Column(nullable = false)
