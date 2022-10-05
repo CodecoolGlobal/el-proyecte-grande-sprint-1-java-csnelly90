@@ -4,7 +4,6 @@ package com.codecool.imdb.controller;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -13,11 +12,16 @@ import com.codecool.imdb.data.repositories.UserRepository;
 import com.codecool.imdb.domain.entities.AppUser;
 import com.codecool.imdb.domain.entities.ERole;
 import com.codecool.imdb.domain.entities.Role;
+import com.codecool.imdb.domain.entities.RefreshToken;
+import com.codecool.imdb.exception.TokenRefreshException;
 import com.codecool.imdb.payload.request.LoginRequest;
 import com.codecool.imdb.payload.request.SignupRequest;
+import com.codecool.imdb.payload.request.TokenRefreshRequest;
 import com.codecool.imdb.payload.response.JwtResponse;
 import com.codecool.imdb.payload.response.MessageResponse;
+import com.codecool.imdb.payload.response.TokenRefreshResponse;
 import com.codecool.imdb.security.JwtUtils;
+import com.codecool.imdb.security.service.RefreshTokenService;
 import com.codecool.imdb.security.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,24 +47,30 @@ public class AuthController {
     UserRepository userRepository;
     RoleRepository roleRepository;
     PasswordEncoder encoder;
+
     JwtUtils jwtUtils;
+
+    RefreshTokenService refreshTokenService;
 
     @Autowired
     public AuthController(AuthenticationManager authenticationManager,
                           UserRepository userRepository,
                           RoleRepository roleRepository,
                           PasswordEncoder encoder,
-                          JwtUtils jwtUtils) {
+                          JwtUtils jwtUtils,
+                          RefreshTokenService refreshTokenService) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
+        this.refreshTokenService = refreshTokenService;
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+        System.out.println(loginRequest.getUsername());
+        System.out.println(loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -69,14 +79,15 @@ public class AuthController {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+                .map(GrantedAuthority::getAuthority).toList();
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles));
+        return ResponseEntity.ok(JwtResponse.builder()
+                .token(jwt).refreshToken(refreshToken.getToken()).id(userDetails.getId())
+                .username(userDetails.getUsername())
+                .email(userDetails.getEmail()).roles(roles).type("Bearer")
+                .build());
+
     }
 
     @PostMapping("/signup")
@@ -100,7 +111,7 @@ public class AuthController {
                 .firstName(signUpRequest.getFirstName())
                 .lastName(signUpRequest.getLastName())
                 .password(encoder.encode(signUpRequest.getPassword()))
-                .build() ;
+                .build();
 //
 
         Set<String> strRoles = signUpRequest.getRole();
@@ -136,5 +147,19 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequest request){
+        String requestRefreshToken = request.getRefreshToken();
+
+        return  refreshTokenService.findByToken(requestRefreshToken)
+                .map(refreshTokenService::verifyExpiration)
+                .map(RefreshToken::getAppUser)
+                .map(appUser -> {
+                    String token = jwtUtils.generateTokenFromUsername(appUser.getUsername());
+                    return ResponseEntity.ok(TokenRefreshResponse.builder().accessToken(token).refreshToken(requestRefreshToken).tokenType("Bearer").build());
+                })
+                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,"Refresh token is not in database!"));
     }
 }

@@ -33,6 +33,15 @@ public class JwtUtils {
                 .compact();
     }
 
+    public String generateTokenFromUsername(String username) {
+        Key key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+
+        return Jwts.builder().setSubject(username).setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs)).signWith(key)
+                .compact();
+    }
+
+
     public String getUserNameFromJwtToken(String token) {
         Key key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
         return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
