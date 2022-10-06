@@ -31,7 +31,7 @@ function Navbar() {
                 <ul>
                     <Link to="user">
                         <div id="user-link-holder">
-                            <li>Profile</li>
+                            <li>{auth.user.username}</li>
                         </div>
                     </Link>
                     <Link to="login">
