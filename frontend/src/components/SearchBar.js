@@ -78,7 +78,7 @@ function SearchBar() {
                 )}
 
             </div>
-            <div>
+            <div id="search-input-container">
                 <input type="text" id="userInput" onChange={updateText} onClick={() => {
                     if (text!=="") setSearchResultContainer(true)}} />
 
