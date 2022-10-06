@@ -62,9 +62,12 @@ export const AuthProvider = ({children}) => {
     const login = (payload) => {
         dataHandler.login(payload)
             .then(response => {
-                if (response.token) localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response.token));
-            })
-            .then(() => loadCurrentUser())
+                    if (response.token) {
+                        localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response.token));
+                        loadCurrentUser();
+                    }
+                }
+            );
     }
 
     const logout = () => {
