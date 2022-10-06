@@ -12,6 +12,11 @@ function LoginForm() {
     const handleSubmit = async (event, username, password) => {
         event.preventDefault();
 
+        if (username.trim().length === 0 || password.trim().length === 0) {
+            setErrorMsg("You need to provide a username and password");
+            return;
+        }
+
         const payload = {
             "username": username,
             "password": password
@@ -38,7 +43,7 @@ function LoginForm() {
                 <div><label htmlFor="pwd-field">PASSWORD{" "}</label></div>
                 <input type="password" value={password} id="pwd-field" placeholder="Enter a password"
                        required onChange={(e) => setPassword(e.target.value)}/>
-                <button>Login</button>
+                <button disabled={!username || !password}>Login</button>
             </form>
         </div>
     );
