@@ -1,85 +1,83 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
+import {useAuth} from "../security/auth";
+import {dataHandler} from "../data/DataHandler";
 
-class UserProfileForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: props.data.firstName,
-            lastName: props.data.lastName,
-            email: props.data.email,
-            phone: props.data.phone
-        };
+function UserProfileForm() {
+    const auth = useAuth();
+    const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
 
-        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-        this.handleLastNameChange = this.handleLastNameChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePhoneChange = this.handlePhoneChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    useEffect(() => {
+        async function fetchUserData() {
+            return await dataHandler.apiGet(`/api/users/username/${auth.user.username}`);
+        }
+
+        fetchUserData()
+            .then(response => {
+                setUsername(response.username);
+                setFirstName(response.firstName);
+                setLastName(response.lastName);
+                setEmail(response.email);
+            });
+    }, []);
+
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value)
     }
 
-    handleFirstNameChange(event) {
-        this.setState({firstName: event.target.value});
+    const handleFirstNameChange = (event) => {
+        setFirstName(event.target.value)
     }
 
-    handleLastNameChange(event) {
-        this.setState({lastName: event.target.value})
+    const handleLastNameChange = (event) => {
+        setLastName(event.target.value)
     }
 
-    handleEmailChange(event) {
-        this.setState({email: event.target.value})
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value)
     }
 
-    handlePhoneChange(event) {
-        this.setState({phone: event.target.value})
-    }
-
-    handleSubmit(event) {
+    const handleSubmit = (event) => {
         event.preventDefault();
         // TODO: post user data to database
-        console.log('Your update was submitted: ' + this.state);
+        console.log(`Your update was submitted: ${username} ${email}`);
     }
 
-    render() {
-        return (
-            <form id="user-info-form">
-                <div id="user-info-box">
-                    <div className="form-group">
-                        <label>
-                            First Name:
-                            <input type="text" defaultValue={this.state.firstName} onChange={this.handleFirstNameChange} />
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            Last Name:
-                            <input type="text" defaultValue={this.state.lastName} onChange={this.handleLastNameChange} />
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            Email:
-                            <input type="email" defaultValue={this.state.email} onChange={this.handleEmailChange} />
-                        </label>
-                    </div>
-                    <div className="form-group">
-                        <label>
-                            Phone:
-                            <input type="text" defaultValue={this.state.phone} onChange={this.handlePhoneChange} />
-                        </label>
-                    </div>
+    return (
+        <form id="user-info-form">
+            <div id="user-info-box">
+                <div className="form-group">
+                    <label>
+                        First Name:
+                        <input type="text" defaultValue={firstName} onChange={handleFirstNameChange}/>
+                    </label>
                 </div>
-                <div id="user-submit-box">
-                    <a href="#" onClick={this.handleSubmit}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        Update
-                    </a>
+                <div className="form-group">
+                    <label>
+                        Last Name:
+                        <input type="text" defaultValue={lastName} onChange={handleLastNameChange}/>
+                    </label>
                 </div>
-            </form>
-        );
-    }
+                <div className="form-group">
+                    <label>
+                        Username:
+                        <input type="text" defaultValue={username} onChange={handleUsernameChange}/>
+                    </label>
+                </div>
+                <div className="form-group">
+                    <label>
+                        Email:
+                        <input type="email" defaultValue={email} onChange={handleEmailChange}/>
+                    </label>
+                </div>
+            </div>
+            <div id="user-submit-box">
+                <button onClick={handleSubmit}>Update</button>
+            </div>
+        </form>
+    );
 }
 
 export default UserProfileForm;

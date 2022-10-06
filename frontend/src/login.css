@@ -7,7 +7,7 @@
 
 .login-container {
     width: 40%;
-    height: 50vh;
+    min-height: 50vh;
     margin: auto;
     padding: 3rem 0;
     background: linear-gradient(
@@ -87,6 +87,9 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    gap: 0.8rem;
 }
 
 .login-form button {
@@ -98,6 +101,14 @@
     width: 85%;
     font-weight: bold;
     font-size: 1.1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.login-form button:disabled {
+    background-color: rgba(32, 200, 232, 0.12);
+    color: #a6a1a1;
+    cursor: not-allowed;
 }
 
 :focus {
@@ -106,4 +117,65 @@
 
 .login-container input[type=text], input[type=password], input[type=email] {
     padding: 1rem;
+}
+
+.error-msg {
+    width: 85%;
+    margin: auto;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    background: #811f2d;
+    color: #bcedf1;
+    padding: 1rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.success-msg {
+    width: 85%;
+    margin: auto;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    background: #03e9f4;
+    color: #171b1f;
+    padding: 1rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.instructions {
+    width: 80%;
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #121218;
+    color: #bcedf1;
+    padding: 0.25rem;
+    position: relative;
+    line-height: 1.6;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: #7fdc7f;
+    margin-left: 0.25rem;
+    font-weight: bold;
+}
+
+.invalid {
+    color: #ef5050;
+    margin-left: 0.25rem;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
