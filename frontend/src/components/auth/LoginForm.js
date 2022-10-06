@@ -13,7 +13,7 @@ function LoginForm() {
         event.preventDefault();
 
         if (username.trim().length === 0 || password.trim().length === 0) {
-            setErrorMsg("You need to provide a username and password");
+            setErrorMsg("You need to provide a username and password.");
             return;
         }
 
@@ -22,14 +22,15 @@ function LoginForm() {
             "password": password
         }
 
-        await auth.login(payload);
+        const response = await auth.login(payload);
 
-        // TODO: fix redirect when logging in after a failed login attempt
-        if (auth.user) {
+        if (response === "success") {
             setErrorMsg("");
             navigate("/");
+        } else if (response === "invalid") {
+            setErrorMsg("Invalid username or password.")
         } else {
-            setErrorMsg("Invalid username or password!");
+            setErrorMsg("There was a problem. Please check back later.");
         }
     }
 
