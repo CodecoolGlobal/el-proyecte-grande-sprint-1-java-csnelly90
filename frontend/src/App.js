@@ -26,7 +26,7 @@ function App() {
                     <Route path="user" element={<RequireAuth><UserPage/></RequireAuth>}/>
                     <Route path="artists/:id" element={<ArtistPage/>}/>
                     <Route path="albums/:id" element={<AlbumPage/>}/>
-                    <Route path="search/type=:searchedType/userSearch=:searchInput" element={<SearchPage/>}></Route>
+                    <Route path="search/type=:searchedType/userSearch=:searchInput" element={<RequireAuth><SearchPage/></RequireAuth>}></Route>
                     <Route path="artists/top-trending" element={<TopTrendingArtistPage/>}></Route>
                     <Route path="albums/top-trending" element={<TopTrendingAlbumPage/>}></Route>
                     <Route path="songs/top-trending" element={<TopTrendingSongPage/>}></Route>
