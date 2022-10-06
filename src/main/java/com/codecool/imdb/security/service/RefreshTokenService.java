@@ -4,7 +4,7 @@ package com.codecool.imdb.security.service;
 import com.codecool.imdb.data.repositories.RefreshTokenRepository;
 import com.codecool.imdb.data.repositories.UserRepository;
 import com.codecool.imdb.domain.entities.RefreshToken;
-import com.codecool.imdb.exception.TokenRefreshException;
+import com.codecool.imdb.utils.exception.TokenRefreshException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

@@ -13,7 +13,7 @@ import com.codecool.imdb.domain.entities.AppUser;
 import com.codecool.imdb.domain.entities.ERole;
 import com.codecool.imdb.domain.entities.Role;
 import com.codecool.imdb.domain.entities.RefreshToken;
-import com.codecool.imdb.exception.TokenRefreshException;
+import com.codecool.imdb.utils.exception.TokenRefreshException;
 import com.codecool.imdb.payload.request.LoginRequest;
 import com.codecool.imdb.payload.request.SignupRequest;
 import com.codecool.imdb.payload.request.TokenRefreshRequest;
@@ -23,6 +23,9 @@ import com.codecool.imdb.payload.response.TokenRefreshResponse;
 import com.codecool.imdb.security.JwtUtils;
 import com.codecool.imdb.security.service.RefreshTokenService;
 import com.codecool.imdb.security.service.UserDetailsImpl;
+import com.codecool.imdb.utils.validation.EmailValidator;
+import com.codecool.imdb.utils.validation.PasswordValidator;
+import com.codecool.imdb.utils.validation.UsernameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -106,6 +109,32 @@ public class AuthController {
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
+
+        if (!UsernameValidator.isValid(signUpRequest.getUsername())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error invalid username:" +
+                            " 3 to 20 characters." +
+                            "First and last characters must be letter or number." +
+                            "Lowercase and uppercase letters, numbers, underscores, hyphens and dots allowed."));
+        }
+        if (!PasswordValidator.isValid(signUpRequest.getPassword())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error invalid password:" +
+                            "6 to 40 characters." +
+                            "Password must contain at least one uppercase letter," +
+                            "one lowercase letter, one digit and one special character."));
+        }
+        if (!EmailValidator.isValid(signUpRequest.getEmail())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error invalid email:" +
+                            "Must be a valid email format: include an individual part," +
+                            "the at-sign and a domain name part."));
+        }
+
+        System.out.println("hello");
 
         // Create new user's account
         AppUser user = AppUser.builder()

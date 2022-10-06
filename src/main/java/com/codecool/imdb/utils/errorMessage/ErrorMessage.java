@@ -1,4 +1,4 @@
-package com.codecool.imdb.errorMessage;
+package com.codecool.imdb.utils.errorMessage;
 
 import lombok.*;
 
