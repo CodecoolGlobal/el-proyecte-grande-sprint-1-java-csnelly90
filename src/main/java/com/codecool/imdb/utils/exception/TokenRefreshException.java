@@ -1,4 +1,4 @@
-package com.codecool.imdb.exception;
+package com.codecool.imdb.utils.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

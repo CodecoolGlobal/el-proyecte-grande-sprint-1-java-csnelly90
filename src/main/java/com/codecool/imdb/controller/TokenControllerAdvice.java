@@ -1,8 +1,8 @@
 package com.codecool.imdb.controller;
 
 
-import com.codecool.imdb.errorMessage.ErrorMessage;
-import com.codecool.imdb.exception.TokenRefreshException;
+import com.codecool.imdb.utils.errorMessage.ErrorMessage;
+import com.codecool.imdb.utils.exception.TokenRefreshException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

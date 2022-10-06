@@ -15,7 +15,6 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 public class SignupRequest {
     @NotBlank
-    @Size(min = 3, max = 20)
     private String username;
 
     @NotBlank
@@ -25,7 +24,6 @@ public class SignupRequest {
     private String lastName;
 
     @NotBlank
-    @Size(max = 50)
     @Email
     private String email;
 
