@@ -1,5 +1,6 @@
 package com.codecool.imdb.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class AppUser {
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new HashSet<>();
