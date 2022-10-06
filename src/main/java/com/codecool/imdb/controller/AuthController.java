@@ -69,8 +69,11 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        System.out.println(loginRequest.getUsername());
-        System.out.println(loginRequest.getPassword());
+        if (!userRepository.existsByUsername(loginRequest.getUsername()) || !encoder.matches(loginRequest.getPassword(),  userRepository.findByUsername(loginRequest.getUsername()).get().getPassword()) ) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: invalid username or password!"));
+        }
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
