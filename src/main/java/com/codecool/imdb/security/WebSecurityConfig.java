@@ -56,7 +56,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                    .antMatchers("/", "/api/artists/**", "/api/albums/**", "/api/songs/**", "/api/auth/**").permitAll()
+                    .antMatchers("/", "/api/artists/**", "/api/albums/**", "/api/songs/**", "/api/auth/**","/api/comments/**").permitAll()
                     .antMatchers("/api/search/**", "api/users/**").hasRole("USER")
                     .anyRequest().authenticated()
                     .and()
