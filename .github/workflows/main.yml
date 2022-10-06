@@ -1,0 +1,45 @@
+name: CI-CD
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "development" branch
+  push:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
+
+  workflow_dispatch:
+
+jobs:
+ 
+  build_test:
+    name: Build & Test App
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '18'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    - name: setup node
+      uses: actions/setup-node@master
+      with:
+          node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: |
+        npm install
+        npm ci
+
+    - name: build & test
+      run: |
+        npm run lint
