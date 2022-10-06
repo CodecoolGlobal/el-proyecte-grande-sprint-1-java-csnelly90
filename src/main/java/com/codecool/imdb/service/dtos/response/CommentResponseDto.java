@@ -1,4 +1,4 @@
-package com.codecool.imdb.service.dtos;
+package com.codecool.imdb.service.dtos.response;
 
 import lombok.*;
 
@@ -7,8 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDto {
+public class CommentResponseDto {
     private String username;
     private String text;
-    private String commentTargetId;
 }
