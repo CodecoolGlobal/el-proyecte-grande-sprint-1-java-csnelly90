@@ -120,10 +120,11 @@
 }
 
 .error-msg {
-    width: 100%;
+    width: 85%;
+    margin: auto;
     font-size: 1.2rem;
     border-radius: 0.5rem;
-    background: #d24f67;
+    background: #811f2d;
     color: #bcedf1;
     padding: 1rem;
     position: relative;
@@ -131,11 +132,12 @@
 }
 
 .success-msg {
-    width: 100%;
+    width: 85%;
+    margin: auto;
     font-size: 1.2rem;
     border-radius: 0.5rem;
-    background: rgb(245, 211, 10);
-    color: #121218;
+    background: #03e9f4;
+    color: #171b1f;
     padding: 1rem;
     position: relative;
     line-height: 1.6;
