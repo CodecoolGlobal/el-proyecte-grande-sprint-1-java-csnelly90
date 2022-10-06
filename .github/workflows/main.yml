@@ -30,7 +30,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     
-      working-directory: ./frontend
     
     - name: setup node
       uses: actions/setup-node@master
@@ -39,9 +38,11 @@ jobs:
 
     - name: Install dependencies
       run: |
+        cd frontend
         npm install
         npm ci
 
     - name: build & test
       run: |
+        cd frontend
         npm run lint
