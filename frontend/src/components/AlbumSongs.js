@@ -5,7 +5,6 @@ import {useNavigate} from "react-router-dom";
 
 
 function AlbumSongs(props) {
-    console.log(props.albumItems)
     const navigate = useNavigate();
 
     return (

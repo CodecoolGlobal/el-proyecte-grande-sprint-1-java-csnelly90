@@ -31,10 +31,10 @@ function Navbar() {
                 <ul>
                     <Link to="user">
                         <div id="user-link-holder">
-                            <li>Profile</li>
+                            <li>{auth.user.username}</li>
                         </div>
                     </Link>
-                    <Link to="login">
+                    <Link to="/login">
                         <div id="user-link-holder" onClick={handleLogout}>
                             <li>Logout</li>
                         </div>
@@ -42,7 +42,7 @@ function Navbar() {
                 </ul>
             ) : (
                 <ul>
-                    <Link to="login">
+                    <Link to="/login">
                         <div id="user-link-holder">
                             <li>Login</li>
                         </div>

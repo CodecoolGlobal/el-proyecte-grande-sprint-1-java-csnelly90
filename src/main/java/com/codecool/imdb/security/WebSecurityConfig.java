@@ -57,7 +57,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                     .antMatchers("/", "/api/artists/**", "/api/albums/**", "/api/songs/**", "/api/auth/**",
-                            "/api/likes/**").permitAll()
+                            "/api/likes/**", "/api/comments/**").permitAll()
                     .antMatchers("/api/search/**", "api/users/**").hasRole("USER")
                     .anyRequest().authenticated()
                     .and()

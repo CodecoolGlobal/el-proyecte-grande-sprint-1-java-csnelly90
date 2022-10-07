@@ -23,8 +23,6 @@ export const AuthProvider = ({children}) => {
             return;
         }
 
-        const controller = new AbortController();
-
         dataHandler.getCurrentUser()
             .then((user) => {
                 setUser({
@@ -36,10 +34,6 @@ export const AuthProvider = ({children}) => {
             .catch((error) => {
                 console.log(error);
             });
-
-        return () => {
-            controller.abort();
-        };
     }, []);
 
     const loadCurrentUser = () => {
@@ -59,12 +53,17 @@ export const AuthProvider = ({children}) => {
         return await dataHandler.signup(payload);
     }
 
-    const login = (payload) => {
-        dataHandler.login(payload)
-            .then(response => {
-                if (response.token) localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response.token));
-            })
-            .then(() => loadCurrentUser())
+    const login = async (payload) => {
+        const response = await dataHandler.login(payload);
+        if (response.token) {
+            localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response.token));
+            loadCurrentUser();
+            return "success";
+        } else if (response?.message.includes("invalid")) {
+            return "invalid";
+        } else {
+            return "other";
+        }
     }
 
     const logout = () => {

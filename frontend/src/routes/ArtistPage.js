@@ -2,25 +2,21 @@ import React, {useEffect, useState} from "react";
 import {dataHandler} from "../data/DataHandler";
 import {useParams} from "react-router-dom";
 import "../ArtistPage.css"
-import ArtistAlbums from "../components/ArtistAlbums";
+import TabsManager from "../components/TabsManager";
 
 
 function ArtistPage() {
-
     let [artistInfo, setArtistInfo] = useState(null);
-    let [albumsInfo, setAlbumsInfo] = useState(null);
-    const {artistId} = {artistId: useParams()};
+    const {id} = useParams();
 
     useEffect(() => {
         async function getData() {
-            let artistResponse = await dataHandler.apiGet("/api/artists/" + artistId.id);
-            let albumResponse = await dataHandler.apiGet("/api/albums/" + artistId.id);
+            let artistResponse = await dataHandler.apiGet("/api/artists/" + id);
             setArtistInfo(artistResponse);
-            setAlbumsInfo(albumResponse);
         }
 
         getData();
-    }, [artistId]);
+    }, [id]);
 
     return (
         <div className={"artist-container"}>
@@ -42,7 +38,7 @@ function ArtistPage() {
                 <div className="album-tab active-tab">Albums</div>
             </div>
 
-            <ArtistAlbums albumItems={albumsInfo} apiRouteOption="albums" changeCardOrder={null}/>
+            <TabsManager contentType={"albums"} id={id} apiRouteOption={"albums"}/>
         </div>
     );
 }
