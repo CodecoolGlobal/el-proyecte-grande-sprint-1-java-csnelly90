@@ -67,13 +67,13 @@ public class LikeService {
 
     public void saveLike(String userName, String likedItem) {
         AppUser user = getAppUserByName(userName);
-        Likes like = new Likes(user, likedItem, true);
+        Likes like = new Likes(user, likedItem);
         likeRepository.save(like);
     }
 
     public void deleteLike(String userName, String likedItem) {
         AppUser user = getAppUserByName(userName);
-        Likes like = new Likes(user, likedItem, true);
-        likeRepository.delete(like);
+        Likes like = new Likes(user, likedItem);
+        likeRepository.deleteByItemIdAndUserId(likedItem, user.getId());
     }
 }
