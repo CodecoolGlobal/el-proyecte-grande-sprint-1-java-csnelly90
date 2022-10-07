@@ -24,11 +24,8 @@ public class Likes {
 
     private String itemId;
 
-    private boolean isLiked;
-
-    public Likes(AppUser user, String likedItem, boolean isLiked) {
+    public Likes(AppUser user, String likedItem) {
         this.user = user;
         this.itemId = likedItem;
-        this.isLiked = isLiked;
     }
 }
