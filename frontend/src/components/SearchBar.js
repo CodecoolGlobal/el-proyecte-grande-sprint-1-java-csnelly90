@@ -9,6 +9,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useNavigate} from "react-router-dom";
 import {dataHandler} from "../data/DataHandler";
 import SearchBoxCard from "./SearchBoxCard";
+import Swal from 'sweetalert2';
+import {useAuth} from "../security/auth";
+
 
 const options = [
     {"name": "Album", "icon": faCompactDisc},
@@ -23,14 +26,32 @@ function SearchBar() {
         const [searchResponse, setSearchResponse] = useState([]);
         const [searchResultContainer, setSearchResultContainer] = useState(false);
         const navigate = useNavigate();
+        const auth = useAuth();
         document.getElementsByTagName("body")[0].addEventListener("click", ()=>setSearchResultContainer(false))
 
-
-        const updateText = () => {
-            setText(document.getElementById("userInput").value);
-        }
-        const navigateToPage = function (apiOption, itemId) {
+        const navigateToTargetPage = function (apiOption, itemId) {
             navigate(`/${apiOption}/` + itemId);
+        }
+        const navigateToSearchPage = function(selected, text){
+            if(selected !== "Choose one" && text.trim() !=="" ){
+                navigate(`/search/type=${selected}/userSearch=${text}`);
+            } else{
+                Swal.fire({
+                    position: 'top',
+                    title: 'Please select an item',
+                    timer:1000,
+                    background:'#121218',
+                    color: '#03e9f4',
+                    showConfirmButton:false
+                })
+            }
+
+        }
+        const updateText = function (input){
+            if(auth.user && input.trim() !=="" && selected !== "Choose one"){
+                setText(input);
+                console.log(text)
+            }
         }
 
         useEffect(() => {
@@ -79,8 +100,10 @@ function SearchBar() {
 
             </div>
             <div id="search-input-container">
-                <input type="text" id="userInput" onChange={updateText} onClick={() => {
-                    if (text!=="") setSearchResultContainer(true)}} />
+                <input type="text" id="userInput"
+                       onChange={(event) => updateText(event.target.value)}
+                       onClick={() => {
+                        if (text!=="") setSearchResultContainer(true)}} />
 
                 {searchResponse.length !== 0 && text !=="" && searchResultContainer &&(
                     <div className="search-results-holder">
@@ -90,7 +113,7 @@ function SearchBar() {
                                <SearchBoxCard data={item}
                                               key={item.id}
                                               apiOption={item.type + "s"}
-                                              handleClick={navigateToPage}
+                                              handleClick={navigateToTargetPage}
                                />
                             </div>
                             )
@@ -98,7 +121,7 @@ function SearchBar() {
                     </div>
                 )}
 
-                <button onClick={()=> navigate(`/search/type=${selected}/userSearch=${text}`)}>
+                <button onClick={ ()=> navigateToSearchPage(selected, text)}>
                     <span><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></span>
                 </button>
             </div>
