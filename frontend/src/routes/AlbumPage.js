@@ -13,9 +13,7 @@ function AlbumPage(){
     useEffect(() => {
         async function getData() {
             let albumResponse = await dataHandler.apiGet("/api/songs/" + id);
-
             setAlbumsInfo(albumResponse);
-            await console.log(albumResponse)
         }
         getData();
     }, [id]);
@@ -34,10 +32,6 @@ function AlbumPage(){
                 </div>
 
             )}
-
-            <div id="song-tab-container">
-                <div className="song-tab active-tab">Tracks</div>
-            </div>
 
             <TabsManager contentType={"songs"} id={id} apiRouteOption={"albums"} changeCardOrder={null}/>
         </div>

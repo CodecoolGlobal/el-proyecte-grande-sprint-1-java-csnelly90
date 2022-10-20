@@ -34,6 +34,7 @@
 
 #search-input-container {
     gap: 1rem;
+    position: relative;
 }
 
 #search-input-container input[type=text] {
@@ -111,7 +112,7 @@
 
 .search-results-holder {
     position: absolute;
-    right: -6rem;
+    bottom: -21.5rem;
     height: 20rem;
     width: 25rem;
     padding: 0.5rem;
