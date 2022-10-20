@@ -34,10 +34,6 @@ function ArtistPage() {
                 </div>
             )}
 
-            <div id="album-tab-container">
-                <div className="album-tab active-tab">Albums</div>
-            </div>
-
             <TabsManager contentType={"albums"} id={id} apiRouteOption={"albums"}/>
         </div>
     );

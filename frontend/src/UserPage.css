@@ -64,6 +64,7 @@
 #user-likes-tab-container {
     display: flex;
     flex-direction: row;
+    margin-top: 2rem;
 }
 
 #user-likes-content-container {
@@ -220,7 +221,7 @@
     color: #03e9f4;
     background-color: #121218; /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, rgba(14, 87, 117, 0.58), rgba(18, 18, 24, 0.7));  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, rgba(14, 87, 117, 0.58), rgba(21, 21, 28, 0.71)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to left, rgba(14, 87, 117, 0.58), rgba(18, 18, 24, 0.7)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .likes-content img {
