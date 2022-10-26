@@ -63,6 +63,7 @@ function CardViewMain(props, user) {
                         getData();
                     } else {
                         setLike("Like");
+                        getData();
                     }
                 }}>
                     {/*<FontAwesomeIcon icon={options[like]}/>*/}
