@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -73,7 +71,11 @@ public class LikeService {
 
     public void deleteLike(String userName, String likedItem) {
         AppUser user = getAppUserByName(userName);
-        Likes like = new Likes(user, likedItem);
-        likeRepository.deleteByItemIdAndUserId(likedItem, user.getId());
+        List<Likes> likes = likeRepository.findAll();
+        for (Likes like : likes) {
+            if (Objects.equals(like.getItemId(), likedItem) && Objects.equals(like.getUser().getUsername(), userName)) {
+                likeRepository.delete(like);
+            }
+        }
     }
 }
