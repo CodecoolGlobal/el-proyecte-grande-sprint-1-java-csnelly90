@@ -14,11 +14,7 @@ public interface LikeRepository extends JpaRepository<Likes, Long> {
     @Query("select l from Likes l where l.user = :user")
     Collection<Likes> findAllItemIdsByUser(@Param("user") AppUser user);
 
-    Likes findByItemId(String itemId);
 
     int getCountByItemId(String ItemId);
 
-    @Modifying
-    @Query("delete from Likes l where l.itemId = :itemId and l.user.id = :user")
-    void deleteByItemIdAndUserId(@Param("itemId") String itemId, @Param("user") Long userId);
 }
