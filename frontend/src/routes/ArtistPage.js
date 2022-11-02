@@ -3,6 +3,7 @@ import {dataHandler} from "../data/DataHandler";
 import {useParams} from "react-router-dom";
 import "../ArtistPage.css"
 import TabsManager from "../components/TabsManager";
+import Like from "../components/Like";
 
 
 function ArtistPage() {
@@ -31,6 +32,7 @@ function ArtistPage() {
                         <small>{artistInfo.genre}</small>
                         <p>{artistInfo.blurbs}</p>
                     </div>
+                    <Like itemid={artistInfo.id}/>
                 </div>
             )}
 
