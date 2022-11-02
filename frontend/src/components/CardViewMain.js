@@ -1,39 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {useNavigate} from "react-router-dom";
 import CardImage from "./CardImage";
 import MusicPlayer from "./MusicPlayer";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHeart, faHeartCircleCheck} from "@fortawesome/free-solid-svg-icons";
-import {dataHandler} from "../data/DataHandler";
+import Like from "./Like";
 
-const options = [
-    {"name": "Like", "icon": faHeart},
-    {"name": "disLike", "icon": faHeartCircleCheck}
-]
-
-function CardViewMain(props, user) {
+function CardViewMain(props) {
     const navigate = useNavigate();
-    const [like, setLike]=useState("Like");
-
-    const payload = {
-        "userName": "balazs",
-        "likedItem": `${props.item.id}`
-    };
-
-    async function getData() {
-        try {
-            // console.log(user.name);
-
-            if (like === "Like") {
-                await dataHandler.apiPost("/api/likes/like", payload);
-            } else {
-                await dataHandler.apiPost("/api/likes/dislike", payload);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
 
     return (
         <div className="card" style={{cursor: "default"}}>
@@ -56,19 +28,7 @@ function CardViewMain(props, user) {
                 <div className="card-redirect" style={{display: props.apiOption === "songs" ? "none" : "flex"}}>
                     <p onClick={() => navigate(`/${props.apiOption}/` + props.item.id)}>GO TO PAGE</p>
                 </div>
-                <div className="card-redirect"
-                    onClick={(e) => {
-                    if(like === "Like") {
-                        setLike("disLike");
-                        getData();
-                    } else {
-                        setLike("Like");
-                        getData();
-                    }
-                }}>
-                    {/*<FontAwesomeIcon icon={options[like]}/>*/}
-                    <p>{like}</p>
-                </div>
+                <Like itemid={props.item.id}/>
                 <p className="card-type">{props.item.type}</p>
             </div>
 
