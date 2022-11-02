@@ -1,5 +1,7 @@
 package com.codecool.imdb.service;
 
+import com.codecool.imdb.domain.model.Song;
+import com.codecool.imdb.service.dtos.NapsterArtistResponse;
 import com.codecool.imdb.service.dtos.NapsterSong;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -39,6 +41,20 @@ public class SongService {
                 return super.getType();
             }
         });
+    }
+
+    public NapsterSong getSong(String id) throws JsonProcessingException {
+        String url = "https://api.napster.com/v2.2/tracks/" + id + "?apikey=" + apiKey;
+        var result = restTemplate.getForObject(url, JsonNode.class);
+        JsonNode node = result.get("tracks").get(0);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return addImage(mapper.readValue(node.toString(), new TypeReference<NapsterSong>() {
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
+        }));
     }
 
     private List<NapsterSong> getUserCustomSongSearch(String userInput) throws JsonProcessingException {

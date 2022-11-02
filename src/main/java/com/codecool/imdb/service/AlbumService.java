@@ -1,5 +1,6 @@
 package com.codecool.imdb.service;
 
+import com.codecool.imdb.domain.model.Album;
 import com.codecool.imdb.service.dtos.NapsterAlbum;
 import com.codecool.imdb.service.dtos.NapsterAlbumResponse;
 import com.codecool.imdb.service.dtos.response.NapsterAlbumCardDto;
@@ -53,6 +54,12 @@ public class AlbumService {
         return resultData.getAlbums().stream().map(this::mapToNapsterAlbumCardDto).collect(Collectors.toSet());
     }
 
+    public Album getAlbumById(String id) {
+        String url = "https://api.napster.com/v2.2/albums/" + id + "?apikey=" + apiKey;
+        var resultData = restTemplate.getForObject(url, NapsterAlbumResponse.class);
+        return resultData.getAlbums().stream().map(this::mapToAlbum).toList().get(0);
+    }
+
     private NapsterAlbumCardDto mapToNapsterAlbumCardDto(NapsterAlbum napsterAlbum) {
         String resolution = "/images/356x237.jpg";
         var card = new NapsterAlbumCardDto();
@@ -71,6 +78,25 @@ public class AlbumService {
         card.setLabel(napsterAlbum.getLabel());
 
         return card;
+    }
+
+    private Album mapToAlbum(NapsterAlbum napsterAlbum) {
+        String resolution = "/images/633x422.jpg";
+        var result = new Album();
+        result.setId(napsterAlbum.getId());
+        result.setName(napsterAlbum.getName());
+        String image = createImageUrl(result.getId(), resolution);
+        result.setImage(image);
+        result.setType(napsterAlbum.getType());
+        if (napsterAlbum.getBlurbs() != null  && napsterAlbum.getBlurbs().length != 0) {
+            result.setBlurbs(String.join(" ", napsterAlbum.getBlurbs()));
+        } else {
+            result.setBlurbs("There is no available information.");
+        }
+        result.setArtistName(napsterAlbum.getArtistName());
+        result.setReleased(napsterAlbum.getReleased().substring(0, 4));
+        result.setLabel(napsterAlbum.getLabel());
+        return result;
     }
 
     public String createImageUrl(String albumId, String resolution) {
