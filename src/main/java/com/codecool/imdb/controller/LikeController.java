@@ -40,4 +40,13 @@ public class LikeController {
         return likeService.getLikedItemIdsByUserName(userName);
     }
 
+    @GetMapping("/likes")
+    public int getLikeNumbersByItemId(@RequestParam String itemId) {
+        return likeService.getLikesCountByItemId(itemId);
+    }
+
+    @GetMapping("/isliked")
+    public boolean getLikeStatus(@RequestParam String itemId, @RequestParam String userName) {
+        return likeService.isLiked(userName, itemId);
+    }
 }

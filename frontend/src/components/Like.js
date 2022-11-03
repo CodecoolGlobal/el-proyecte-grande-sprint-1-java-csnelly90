@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "../HomePage.css"
 import {dataHandler} from "../data/DataHandler";
 import {useAuth} from "../security/auth";
@@ -8,7 +8,28 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function Like(props) {
     const [like, setLike] = useState("Like");
+    const [likeNumber, setLikeNumber] = useState(0);
     const auth = useAuth();
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                let number = await dataHandler.apiGet(`/api/likes/likes?itemId=${props.itemid}`);
+                setLikeNumber(number);
+                if (auth.user) {
+                    let likeStatus = await dataHandler.apiGet(`/api/likes/isliked?itemId=${props.itemid}&userName=${auth.user.username}`);
+                    if (likeStatus) {
+                        setLike("disLike");
+                    } else {
+                        setLike("Like");
+                    }
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getData();
+    }, [likeNumber]);
 
     function getPayload() {
         let payload = {};
@@ -34,6 +55,8 @@ function Like(props) {
             } else {
                 await dataHandler.apiPost("/api/likes/dislike", payload);
             }
+            let number = await dataHandler.apiGet(`/api/likes/likes?itemId=${props.itemid}`);
+            setLikeNumber(number);
         } catch (error) {
             console.log(error);
         }
@@ -50,7 +73,15 @@ function Like(props) {
                                        sendLike();
                                    }
                                }}>
-                {like === "Like" ? (<FontAwesomeIcon icon={EmptyHeart}/>) : (<FontAwesomeIcon icon={FullHeart}/>)}
+                {like === "Like" ? (<div className="count">
+                                        <FontAwesomeIcon icon={EmptyHeart}/>
+                                        <div></div>
+                                        <p className={likeNumber === 0 ? "hide" : "display"}>{likeNumber}</p>
+                                    </div>) : (<div className="count">
+                                        <FontAwesomeIcon icon={FullHeart}/>
+                                        <div></div>
+                                        <p className={likeNumber === 0 ? "hide" : "display"}>{likeNumber}</p>
+                                    </div>)}
             </div>) : (<div></div>)}
         </div>
     )

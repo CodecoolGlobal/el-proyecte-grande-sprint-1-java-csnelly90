@@ -227,6 +227,13 @@
     margin-top: 5rem;
 }
 
+.count {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+}
+
 @media screen and (max-width: 1000px) {
     .top-trending-section {
         display: flex;
