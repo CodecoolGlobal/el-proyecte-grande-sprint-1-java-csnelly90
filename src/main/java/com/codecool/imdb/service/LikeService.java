@@ -60,22 +60,45 @@ public class LikeService {
     }
 
     public int getLikesCountByItemId(String itemId) {
-        return likeRepository.getCountByItemId(itemId);
+        int count = 0;
+        List<Likes> likes = likeRepository.findAll();
+        for (Likes like : likes) {
+            if (Objects.equals(like.getItemId(), itemId)) {
+                count += 1;
+            }
+        }
+        System.out.println(count);
+        return count;
     }
 
     public void saveLike(String userName, String likedItem) {
         AppUser user = getAppUserByName(userName);
-        Likes like = new Likes(user, likedItem);
-        likeRepository.save(like);
-    }
-
-    public void deleteLike(String userName, String likedItem) {
-        AppUser user = getAppUserByName(userName);
+        Likes newLike = new Likes(user, likedItem);
         List<Likes> likes = likeRepository.findAll();
         for (Likes like : likes) {
             if (Objects.equals(like.getItemId(), likedItem) && Objects.equals(like.getUser().getUsername(), userName)) {
                 likeRepository.delete(like);
             }
         }
+        likeRepository.save(newLike);
+    }
+
+    public void deleteLike(String userName, String likedItem) {
+        List<Likes> likes = likeRepository.findAll();
+        for (Likes like : likes) {
+            if (Objects.equals(like.getItemId(), likedItem) && Objects.equals(like.getUser().getUsername(), userName)) {
+                likeRepository.delete(like);
+            }
+        }
+    }
+
+    public boolean isLiked(String userName, String itemId) {
+        List<Likes> likes = likeRepository.findAll();
+        for (Likes like : likes) {
+            if (Objects.equals(like.getItemId(), itemId) && Objects.equals(like.getUser().getUsername(), userName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
