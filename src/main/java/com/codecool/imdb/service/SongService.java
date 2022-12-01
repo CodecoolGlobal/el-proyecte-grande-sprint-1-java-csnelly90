@@ -29,6 +29,11 @@ public class SongService {
         return songs.stream().map(this::addImage).collect(Collectors.toSet());
     }
 
+    public NapsterSong getSongWithImageById(String id) throws JsonProcessingException {
+        NapsterSong song = getSong(id);
+        return addImage(song);
+    }
+
     public Collection<NapsterSong> getTopSongs(int limit, int offset) throws JsonProcessingException {
         String url = "https://api.napster.com/v2.2/tracks/top?apikey=" + apiKey + "&catalog=UK&limit=" + limit + "&offset=" + offset + "&range=week";
         var resultData = restTemplate.getForObject(url, JsonNode.class);
