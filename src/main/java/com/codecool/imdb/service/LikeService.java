@@ -45,18 +45,14 @@ public class LikeService {
         return appUser;
     }
 
-    public Collection<Item> getLikedItemIdsByUserName(String userName) throws JsonProcessingException {
+    public Collection<String> getLikedItemIdsByUserName(String userName) {
         AppUser user = getAppUserByName(userName);
         Collection<Likes> items = likeRepository.findAllItemIdsByUser(user);
-        Collection<Item> resultItems = new ArrayList<>();
+        Collection<String> resultIds = new ArrayList<>();
         for (Likes item : items) {
-            switch (item.getItemId().substring(0, 3)) {
-                case "art" -> resultItems.add(artistService.getArtist(item.getItemId()));
-                case "alb" -> resultItems.add(albumService.getAlbumById(item.getItemId()));
-                case "tra" -> resultItems.add(songService.getSong(item.getItemId()));
-            }
+            resultIds.add(item.getItemId());
         }
-        return resultItems;
+        return resultIds;
     }
 
     public int getLikesCountByItemId(String itemId) {

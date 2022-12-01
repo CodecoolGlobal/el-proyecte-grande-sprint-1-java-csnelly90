@@ -36,7 +36,7 @@ public class LikeController {
     }
 
     @GetMapping("/get-all")
-    public Collection<Item> getLikedItemsByUserName(@RequestParam String userName) throws JsonProcessingException {
+    public Collection<String> getLikedItemsByUserName(@RequestParam String userName) {
         return likeService.getLikedItemIdsByUserName(userName);
     }
 

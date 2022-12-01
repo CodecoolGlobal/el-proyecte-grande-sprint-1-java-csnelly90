@@ -1,5 +1,6 @@
 package com.codecool.imdb.controller;
 
+import com.codecool.imdb.domain.model.Album;
 import com.codecool.imdb.service.AlbumService;
 import com.codecool.imdb.service.dtos.NapsterAlbum;
 import com.codecool.imdb.service.dtos.response.NapsterAlbumCardDto;
@@ -36,5 +37,10 @@ public class AlbumApiController {
     @GetMapping(value = "/{id}")
     public Collection<NapsterAlbumCardDto> getAlbumsByArtistId(@PathVariable String id){
         return albumService.getAlbumsByArtistId(id);
+    }
+
+    @GetMapping(value = "/album/{id}")
+    public Album getAlbumById(@PathVariable String id) {
+        return albumService.getAlbumById(id);
     }
 }
