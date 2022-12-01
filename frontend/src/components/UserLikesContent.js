@@ -7,10 +7,17 @@ function LikedContent(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await dataHandler.apiGet(`/api/artists/${props.artistId}/`);
-            setData(response);
+            if (props.itemId.includes("art")) {
+                const response = await dataHandler.apiGet(`/api/artists/${props.itemId}/`);
+                setData(response);
+            } else if (props.itemId.includes("alb")) {
+                const response = await dataHandler.apiGet(`/api/albums/album/${props.itemId}/`);
+                setData(response);
+            } else {
+                const response = await dataHandler.apiGet(`/api/songs/song/${props.itemId}/`);
+                setData(response);
+            }
         };
-
         fetchData();
     }, [props.id]);
 
@@ -21,7 +28,6 @@ function LikedContent(props) {
                     <div id="user-likes-title">
                         <h2>{data.name}</h2>
                     </div>
-                    {/*<div><h1>{data.name}</h1></div>*/}
                     <div className="justified-text">
                         <p>{data.blurbs}</p>
                     </div>
@@ -37,34 +43,49 @@ function LikedContent(props) {
 }
 
 function UserLikesContent(props) {
-    const likedContent = props.likedArtists.map((artistId) =>
-        <div key={artistId} className={props.toggleState === 1 ? "likes-content active-content" : "likes-content"}>
-            <LikedContent artistId={artistId} />
-        </div>
-    );
+    let likedArtist = [];
+    let likedAlbum = [];
+    let likedSong = [];
+    if (props.likedItems !== null) {
+        props.likedItems.map((itemId) => {
+            if (itemId.includes("art")) {
+                likedArtist.push(<div key={itemId} className={props.toggleState === 1 ? "likes-content active-content" : "likes-content"}>
+                    <LikedContent itemId={itemId}/>
+                </div>);
+            } else if (itemId.includes("alb")) {
+                likedAlbum.push(<div key={itemId} className={props.toggleState === 2 ? "likes-content active-content" : "likes-content"}>
+                    <LikedContent itemId={itemId}/>
+                </div>);
+            } else if (itemId.includes("tra")) {
+                likedSong.push(<div key={itemId} className={props.toggleState === 3 ? "likes-content active-content" : "likes-content"}>
+                    <LikedContent itemId={itemId} />
+                </div>);
+            }
+        })
+        if (likedArtist.length === 0) {
+            likedArtist.push(<div key={likedArtist.length}>
+                <p>There is no liked artist</p>
+            </div>);
+        }
+        if (likedAlbum.length === 0) {
+            likedAlbum.push(<div key={likedAlbum.length}>
+                <p>There is no liked album</p>
+            </div>);
+        }
+        if (likedSong.length === 0) {
+            likedSong.push(<div key={likedSong.length}>
+                <p>There is no liked song</p>
+            </div>);
+        }
+    }
 
     return (
         <div id="user-likes-content-container">
+            {likedArtist}
 
-            {likedContent}
+            {likedAlbum}
 
-            <div
-                className={props.toggleState === 2 ? "likes-content active-content" : "likes-content"}
-            >
-                <h2>Liked albums</h2>
-                <p>
-                    Under construction...
-                </p>
-            </div>
-
-            <div
-                className={props.toggleState === 3 ? "likes-content active-content" : "likes-content"}
-            >
-                <h2>Liked songs</h2>
-                <p>
-                    Under construction...
-                </p>
-            </div>
+            {likedSong}
         </div>
     );
 }
