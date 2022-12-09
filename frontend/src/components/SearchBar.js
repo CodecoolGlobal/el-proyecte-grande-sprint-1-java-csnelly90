@@ -52,7 +52,7 @@ function SearchBar() {
 
         }
         const updateText = function (input){
-            if(auth.user && input.trim() !==""){
+            if(auth.user){
                 setText(input);
             }
             if (!auth.user){
