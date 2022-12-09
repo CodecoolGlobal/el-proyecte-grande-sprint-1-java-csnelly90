@@ -62,17 +62,17 @@ function UserLikesContent(props) {
                 </div>);
             }
         })
-        if (likedArtist.length === 0) {
+        if (likedArtist.length === 0 && props.toggleState === 1) {
             likedArtist.push(<div key={likedArtist.length}>
                 <p>There is no liked artist</p>
             </div>);
         }
-        if (likedAlbum.length === 0) {
+        if (likedAlbum.length === 0 && props.toggleState === 2) {
             likedAlbum.push(<div key={likedAlbum.length}>
                 <p>There is no liked album</p>
             </div>);
         }
-        if (likedSong.length === 0) {
+        if (likedSong.length === 0 && props.toggleState === 3) {
             likedSong.push(<div key={likedSong.length}>
                 <p>There is no liked song</p>
             </div>);
