@@ -9,8 +9,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useNavigate} from "react-router-dom";
 import {dataHandler} from "../data/DataHandler";
 import SearchBoxCard from "./SearchBoxCard";
-import Swal from 'sweetalert2';
 import {useAuth} from "../security/auth";
+import Swal from "sweetalert2";
 
 
 const options = [
@@ -38,12 +38,32 @@ function SearchBar() {
             if(selected !== "Choose one" && text.trim() !=="" ){
                 setText("");
                 navigate(`/search/type=${selected}/userSearch=${text}`);
+            } else{
+                Swal.fire({
+                    position: 'top',
+                    title: 'Please select what you wish to search!',
+                    timer:1000,
+                    background:'#121218',
+                    color: '#03e9f4',
+                    showConfirmButton:false
+                })
+
             }
 
         }
         const updateText = function (input){
             if(auth.user && input.trim() !==""){
                 setText(input);
+            }
+            if (!auth.user){
+                Swal.fire({
+                    position: 'top',
+                    title: 'Please log in to be able to search!',
+                    timer:1000,
+                    background:'#121218',
+                    color: '#03e9f4',
+                    showConfirmButton:false
+                })
             }
         }
 
