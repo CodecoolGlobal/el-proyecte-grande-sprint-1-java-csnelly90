@@ -2,6 +2,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import CardImage from "./CardImage";
 import MusicPlayer from "./MusicPlayer";
+import Like from "./Like";
 
 function CardViewMain(props) {
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ function CardViewMain(props) {
                 <div className="card-redirect" style={{display: props.apiOption === "songs" ? "none" : "flex"}}>
                     <p onClick={() => navigate(`/${props.apiOption}/` + props.item.id)}>GO TO PAGE</p>
                 </div>
+                <Like itemid={props.item.id}/>
                 <p className="card-type">{props.item.type}</p>
             </div>
 

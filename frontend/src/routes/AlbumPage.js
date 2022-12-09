@@ -3,6 +3,7 @@ import {dataHandler} from "../data/DataHandler";
 import {useParams} from "react-router-dom";
 import "../ArtistPage.css"
 import TabsManager from "../components/TabsManager";
+import Like from "../components/Like";
 
 
 
@@ -29,8 +30,8 @@ function AlbumPage(){
                         <b><h1 className={"artist-name"}>{albumsInfo[0].albumName}</h1></b>
                         <h3>Genres:</h3>
                     </div>
+                    <Like itemid={albumsInfo[0].id}/>
                 </div>
-
             )}
 
             <TabsManager contentType={"songs"} id={id} apiRouteOption={"albums"} changeCardOrder={null}/>

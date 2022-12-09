@@ -9,14 +9,16 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Album {
+public class Album extends Item {
 
     private String id;
     private String name;
-    private Artist artistName;
-    private Integer released;
     private String type;
     private String label;
     private Integer trackCount;
+    private String image;
+    private String blurbs;
+    private String artistName;
+    private String released;
     private List<Song> songs;
 }

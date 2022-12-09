@@ -37,4 +37,9 @@ public class SongApiController {
         return songService.getSongsByAlbumId(id);
     }
 
+    @GetMapping(value = "song/{id}")
+    public NapsterSong getSongById(@PathVariable String id) throws JsonProcessingException {
+        return songService.getSongWithImageById(id);
+    }
+
 }
