@@ -27,37 +27,30 @@ function SearchBar() {
         const [searchResultContainer, setSearchResultContainer] = useState(false);
         const navigate = useNavigate();
         const auth = useAuth();
-        document.getElementsByTagName("body")[0].addEventListener("click", ()=>setSearchResultContainer(false))
+
+        document.getElementsByTagName("body")[0].addEventListener("click",
+            ()=>setSearchResultContainer(false))
 
         const navigateToTargetPage = function (apiOption, itemId) {
             navigate(`/${apiOption}/` + itemId);
         }
         const navigateToSearchPage = function(selected, text){
             if(selected !== "Choose one" && text.trim() !=="" ){
+                setText("");
                 navigate(`/search/type=${selected}/userSearch=${text}`);
-            } else{
-                Swal.fire({
-                    position: 'top',
-                    title: 'Please select an item',
-                    timer:1000,
-                    background:'#121218',
-                    color: '#03e9f4',
-                    showConfirmButton:false
-                })
             }
 
         }
         const updateText = function (input){
-            if(auth.user && input.trim() !=="" && selected !== "Choose one"){
+            if(auth.user && input.trim() !==""){
                 setText(input);
-                console.log(text)
             }
         }
 
         useEffect(() => {
             async function getData() {
                 try {
-                    if (selected !=="Choose one" && text!==""){
+                    if (text!==""){
                         let response = await dataHandler.apiGet(`/api/search/${selected}/${text}`);
                         if(response){
                             setSearchResponse(response);
@@ -102,6 +95,7 @@ function SearchBar() {
             <div id="search-input-container">
                 <input type="text" id="userInput"
                        onChange={(event) => updateText(event.target.value)}
+                       value={text}
                        onClick={() => {
                         if (text!=="") setSearchResultContainer(true)}} />
 
